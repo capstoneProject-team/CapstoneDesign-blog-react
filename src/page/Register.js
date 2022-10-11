@@ -1,38 +1,46 @@
 import React from 'react'
 import {Form, Button} from "react-bootstrap";
-import axios from "axios";
+import Axios from "axios";
 import toast from "bootstrap/js/src/toast";
 import {Formik} from "formik";
 import * as Yup from "yup";
 
 const Register = (props) => {
+  
   const submit = async (values) => {
     console.log(values);
-    const {email, password, username} = values;
-    try {
-      await axios.post('/api/auth/signup', {email, password, username});
+    const {email, password, username,location} = values;
+    await Axios.post('/api/auth/signup', {email, password, username,location})
+    .then(response =>{
+      console.log(response.response.status);
+    })
+    .catch(response => {
+      console.log(response.response.status);
+    });
+    // try {
+    //   await axios.post('/api/auth/signup', {email, password, username,location});
 
-      toast.success('회원등록하였습니다. 로그인하세요', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      props.history.push('/login');
-    } catch(e) {
-      toast.error('실패하였습니다. 다시 시도하세요', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
+    //   toast.success('회원등록하였습니다. 로그인하세요', {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    //   props.history.push('/login');
+    // } catch(e) {
+    //   toast.error('실패하였습니다. 다시 시도하세요', {
+    //     position: "top-center",
+    //     autoClose: 3000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    // }
   }
   return (
     <Formik
@@ -47,7 +55,7 @@ const Register = (props) => {
           .min(6, "6자이상 입력하세요 :("),
         password2: Yup.string()
           .oneOf([Yup.ref("password"), null], "패스워드가 일치하지 않습니다 :(")
-          .required("패스워드가 일치하지 않습니다 :("),
+          .required("필수 입력 사항입니다 :("),
         username: Yup.string()
           .required("필수 입력 사항입니다 :("),
         location: Yup.string()
@@ -123,6 +131,7 @@ const Register = (props) => {
                           onChange={handleChange} onBlur={handleBlur}
                           isValid={touched.location && !errors.location}
                           isInvalid={touched.location && errors.location ? true : false}>
+                                <option>지역을 선택해 주세요.</option>
                                 <option>서울</option>
                                 <option>경기도</option>
                                 <option>강원도</option>
@@ -135,7 +144,7 @@ const Register = (props) => {
                                 <option>제주도</option>
             </Form.Select>
             { touched.location && !errors.location && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
-            { touched.location && errors.location && <Form.Control.Feedback type="invalid">{errors.password2}</Form.Control.Feedback> }
+            { touched.location && errors.location && <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback> }
           </Form.Group>
 
           <Button variant="primary" type="submit" disabled={isSubmitting}>
