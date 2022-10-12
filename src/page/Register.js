@@ -39,7 +39,6 @@ const Register = (props) => {
       //     </p>
       //   </Alert>
     });
-
   }
   return (
     <Formik
@@ -173,6 +172,8 @@ const Register = (props) => {
                     ex) 떡볶이
                   </Form.Text>
           </Form.Group>
+
+          <br />
 
           <Button variant="primary" type="submit" disabled={isSubmitting}>
             Submit
