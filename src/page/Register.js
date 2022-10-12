@@ -1,7 +1,6 @@
 import React from 'react'
 import {Form, Button} from "react-bootstrap";
 import Axios from "axios";
-import Alert from 'react-bootstrap/Alert'
 import {Formik} from "formik";
 import * as Yup from "yup";
 
@@ -13,36 +12,26 @@ const Register = (props) => {
     await Axios.post('/api/auth/signup', {email, password, username,location,question1,question2})
     .then(response =>{
       alert("회원가입에 성공하였습니다! 반갑습니다 " + username + "님 :)")
-        // <Alert variant="success">
-        //   <Alert.Heading>회원가입을 환영합니다!</Alert.Heading>
-        //   <p>
-        //     "Haru Emotion Diary" 에 성공적으로 가입되었습니다!
-        //     감사합니다 :) 
-        //   </p>
-        //   <hr />
-        //   <p className="mb-0">
-        //     회원탈퇴는 마이페이지에서 가능합니다!
-        //   </p>
-        // </Alert>
     })
     .catch(response => {
       alert("회원가입에 실패하였습니다! 다시 시도해주세요 :(");
-      // <Alert variant="danger">
-      //     <Alert.Heading>회원가입에 실패하였습니다!</Alert.Heading>
-      //     <p>
-      //       입력사항을 다시 한번 확인해주세요!
-      //       감사합니다 :)
-      //     </p>
-      //     <hr />
-      //     <p className="mb-0">
-      //       문제가 지속될 시 능력자 "이찬희"를 불러주세요!
-      //     </p>
-      //   </Alert>
     });
   }
   return (
     <Formik
       initialValues={{ email: '', password: '', password2: '', username: '', location: '', question1: '', question2: ''}}
+    const {email, password, username,location} = values;
+    await Axios.post('/api/auth/signup', {email, password, username,location})
+    .then(response =>{
+      console.log(response.response.status);
+    })
+    .catch(response => {
+      console.log(response.response.status);
+    });
+  }
+  return (
+    <Formik
+      initialValues={{ email: '', password: '', password2: '', username: '', location: ''}}
       onSubmit={submit}
       validationSchema={Yup.object().shape({
         email: Yup.string()
@@ -148,7 +137,7 @@ const Register = (props) => {
             { touched.location && !errors.location && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
             { touched.location && errors.location && <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback> }
           </Form.Group>
-
+             
           <br />
 
           <Form.Group controlId="formGroupQuestion1">
