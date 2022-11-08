@@ -18,7 +18,7 @@ import introduce_8 from '../image/introduce_8.jpg';
 
 
 const Introduce = ({setNavVisible}) => {
-  const {Title} = Typography;
+   const {Title} = Typography;
   setNavVisible(true);
 
 
