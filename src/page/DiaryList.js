@@ -1,4 +1,4 @@
-import React from 'react'
+import {React,useState,useEffect} from 'react'
 import Button from 'react-bootstrap/Button';
 import Navigation from '../component/Navigation'
 import { Routes, Route ,Link} from "react-router-dom";
@@ -9,8 +9,46 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import PostCard from '../component/PostCard';
-
+import jwt_decode from "jwt-decode";
+import Axios from "axios";
+import getStorageItem from '../utils/useLocalStorage'
 const DiaryList = ({setNavVisible}) => {
+  const [page, setPage] = useState(1);
+
+  const [pageList, setPageList] = useState([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [pageCnt, setPageCnt] = useState([]);
+  let jwt = localStorage.getItem('jwtToken');
+  jwt = jwt.substring(1, jwt.length - 1)
+  const { user_id } = jwt_decode(jwt);
+ 
+  const handlePage = (page) => {
+    setPage(page);
+  }
+
+  useEffect(() => {
+      const pageData = async() => {
+        const response = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post/?page=${page}&author_id=${user_id}`);
+        console.log(response)
+        setPageList(response.data.results);
+        setTotalPage(parseInt((response.data.count)/ 5)+1);
+      }
+      pageData();
+  },[page])
+
+  useEffect(() => {
+    let pages = [];
+    for(let i = 1 ; i <= totalPage ; i++){
+      pages.push(i);
+    }
+    setPageCnt(pages);
+  },[totalPage])
+
+  // handlePage(1);
+  console.log(pageList)
+  console.log(pageCnt)
+  
+
   return (
     <div>
         <br/><br/><br/>
@@ -30,25 +68,14 @@ const DiaryList = ({setNavVisible}) => {
         </SplitButton></Col>
         </Row>
         </Container><br/>
-
         
-        <PostCard/>
-        <PostCard/>
-        <PostCard/>
-
+        {pageList.map(detail => (<PostCard detail={detail}/>))}
+        
         <div class = 'pagination'>
           <Pagination>
           <Pagination.First />
           <Pagination.Prev />
-          <Pagination.Item>{1}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{10}</Pagination.Item>
-          <Pagination.Item>{11}</Pagination.Item>
-          <Pagination.Item active>{12}</Pagination.Item>
-          <Pagination.Item>{13}</Pagination.Item>
-          <Pagination.Item disabled>{14}</Pagination.Item>
-          <Pagination.Ellipsis />
-          <Pagination.Item>{20}</Pagination.Item>
+          {pageCnt.map(x => (<Pagination.Item onClick={()=> handlePage(x)} >{x}</Pagination.Item>))}          
           <Pagination.Next />
           <Pagination.Last /> 
           &nbsp;&nbsp;&nbsp;&nbsp;

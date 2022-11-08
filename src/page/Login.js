@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import useLocalStorage from '../utils/useLocalStorage';
 import logo_detail from '../image/logo_detail.png';
-
+import kakao_img from '../image/kakao_login_medium_wide.png';
 
 const Login = ({ setNavVisible, setAuthentication }) => {
   setNavVisible(false);
@@ -16,9 +16,16 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   const navigateRegister = () => {
     navigate("/Register")
   }
-  // const navigateIntroduce =()=>{
-  //   navigate("/");
-  // }
+  
+  const CLIENT_ID = "c0e623d493a756e23825d84d5a28587a";
+  const REDIRECT_URI =  "http://localhost:3000/main";
+
+// 프런트엔드 리다이랙트 URI 예시
+// const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
+
+// 백엔드 리다이랙트 URI 예시
+// const REDIRECT_URI =  "http://localhost:5000/kakao/code";
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const [username, setId] = useState(null);
   const [password, setPassword] = useState(null);
@@ -49,6 +56,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
       });
     }
   }
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
@@ -73,6 +81,11 @@ const Login = ({ setNavVisible, setAuthentication }) => {
         <Col className='loginButton'>
           <Row>
             <Button className="w-100" variant="primary" type="submit" >로그인</Button>
+          </Row><br/>
+          <Row>
+            <a href={KAKAO_AUTH_URL}>
+              <img src={kakao_img} />
+            </a>
           </Row>
           <hr />
           <Row>

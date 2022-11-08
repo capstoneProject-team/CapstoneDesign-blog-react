@@ -3,25 +3,29 @@ import Figure from 'react-bootstrap/Figure';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-const PostCard = () => {
+const PostCard = ({detail}) => {
+  const moveToDetail = () => {
+    
+  }
+  console.log('detail = ' + detail.title)
   return (
-    <div>
+    <div onClick={moveToDetail}>
       <Container>
         <Row>
-          <Col>(이모티콘) 제목</Col>
+          <Col>(이모티콘) {detail.title}</Col>
         </Row>
         <Row>
-          <Col>상세내용</Col>
+          <Col>d</Col>
         </Row>
         <Row>
-          <Col>작성날짜</Col>
+          <Col>{detail.created_at}</Col>
         </Row>
         <Figure>
         <Figure.Image
           width={171}
           height={180}
-          alt="171x180"
-          src="holder.js/171x180"
+          alt="게시물 사진"
+          src={detail.photo}
         />
         </Figure>
 

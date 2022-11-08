@@ -1,4 +1,4 @@
-import {React,useState} from 'react'
+import {React,useState,useEffect} from 'react'
 import { Routes, Route ,Navigate} from "react-router-dom";
 import Introduce from './page/Introduce';
 import Login from "./page/Login";
@@ -12,14 +12,16 @@ import Register from "./page/Register";
 import './App.css';
 import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './component/Navigation'
+import Navigation from './component/Navigation';
+import KakaoRedirectHandler from './component/KakaoRedirectHandler';
+import getStorageItem from './utils/useLocalStorage';
 
 function App() {
-  let [isAuthenticated , setAuthentication] = useState(false);
-  let [navVisible,setNavVisible] = useState(true);
+  let jwtBoolean = '' ;
+  localStorage.getItem('jwtToken') == null ? jwtBoolean=false : jwtBoolean=true;
+  let [isAuthenticated , setAuthentication] = useState(jwtBoolean);
+  let [navVisible,setNavVisible] = useState(jwtBoolean);
   
- 
-
   return (
     <div>
     {navVisible && <Navigation isAuthenticated={isAuthenticated}  setAuthentication={setAuthentication}/>}
@@ -29,12 +31,12 @@ function App() {
         <Route path="/diary-detail" element={isAuthenticated==true ? <DiaryDetail authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-list" element={isAuthenticated==true ? <DiaryList authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/login"  element={<Login setAuthentication={setAuthentication} setNavVisible={setNavVisible}/>}/>
-        <Route path="/main" element={isAuthenticated ? <Main authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Navigate replace to="/" />} />
-        <Route path="/Mypage" element={isAuthenticated==true ? <Mypage authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
+        <Route path="/oauth/callback/kakao" element=<KakaoRedirectHandler setAuthentication={setAuthentication}/>/>
+        <Route path="/main" element={isAuthenticated ? <Main authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Navigate replace to="/" />} />
+        <Route path="/Mypage" element={isAuthenticated==true ? <Mypage authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/Register" element={<Register setNavVisible={setNavVisible}/>}/>
         <Route path="/FindPassword" element={<FindPassword setNavVisible={setNavVisible}/>}/>
       </Routes>
-
     </div>
 
   );

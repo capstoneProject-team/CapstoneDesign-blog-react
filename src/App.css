@@ -2,6 +2,11 @@
   margin: 0 auto;
 }
 
+.bannerContent{
+  display : flex;
+  justify-content : space-between;
+}
+
 .listNav{
   display: flex;
   flex-direction: row;

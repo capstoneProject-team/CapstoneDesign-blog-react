@@ -13,7 +13,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
 
-const Mypage = ({ isAuthenticated, setNavVisible }) => {
+const Mypage = ({ setAuthentication, setNavVisible }) => {
   setNavVisible(true);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
@@ -70,8 +70,10 @@ const Mypage = ({ isAuthenticated, setNavVisible }) => {
           icon: <SmileOutlined style={{ color: "#108ee9" }} />,
           placement: 'topRight'
         });
+        setAuthentication(false);
         navigate('/')
       } catch (e) {
+        console.log(e)
         notification.open({
           message: "계정삭제 실패, 다시 시도해 주세요.",
           icon: <FrownOutlined style={{ color: "#108ee9" }} />,
