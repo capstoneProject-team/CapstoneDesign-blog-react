@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import useLocalStorage from '../utils/useLocalStorage';
 import logo_detail from '../image/logo_detail.png';
-import kakao_img from '../image/kakao_login_medium_wide.png';
+import kakaotalk_icon from '../image/kakaotalk_icon.png';
 
 const Login = ({ setNavVisible, setAuthentication }) => {
   setNavVisible(false);
@@ -16,15 +16,15 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   const navigateRegister = () => {
     navigate("/Register")
   }
-  
+
   const CLIENT_ID = "c0e623d493a756e23825d84d5a28587a";
-  const REDIRECT_URI =  "http://localhost:3000/main";
+  const REDIRECT_URI = "http://localhost:3000/main";
 
-// 프런트엔드 리다이랙트 URI 예시
-// const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
+  // 프런트엔드 리다이랙트 URI 예시
+  // const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
 
-// 백엔드 리다이랙트 URI 예시
-// const REDIRECT_URI =  "http://localhost:5000/kakao/code";
+  // 백엔드 리다이랙트 URI 예시
+  // const REDIRECT_URI =  "http://localhost:5000/kakao/code";
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const [username, setId] = useState(null);
@@ -39,6 +39,8 @@ const Login = ({ setNavVisible, setAuthentication }) => {
       console.log(token)
       setAuthentication(true);
       const { user_id } = jwt_decode(token);
+      const { nickname } = jwt_decode(token);
+      localStorage.setItem('nickname', nickname);
       setJwtToken(token);
       notification.open({
         message: "로그인 성공",
@@ -58,42 +60,46 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   }
 
   return (
+
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Form className="LoginForm" onSubmit={onSubmit} style={{ marginTop: '50px', width: '300px'}}>
+
+        <div className="logoImage" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom : '30px' }}>
+          <Link to="/"><img src={logo_detail} width="250" height="120" /></Link>
+        </div>
 
 
-      <Form className="LoginForm" onSubmit={onSubmit}>
-      <Link to="/"><img src={logo_detail} width="300" height="150" /></Link>
-        
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>E-mail</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" onChange={e => setId(e.target.value)} />
+          <Form.Control type="email" placeholder="이메일" onChange={e => setId(e.target.value)} />
 
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>비밀번호</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-          <div style={{ float: "right"}}><Link to="/FindPassword" setNavVisible={true} style={{textDecoration: 'none'}}>비밀번호 찾기</Link></div>
+          <Form.Control type="password" placeholder="비밀번호" onChange={e => setPassword(e.target.value)} />
+          <div style={{ float: "right", fontSize : "10pt" }}><Link to="/FindPassword" setNavVisible={true} style={{ textDecoration: 'none' }}>비밀번호 찾기</Link></div>
         </Form.Group>
-        
-        <br/>
 
-        <Col className='loginButton'>
-          <Row>
-            <Button className="w-100" variant="primary" type="submit" >로그인</Button>
-          </Row><br/>
-          <Row>
-            <a href={KAKAO_AUTH_URL}>
-              <img src={kakao_img} />
-            </a>
-          </Row>
+        <br />
+
+        <div className='loginButton mt-3'>
+          <Button className="w-100 mb-2" style={{ backgroundColor: '#4A93FF', border: 'none' }} variant="primary" type="submit" >로그인</Button>
+            <a href={KAKAO_AUTH_URL}><Button className="w-100 mb-3 btn-warning " style={{ backgroundColor: "#f7dc09", border: 'none' }}><img src={kakaotalk_icon} width='25' height='14' />Kakao 로그인</Button></a>
           <hr />
+          <p style={{ textAlign : 'center', fontSize : "10pt" }}>HED의 회원이 아니신가요? <Link to='/Register' style={{ textDecoration: 'none' }}>회원가입</Link></p>
+
+
+        </div>
+
+
+
+
+        {/* 
           <Row>
-            <Button variant="outline-primary" onClick={navigateRegister}>회원가입</Button>
-          </Row>
-        </Col>
-
-
+            
+          </Row> */}
 
       </Form>
 

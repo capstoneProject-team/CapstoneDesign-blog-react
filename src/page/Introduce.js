@@ -10,10 +10,10 @@ import Col from 'react-bootstrap/Col';
 
 
 
-const Introduce = ({setNavVisible}) => {
+const Introduce = ({setNavVisible, setAuthentication}) => {
 
   setNavVisible(true);
-
+  setAuthentication(false);
 
   return (
     <div>

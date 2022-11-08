@@ -3,12 +3,14 @@ import getStorageItem from '../utils/useLocalStorage'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { Row, Col } from 'react-bootstrap'
+// import backgroundImagetest from '../image/background.jpeg';
+
 import { notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import useLocalStorage from '../utils/useLocalStorage';
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
-import InputGroup from 'react-bootstrap/InputGroup';
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from 'react-bootstrap';
 
@@ -28,23 +30,25 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
   const { user_id } = jwt_decode(token);
   console.log(user_id)
-  let { nickname } = jwt_decode(token);
+  let nickname = localStorage.getItem('nickname');
   const { email } = jwt_decode(token);
+  const {location} = jwt_decode(token);
   const [changeName, setChangeName] = useState('');
+  console.log(token);
 
 
   const updateName = async (event) => {
     event.preventDefault();
     console.log(changeName)
     try {
-      let nickname=changeName
-      const response = await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/info/${user_id}/`,{nickname})
-      console.log(token)
-      // const response2 = await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}user/token/`,{token})
-      // console.log(response2)
-      // const token = response2.data.access;
-      // console.log(token)
-      // setJwtToken(token);
+      let nickname = changeName;
+      //바뀐 jwt token이 response에 들어올 예정
+      const response = await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/info/${user_id}/`, { nickname })
+      localStorage.setItem("nickname", response.data.nickname);
+      // const tokenChange = response.data.access;
+      // setJwtToken(tokenChange);
+      // console.log(tokenChange);
+
       namehandleClose();
       notification.open({
         message: "이름변경 성공",
@@ -59,62 +63,95 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
       });
     }
   }
-    const deleteAccount = async (event) => {
-      event.preventDefault();
-      try {
-        const response = await Axios.delete(`${process.env.REACT_APP_LOCAL_DJ_IP}user/delete/${user_id}/`)
-        window.localStorage.clear();
-        handleClose();
-        notification.open({
-          message: "계정삭제 성공",
-          icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-          placement: 'topRight'
-        });
-        setAuthentication(false);
-        navigate('/')
-      } catch (e) {
-        console.log(e)
-        notification.open({
-          message: "계정삭제 실패, 다시 시도해 주세요.",
-          icon: <FrownOutlined style={{ color: "#108ee9" }} />,
-          placement: 'topRight'
-        });
+  const deleteAccount = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await Axios.delete(`${process.env.REACT_APP_LOCAL_DJ_IP}user/delete/${user_id}/`)
+      window.localStorage.clear();
+      handleClose();
+      notification.open({
+        message: "계정삭제 성공",
+        icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+        placement: 'topRight'
+      });
+      setAuthentication(false);
+      navigate('/')
+    } catch (e) {
+      console.log(e)
+      notification.open({
+        message: "계정삭제 실패, 다시 시도해 주세요.",
+        icon: <FrownOutlined style={{ color: "#108ee9" }} />,
+        placement: 'topRight'
+      });
 
-      }
     }
-    return (
-      <div>
-        <Container >
-          {/* <form action='' method='update'> */}
-          <Form>
-            <h3>마이페이지</h3>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                이름
-              </InputGroup.Text>
-              <Form.Control
-                onChange={(event) => setChangeName(event.target.value)}
-                placeholder={nickname}
-                aria-describedby="inputGroup-sizing-small"
-              />
-            </InputGroup>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="inputGroup-sizing-default">
-                Email
-              </InputGroup.Text>
+  }
+  return (
+    <div>
+      <br/>
+      <Container style={{paddingLeft : '6%', paddingRight : '6%'}}>
+        <h3><b>마이페이지</b></h3> <hr />
+        <div>
+          <Form style={{padding: '20px'}}>
+            
+            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
+              <div className='explain' style={{width : '300px'}}>
+                <h5><b>닉네임 변경</b></h5>
+                <p style={{width:'200px'}}>사용자가 원하는 닉네임으로 언제든지 변경이 가능합니다.</p>
+              </div>
+
+            <div className="box" style={{width : '500px', padding : '30px'}}>
+            <Form.Label>닉네임</Form.Label>
+              <Form.Group id="inputGroup-sizing-default">
+                <Form.Control
+                  onChange={(event) => setChangeName(event.target.value)}
+                  placeholder={nickname}
+                  aria-describedby="inputGroup-sizing-small"/>
+                  <br/>
+                  <Button style={{ backgroundColor: '#4A93FF', border: 'none', float:"right"}} variant='primary' onClick={namehandleShow}>변경사항 저장</Button>
+              </Form.Group></div>
+            </div>
+
+
+            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
+              <div className='explain' style={{width : '300px'}}>
+                <h5><b>개인정보</b></h5>
+                <p style={{width:'200px'}}>사용자가 회원가입 시 입력한 개인정보를 확인할 수 있습니다.</p>
+              </div>
+
+            <div className="box" style={{width : '500px', padding : '30px'}}>
+              <Form.Group id="inputGroup-sizing-default">
+              <Form.Label>E-mail</Form.Label>
               <Form.Control
                 aria-label="Default"
                 aria-describedby="inputGroup-sizing-default"
                 value={email}
                 readOnly
-              />
-            </InputGroup>
-            <Button variant='primary' onClick={namehandleShow}>이름 변경</Button>
+                />
+                <br/>
+              <Form.Label>지역</Form.Label>
+              <Form.Control
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                value={location}
+                readOnly
+                />
+              </Form.Group>
 
-            <Button variant="danger" onClick={handleShow}>
-              계정 삭제
+              </div>
+            </div>
+
+            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
+              <div className='explain' style={{width : '300px'}}>
+                <h5><b>회원 탈퇴</b></h5>
+              </div>
+
+            <div className="box" style={{width : '500px', padding : '30px', textAlign : 'center'}}>
+            <Button variant="danger" onClick={handleShow} style={{width : '200px'}}>
+              회원 탈퇴 진행
             </Button>
-
+            </div>
+          </div>
 
             <Modal show={nameshow} onHide={namehandleClose}>
               <Modal.Header closeButton>
@@ -125,7 +162,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
                 <Button variant="secondary" onClick={namehandleClose}>
                   취소
                 </Button>
-                <Button variant="danger" type="submit" onClick={updateName}>
+                <Button type="submit" onClick={updateName}>
                   변경
                 </Button>
               </Modal.Footer>
@@ -147,12 +184,13 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
               </Modal.Footer>
             </Modal>
           </Form>
-          <br />
+        </div>
+        <br />
+      </Container>
 
-        </Container>
 
-      </div>
-    )
-  }
+    </div>
+  )
+}
 
-  export default Mypage
+export default Mypage

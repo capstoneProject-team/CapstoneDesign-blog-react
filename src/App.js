@@ -26,7 +26,7 @@ function App() {
     <div>
     {navVisible && <Navigation isAuthenticated={isAuthenticated}  setAuthentication={setAuthentication}/>}
       <Routes>
-        <Route path="/" element={<Introduce setNavVisible={setNavVisible}/>}/>
+        <Route path="/" element={<Introduce setNavVisible={setNavVisible} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-create" element={isAuthenticated==true ? <DiaryCreate authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-detail" element={isAuthenticated==true ? <DiaryDetail authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-list" element={isAuthenticated==true ? <DiaryList authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>

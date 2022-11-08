@@ -7,13 +7,6 @@ const WeatherDate = (props) => {
     const token = getStorageItem('jwtToken', '')[0];
     const { location } = jwt_decode(token);
 
-    // let now = new Date();
-    // let todayYear = now.getFullYear();
-    // let todayMonth = now.getMonth() + 1;
-    // let todayDate = now.getDate();
-    // const week = ['일', '월', '화', '수', '목', '금', '토'];
-    // let dayOfweek = week[now.getDay()];    
-
     const [nowWeather, setNowWeather] = useState(null);
 
     const cityLocationList = [
@@ -41,7 +34,7 @@ const WeatherDate = (props) => {
     })
 
     const getWeatherByCityLocation = async (lat, lon) => {
-        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f6dac6728e6a482af225b0345eb090e9&&units=metric`
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f6dac6728e6a482af225b0345eb090e9&lang=kr&&units=metric`
         let response = await fetch(url);
         let data = await response.json();
         setNowWeather(data);
@@ -53,8 +46,16 @@ const WeatherDate = (props) => {
 
     return (
         <div>
-            <p>{props.todayYear}년 {props.todayMonth}월 {props.todayDate}일 {props.dayOfweek}요일
-                | {cityInfo[0].city} {nowWeather?.main.temp}° {nowWeather?.weather[0].main}</p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', }}>
+                <div style={{ float: 'left', height:'50px', display: 'table-cell', verticalAlign: 'middle', fontSize : '12pt'}}>
+                    <div style={{position: 'relative', top: '15px'}}><b>{props.todayYear}년 {props.todayMonth}월 {props.todayDate}일 {props.dayOfweek}요일</b></div>
+                    </div>
+                <div style={{ float: 'right', fontSize : "11pt"}}>
+                <img style={{ width: "30x", height: "50px", filter: "drop-shadow(0.5px 0.5px 0.5px #000)", marginRight : "-5px"}} src={`http://openweathermap.org/img/wn/${nowWeather?.weather[0].icon}@2x.png`} />
+                    <b>{nowWeather?.main.temp.toFixed(1)}° {nowWeather?.weather[0].main}</b> {cityInfo[0].city}
+                    
+                </div>
+            </div>
         </div>
     )
 }

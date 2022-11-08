@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import { Routes, Route, Link } from "react-router-dom";
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
-import WeatherDate from '../component/WeatherDate';
+import WeatherDate from '../component/MainWeather';
 import MainBanner from '../component/MainBanner';
 import MainPrologue from '../component/MainPrologue';
 import MainTrend from '../component/MainTrend';
@@ -23,13 +23,15 @@ const Main = ({ setNavVisible }) => {
   const week = ['일', '월', '화', '수', '목', '금', '토'];
   let dayOfweek = week[now.getDay()];
 
+//   useEffect(() => {
+//     window.location.replace("/main")
+// }, [])
   return (
     <div>
-      <Container>
+      <Container style={{paddingLeft : '6%', paddingRight : '6%'}}>
         <Col className="body">
-          <Row>
-              <WeatherDate todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek}/>
-          </Row>
+            <Row><WeatherDate todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek} /></Row>
+      
 
           <Row>
             <MainBanner todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek}/>
