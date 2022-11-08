@@ -64,14 +64,14 @@ const Register = ({setNavVisible, props}) => {
       <Link to="/"><img src={logo_detail} width="300" height="150" margin="100"/></Link>
 
       <Formik
-      initialValues={{nickname:'', email:'', password: '', password2: '',hint1:'',hint2:'',
+      initialValues={{nickname:'', username:'', password: '', password2: '',hint1:'',hint2:'',
       location: '',question1:'',question2:'',question3:''}}
       // nickname : 사용자 이름, username : 이메일
       onSubmit={submit}
       validationSchema={Yup.object().shape({
         nickname: Yup.string()
         .required("필수 입력 사항입니다!"),
-        email: Yup.string()
+        username: Yup.string()
         .email("이메일 형식으로 입력하세요!")
         .required("필수 입력 사항입니다!"),
         password: Yup.string()
@@ -116,15 +116,15 @@ const Register = ({setNavVisible, props}) => {
             { touched.nickname && errors.nickname && <Form.Control.Feedback type="invalid">{errors.nickname}</Form.Control.Feedback> }
           </Form.Group>
           <br/>
-          <Form.Group controlId="email">
+          <Form.Group controlId="username">
             <Form.Label>이메일 주소</Form.Label>
-            <Form.Control name="email" placeholder="이메일 주소를 입력하세요"
-                          value={values.email}
+            <Form.Control name="username" placeholder="이메일 주소를 입력하세요"
+                          value={values.username}
                           onChange={handleChange} onBlur={handleBlur}
-                          isValid={touched.email && !errors.email}
-                          isInvalid={touched.email && errors.email ? true : false} />
-            { touched.email && !errors.email && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
-            { touched.email && errors.email && <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback> }
+                          isValid={touched.username && !errors.username}
+                          isInvalid={touched.username && errors.username ? true : false} />
+            { touched.username && !errors.username && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
+            { touched.username && errors.username && <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback> }
           </Form.Group>
           <br/>
           <Form.Group controlId="formGroupPassword">
@@ -207,10 +207,10 @@ const Register = ({setNavVisible, props}) => {
                           isValid={touched.question1 && !errors.question1}
                           isInvalid={touched.question1 && errors.question1 ? true : false}>
                                 <option>답변을 선택해 주세요.</option>
-                                <option value={"1"}>(1) 틈날 때 마다</option>
-                                <option value={"2"}>(2) 여유가 될 때</option>
-                                <option value={"3"}>(3) 생각나는 노래가 있을 때</option>
-                                <option value={"4"}>(4) 생각나는 노래가 있을 때</option>
+                                <option value={"틈날 때 마다"}>(1) 틈날 때 마다</option>
+                                <option value={"여유가 될 때"}>(2) 여유가 될 때</option>
+                                <option value={"생각나는 노래가 있을 때"}>(3) 생각나는 노래가 있을 때</option>
+                                <option value={"자주 듣지 않음"}>(4) 자주 듣지 않음</option>
                       
             </Form.Select>
             { touched.question1 && !errors.question1 && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
@@ -225,10 +225,12 @@ const Register = ({setNavVisible, props}) => {
                           isValid={touched.question2 && !errors.question2}
                           isInvalid={touched.question2 && errors.question2 ? true : false}>
                                 <option>답변을 선택해 주세요.</option>
-                                <option value={"1"}>(1) 따로 시간을 내서</option>
-                                <option value={"2"}>(2) 이동 중에</option>
-                                <option value={"3"}>(3) 감정적일 때</option>
-                                <option value={"4"}>(4) 공부할 때</option>
+                                <option value={"따로 시간을 내서"}>(1) 따로 시간을 내서</option>
+                                <option value={"이동 중에"}>(2) 이동 중에</option>
+                                <option value={"감정적일 때"}>(3) 감정적일 때</option>
+                                <option value={"공부할 때"}>(4) 공부할 때</option>
+                                <option value={"심심할 때"}>(5) 공부할 때</option>
+                                <option value={"운동할 때"}>(6) 공부할 때</option>
                                 
             </Form.Select>
             { touched.question2 && !errors.question2 && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
@@ -236,17 +238,29 @@ const Register = ({setNavVisible, props}) => {
           </Form.Group>
           <br/>
           <Form.Group controlId="question3">
-            <Form.Label>질문3. 위 상황에서 어떤 노래를 주로 들으시나요??</Form.Label>
+            <Form.Label>질문3. 좋아하는 음악 장르가 어떻게 되나요?</Form.Label>
             <Form.Select name='question3'
                           value={values.question3}
                           onChange={handleChange} onBlur={handleBlur}
                           isValid={touched.question3 && !errors.question3}
                           isInvalid={touched.question3 && errors.question3 ? true : false}>
                                 <option>답변을 선택해 주세요.</option>
-                                <option value={"1"}>(1) 신나는 음악</option>
-                                <option value={"2"}>(2) 침착한 음악</option>
-                                <option value={"3"}>(3) 둘 다</option>
-                                
+                                <option value={"클래식"}>(1) 클래식</option>
+                                <option value={"재즈"}>(2) 재즈</option>
+                                <option value={"CCM"}>(3) CCM</option>
+                                <option value={"팝"}>(4) 팝</option>
+                                <option value={"발라드"}>(5) 발라드</option>
+                                <option value={"블루스"}>(6) 블루스</option>
+                                <option value={"힙합"}>(7) 힙합</option>
+                                <option value={"컨트리"}>(8) 컨트리</option>
+                                <option value={"포크"}>(9) 포크</option>
+                                <option value={"레게"}>(10) 레게</option>
+                                <option value={"디스코"}>(11) 디스코</option>
+                                <option value={"록"}>(12) 록</option>
+                                <option value={"일렉트로닉"}>(13) 일렉트로닉</option>
+                                <option value={"K-POP"}>(14) K-POP</option>
+                                <option value={"트로트"}>(15) 트로트</option>
+                                <option value={"R&B"}>(16) R&B</option>
             </Form.Select>
             { touched.question3 && !errors.question3 && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback> }
             { touched.question3 && errors.question3 && <Form.Control.Feedback type="invalid">{errors.question3}</Form.Control.Feedback> }
