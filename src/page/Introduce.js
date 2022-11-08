@@ -17,10 +17,10 @@ import introduce_8 from '../image/introduce_8.jpg';
 
 
 
-const Introduce = ({setNavVisible}) => {
-   const {Title} = Typography;
+const Introduce = ({setNavVisible, setAuthentication}) => {
+  const {Title} = Typography;
   setNavVisible(true);
-
+  setAuthentication(false);
 
   return (
     <div>

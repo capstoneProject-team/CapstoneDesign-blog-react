@@ -13,6 +13,7 @@ const Navigation = ({ isAuthenticated, setAuthentication }) => {
   console.log(isAuthenticated);
   const navigate = useNavigate();
 
+
   const login = () => {
     navigate('/login')
   }
@@ -33,8 +34,8 @@ const Navigation = ({ isAuthenticated, setAuthentication }) => {
 
   return (
     <Navbar collapseOnSelect expand="lg">
-      <Container>
-        <Link to={'/main'}><Navbar.Brand>
+      <Container style={{paddingLeft : '5%', paddingRight : '5%'}}>
+        <Link to={'/main'}><Navbar.Brand href="#">
           <img
             alt=""
             src={logo_detail}
@@ -47,11 +48,11 @@ const Navigation = ({ isAuthenticated, setAuthentication }) => {
         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
 
           {isAuthenticated == false ?
-            <Nav><Nav.Link onClick={login}>Sign in</Nav.Link></Nav> :
+            <Nav><Nav.Link onClick={login} href="#">Sign in</Nav.Link></Nav> :
 
-            <Nav><Nav.Link onClick={diarylist}>전체 일기장</Nav.Link>
-              <Nav.Link onClick={mypage}>마이페이지</Nav.Link>
-              <Nav.Link onClick={logout}>로그아웃</Nav.Link>
+            <Nav><Nav.Link onClick={diarylist} href="#">전체 일기장</Nav.Link>
+              <Nav.Link onClick={mypage} href="#" >마이페이지</Nav.Link>
+              <Nav.Link onClick={logout} href="#">로그아웃</Nav.Link>
             </Nav>
           }
 

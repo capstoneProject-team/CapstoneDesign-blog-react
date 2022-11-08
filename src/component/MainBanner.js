@@ -3,11 +3,13 @@ import jwt_decode from "jwt-decode";
 import getStorageItem from '../utils/useLocalStorage';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import logo from '../image/logo.png';
+import sunset from '../image/sunset_mainbanner.jpg';
+
 import { Routes, Route, Link } from "react-router-dom";
 
 const MainBanner = (props) => {
     const token = getStorageItem('jwtToken', '')[0];
-    const { nickname } = jwt_decode(token);
+    const nickname = localStorage.getItem('nickname') || '반가운';
     let today = props.todayYear + "-" + props.todayMonth + "-" + props.todayDate;
     
     //백에서 불러올 데이터
@@ -99,12 +101,12 @@ const MainBanner = (props) => {
         setBannerContent();
     }, [])
     return (
-        <div className='box' style={{ padding: "30px" }}>
+        <div className='box' style={{ padding: "50px"}}>
             {bannerDefault && <div className="bannerContent">
                 <div>
-                    <h4>{nickname}님, 오늘 하루 어떠셨나요? <br />
+                    <h3><b>{nickname}님, 오늘 하루 어떠셨나요? <br />
                         <br />
-                        일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
+                        일상을 기록하고 <br /> 근사한 밤을 보내세요!</b></h3>
                     <br />
                     <Link to="/diary-create"><Button>일기 쓰러가기</Button></Link></div>
 
