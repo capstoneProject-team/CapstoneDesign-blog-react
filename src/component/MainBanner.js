@@ -3,7 +3,6 @@ import jwt_decode from "jwt-decode";
 import getStorageItem from '../utils/useLocalStorage';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import logo from '../image/logo.png';
-import sunset from '../image/sunset_mainbanner.jpg';
 
 import { Routes, Route, Link } from "react-router-dom";
 
