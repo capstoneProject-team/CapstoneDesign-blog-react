@@ -19,7 +19,8 @@ const Navigation = ({ isAuthenticated, setAuthentication }) => {
   }
 
   const logout = () => {
-    setStorageItem('jwtToken', '');
+    // setStorageItem('jwtToken', '');
+    localStorage.removeItem('jwtToken');
     setAuthentication(false);
     window.localStorage.clear();
     navigate('/')

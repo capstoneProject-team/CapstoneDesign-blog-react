@@ -28,10 +28,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Introduce setNavVisible={setNavVisible} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-create" element={isAuthenticated==true ? <DiaryCreate authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
-        <Route path="/diary-detail" element={isAuthenticated==true ? <DiaryDetail authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
+        <Route path="/diary-detail/:post_id" element={isAuthenticated==true ? <DiaryDetail authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-list" element={isAuthenticated==true ? <DiaryList authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/login"  element={<Login setAuthentication={setAuthentication} setNavVisible={setNavVisible}/>}/>
-        <Route path="/oauth/callback/kakao" element=<KakaoRedirectHandler setAuthentication={setAuthentication}/>/>
+        <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler setAuthentication={setAuthentication}/>}/>
         <Route path="/main" element={isAuthenticated ? <Main authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Navigate replace to="/" />} />
         <Route path="/Mypage" element={isAuthenticated==true ? <Mypage authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/Register" element={<Register setNavVisible={setNavVisible}/>}/>
