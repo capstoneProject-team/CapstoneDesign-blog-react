@@ -25,7 +25,6 @@ const DiaryList = ({setNavVisible}) => {
   useEffect(() => {
       const pageData = async() => {
         const response = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post?page=${page}&author_id=${user_id}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
-        console.log(response)
         setPageList(response.data.results);
         setPostCnt(response.data.results.length);
         setTotalPage(parseInt((response.data.count)/ 5)+1);
@@ -42,8 +41,6 @@ const DiaryList = ({setNavVisible}) => {
   }, [totalPage])
 
   // handlePage(1);
-  console.log(pageList)
-  console.log(pageCnt)
 
   return ( 
     <div>

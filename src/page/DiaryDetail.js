@@ -26,13 +26,14 @@ const DiaryDetail = ({setNavVisible}) => {
   const [keyword, setKeyword] = useState([]);
   const [link, setLink] = useState([]);
   const [params, setParams] = useState({
-    key : 'AIzaSyCFDueeCWgW75VFoGw8GWiC7ve1xyGW6lg',
+    key : `${process.env.REACT_APP_YOUTUBE_API_KEY}`,
     part: 'snippet',
     q: `${'슬플 때'}노래모음`,
     maxResults: 10,
     type: 'video',
     videoDuration: 'long'
   });
+  console.log(process.env.YOUTUBE_API_KEY);
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const { Header, Content, Footer } = Layout;
 
