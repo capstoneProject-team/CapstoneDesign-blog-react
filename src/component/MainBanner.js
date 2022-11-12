@@ -1,13 +1,13 @@
 import { React, useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
-import getStorageItem from '../utils/useLocalStorage';
+import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage';
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import logo from '../image/logo.png';
 
 import { Routes, Route, Link } from "react-router-dom";
 
 const MainBanner = (props) => {
-    const token = getStorageItem('jwtToken', '')[0];
+    const token = getJwtAtStorage(); //getStorageItem('jwtToken', '')[0];
     const nickname = localStorage.getItem('nickname') || '반가운';
     let today = props.todayYear + "-" + props.todayMonth + "-" + props.todayDate;
     

@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
-import getStorageItem from '../utils/useLocalStorage';
+import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage';
 
 const WeatherDate = (props) => {
 
-    const token = getStorageItem('jwtToken', '')[0];
+    const token = getJwtAtStorage(); //getStorageItem('jwtToken', '')[0];
     const { location } = jwt_decode(token);
 
     const [nowWeather, setNowWeather] = useState(null);

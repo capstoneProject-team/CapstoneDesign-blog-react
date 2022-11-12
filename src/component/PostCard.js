@@ -1,39 +1,39 @@
 import React from 'react'
-import Figure from 'react-bootstrap/Figure';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {Figure, Container, Row, Col} from 'react-bootstrap';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 const PostCard = ({detail}) => {
   const moveToDetail = () => {
     
   }
   console.log('detail = ' + detail.title)
   return (
-    <div onClick={moveToDetail}>
+    <Link to={`/diary-detail/${detail.id}`}>
       <Container>
         <Row>
-          <Col>(이모티콘) {detail.title}</Col>
+          <Col>{detail.title} </Col>
         </Row>
         <Row>
-          <Col>d</Col>
+          <Col>{moment(detail.created_at).format('YYYY년 MM월 DD일')}</Col>
         </Row>
-        <Row>
-          <Col>{detail.created_at}</Col>
-        </Row>
-        <Figure>
-        <Figure.Image
-          width={171}
-          height={180}
-          alt="게시물 사진"
-          src={detail.photo}
-        />
-        </Figure>
+        {
+          detail.photo && (
+            <Figure>
+              <Figure.Image
+                width={171}
+                height={180}
+                alt="게시물 사진"
+                src={detail.photo}
+              />
+            </Figure> 
+          )
+        }
+        
 
-        <br/><br/><br/>
+        <br/><br/><br/> 
 
         </Container>
-    
-    </div>
+    </Link>
   )
 }
 

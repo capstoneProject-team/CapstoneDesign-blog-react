@@ -18,11 +18,15 @@ import { Container, Form, Row, Col } from 'react-bootstrap';
 //antd
 import { UploadOutlined } from '@ant-design/icons';
 import { Space, Upload, notification } from 'antd';
-import { Axios } from 'axios';
+import Axios from 'axios';
 
 //etc
 import {useNavigate} from 'react-router-dom';
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
+import { getJwtAtStorage } from '../utils/useLocalStorage';
+
+//date format
+import moment from 'moment';
 
 const DiaryCreate = ({setNavVisible}) => {
   setNavVisible(true);
@@ -46,32 +50,64 @@ const DiaryCreate = ({setNavVisible}) => {
     })
   }
 
+  //파일 데이터 관련 코드
+  const [selectFile, setSelectFile] = useState(null);
 
   const onSubmit =async (event) => {
     event.preventDefault();
     console.log(created_at,diaryContent);
 
     let {title, content} = diaryContent;
-
+    const formData = new FormData();
+    formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('photo', selectFile);
+    console.log(selectFile);
     try {
-      await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`,{created_at, title, content})
+      await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData, { headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
       notification.open({
-        message:"회원가입 성공",
-        description:"로그인 페이지로 이동합니다.",
+        message:"저장 완료!",
+        description:"일기를 성공적으로 저장하였습니다.",
         icon:<SmileOutlined/>
       }); 
-      navigate('/DiaryDetail')
+      console.log('success')
+      navigate('/diary-list')
     }
     catch(e){
+      console.log(e)
       if(e.response){
         notification.open({
-          message:"회원가입 실패",
-          description:"아이디/비밀번호를 확인해주세요.",
+          message:"로그인/회원가입이 되어있는지 확인해주세요.",
+          description:"로그인 후 일기를 써보세요.",
           icon:<FrownOutlined/>
         })};
     }
   }
 
+
+  //파일 선택 확인 
+  const fileSelectedHandler = (event) => {
+    setSelectFile(event.target.files[0]);
+  }
+  
+  //파일 업로드
+  // const fileUploadHandler = () => {
+   
+   
+  //   console.log(selectFile)
+  
+  //   try {
+  //     Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData,
+  //     {
+  //       header : {}
+  //     });//업로드 파일에 관련된 Url 작성 필요
+  //     }
+  //   catch {
+  //     console.log("실패");
+  //   }
+  // }
+  
 
 
   return (
@@ -100,10 +136,10 @@ const DiaryCreate = ({setNavVisible}) => {
                   removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed", "Table", "TableToolbar", "BlockQuote"],
                   placeholder: "내용을 입력하세요."
                 }}
-
+                
                 onReady={editor => {
                   console.log('Editor is ready to use!', editor);
-
+                  
                 }}
                 onChange={(event, editor) => {
                   const data = editor.getData();
@@ -120,13 +156,8 @@ const DiaryCreate = ({setNavVisible}) => {
                   //   console.log('Focus.', editor);
                 }}
               />
-              <Upload
-                // action="https://www.mocky.io/v2/5cc8019d300000980a055e76" 이미지 업로드 url
-                listType="picture"
-                maxCount={1}
-              >
-                <Button icon={<UploadOutlined />}>이미지 올리기</Button>
-              </Upload>
+
+              <input type="file" onChange={fileSelectedHandler} />
 
               <div className='mt-3'>
                 {/* <Link to="/diary-detail"><Button type="submit" variant="info">저장</Button></Link> */}
