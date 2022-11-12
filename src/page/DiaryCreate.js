@@ -21,14 +21,14 @@ import { Space, Upload, notification } from 'antd';
 import Axios from 'axios';
 
 //etc
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 
 //date format
 import moment from 'moment';
 
-const DiaryCreate = ({setNavVisible}) => {
+const DiaryCreate = ({ setNavVisible }) => {
   setNavVisible(true);
   //다이어리 날짜  
   const [created_at, setDate_time] = useState(new Date());
@@ -55,7 +55,7 @@ const DiaryCreate = ({setNavVisible}) => {
 
   const onSubmit =async (event) => {
     event.preventDefault();
-    console.log(created_at,diaryContent);
+    console.log(created_at, diaryContent);
 
     let {title, content} = diaryContent;
     const formData = new FormData();
@@ -91,24 +91,6 @@ const DiaryCreate = ({setNavVisible}) => {
     setSelectFile(event.target.files[0]);
   }
   
-  //파일 업로드
-  // const fileUploadHandler = () => {
-   
-   
-  //   console.log(selectFile)
-  
-  //   try {
-  //     Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData,
-  //     {
-  //       header : {}
-  //     });//업로드 파일에 관련된 Url 작성 필요
-  //     }
-  //   catch {
-  //     console.log("실패");
-  //   }
-  // }
-  
-
 
   return (
     <div>
@@ -119,7 +101,7 @@ const DiaryCreate = ({setNavVisible}) => {
           <Row>
             <Col lg={9}><DatePicker selected={created_at} onChange={(date) => setDate_time(date)} /></Col>
             {/* <DatePicker defaultValue={moment({startDate}, dateFormat)} format={dateFormat} /> */}
-          
+
           </Row>
 
           <Row>

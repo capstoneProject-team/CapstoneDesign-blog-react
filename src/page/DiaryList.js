@@ -1,17 +1,12 @@
-import {React,useState,useEffect} from 'react'
-import Button from 'react-bootstrap/Button';
+import { React, useState, useEffect } from 'react'
 import Navigation from '../component/Navigation'
-import { Routes, Route ,Link} from "react-router-dom";
-import SplitButton from 'react-bootstrap/SplitButton';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Routes, Route, Link } from "react-router-dom";
 import Pagination from 'react-bootstrap/Pagination';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import { Container, Row, Col, Button, Table, Dropdown, SplitButton } from 'react-bootstrap';
 import PostCard from '../component/PostCard';
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
-import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage'
+import { getJwtAtStorage } from '../utils/useLocalStorage'
 const DiaryList = ({setNavVisible}) => {
   const [page, setPage] = useState(1);
 
@@ -22,7 +17,7 @@ const DiaryList = ({setNavVisible}) => {
   let jwt = localStorage.getItem('jwtToken');
   jwt = jwt.substring(1, jwt.length - 1)
   const { user_id } = jwt_decode(jwt);
- 
+
   const handlePage = (page) => {
     setPage(page);
   }
@@ -40,18 +35,17 @@ const DiaryList = ({setNavVisible}) => {
 
   useEffect(() => {
     let pages = [];
-    for(let i = 1 ; i <= totalPage ; i++){
+    for (let i = 1; i <= totalPage; i++) {
       pages.push(i);
     }
     setPageCnt(pages);
-  },[totalPage])
+  }, [totalPage])
 
   // handlePage(1);
   console.log(pageList)
   console.log(pageCnt)
-  
 
-  return (
+  return ( 
     <div>
         <br/><br/><br/>
         <Container>
@@ -72,21 +66,22 @@ const DiaryList = ({setNavVisible}) => {
         </Container><br/>
         
         {pageList.map(detail => (<PostCard detail={detail}/>))}
-        
-        <div class = 'pagination'>
-          <Pagination>
-          <Pagination.First />
-          <Pagination.Prev />
-          {pageCnt.map(x => (<Pagination.Item onClick={()=> handlePage(x)} >{x}</Pagination.Item>))}          
-          <Pagination.Next />
-          <Pagination.Last /> 
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <Link to="/diary-create"><Button variant="info">일기 쓰기</Button></Link>
-          </Pagination>
-      </div>
-    </div>
+  
+        <br />
+        <br />
 
-    
+        <div class='pagination'>
+          <Pagination size="sm">
+            <Pagination.First />
+            <Pagination.Prev />
+            {pageCnt.map(x => (<Pagination.Item onClick={()=> handlePage(x)} >{x}</Pagination.Item>))}          
+            {/* <Pagination.Item>1</Pagination.Item> */}
+            <Pagination.Next />
+            <Pagination.Last />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+          </Pagination>
+        </div>
+    </div>
   )
 }
 

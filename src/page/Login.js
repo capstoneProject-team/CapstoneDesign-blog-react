@@ -86,7 +86,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
         <br />
 
         <div className='loginButton mt-3'>
-          <Button className="w-100 mb-2" style={{ backgroundColor: '#4A93FF', border: 'none' }} variant="primary" type="submit" >로그인</Button>
+          <Button className="w-100 mb-2" style={{ backgroundColor: '#4A93FF', border: 'none' }} type="submit" >로그인</Button>
             <a href={KAKAO_AUTH_URL}><Button className="w-100 mb-3 btn-warning " style={{ backgroundColor: "#f7dc09", border: 'none' }}><img src={kakaotalk_icon} width='25' height='14' />Kakao 로그인</Button></a>
           <hr />
           <p style={{ textAlign : 'center', fontSize : "10pt" }}>HED의 회원이 아니신가요? <Link to='/Register' style={{ textDecoration: 'none' }}>회원가입</Link></p>
