@@ -7,6 +7,8 @@ import PostCard from '../component/PostCard';
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import { getJwtAtStorage } from '../utils/useLocalStorage'
+import editIcon from '../image/editicon.png'
+
 const DiaryList = ({setNavVisible}) => {
   const [page, setPage] = useState(1);
 
@@ -44,21 +46,12 @@ const DiaryList = ({setNavVisible}) => {
 
   return ( 
     <div>
-        <br/><br/><br/>
+      <Link to="/diary-create">
+          <img src={editIcon} style={{filter: "drop-shadow(1.5px 1.5px 1.5px #000)", color : "#4A93FF" ,width:'80px', height:'80px', position: 'fixed', top: '87%', left: '77%', zIndex : '2' }}/></Link>
         <Container>
         <Row >
           <Col ><h5>{postCnt}개의 글</h5></Col>
-          <Col xs={6}></Col>
-          <Col>
-          <SplitButton
-          key='Info'
-          id={`dropdown-split-variants-'Info'`}
-          variant={'Info'.toLowerCase()}
-          title={'정렬조건'}
-        >
-          <Dropdown.Item eventKey="1">최신순</Dropdown.Item>
-          <Dropdown.Item eventKey="2">오래된순</Dropdown.Item>
-        </SplitButton></Col>
+
         </Row>
         </Container><br/>
         

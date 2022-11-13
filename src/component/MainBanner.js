@@ -100,23 +100,24 @@ const MainBanner = (props) => {
         setBannerContent();
     }, [])
     return (
-        <div className='box' style={{ padding: "50px"}}>
+        <div className='mainBannerBox' style={{ padding: "50px"}}>
             {bannerDefault && <div className="bannerContent">
                 <div>
-                    <h3><b>{nickname}님, 오늘 하루 어떠셨나요? <br />
+                    <h4><b>{nickname}님, 오늘 하루 어떠셨나요? <br />
                         <br />
-                        일상을 기록하고 <br /> 근사한 밤을 보내세요!</b></h3>
+                        일상을 기록하고 <br /> 근사한 밤을 보내세요!</b></h4>
                     <br />
-                    <Link to="/diary-create"><Button>일기 쓰러가기</Button></Link></div>
-
-                <div className='bannerImage'>
-                    <img src={logo} width="200" height="200" />
+                    <Link to="/diary-create"><Button>일기 쓰러가기</Button></Link>
                     </div>
+
+                {/* <div className='bannerImage'>
+                    <img src={logo} width="200" height="200" />
+                    </div> */}
             </div>}
 
             {/* happy */}
             {bannerHappy && <div className="bannerContent" >
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 기쁜 하루<br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
@@ -125,11 +126,12 @@ const MainBanner = (props) => {
                     <Link to="/diary-detail"><Button>일기장 보기</Button></Link></div>
                 <div className='bannerImage'>
                     <img src={logo} width="350" height="250" />
-                </div></div>}
+                </div>
+                </div>}
 
             {/* 슬픔 */}
             {bannerSad && <div className="bannerContent">
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 슬픈 하루<br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
@@ -143,7 +145,7 @@ const MainBanner = (props) => {
 
             {/* 화남 */}
             {bannerAngry && <div className="bannerContent">
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 화난 하루 <br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
@@ -157,7 +159,7 @@ const MainBanner = (props) => {
 
             {/* 상처 */}
             {bannerHurt && <div className="bannerContent">
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 상처받은 하루<br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
@@ -170,7 +172,7 @@ const MainBanner = (props) => {
 
             {/* 불안 */}
             {bannerAnxious && <div className="bannerContent">
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 불안한 하루<br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>
@@ -183,7 +185,7 @@ const MainBanner = (props) => {
 
             {/* 당황 */}
             {bannerStatrled && <div className="bannerContent">
-                <div>
+                <div className='box' style={{ padding: "50px"}}>
                     <h4>{nickname}님, 당황스러운 하루 <br />
                         <br />
                         일상을 기록하고 <br /> 근사한 밤을 보내세요!</h4>

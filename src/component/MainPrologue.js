@@ -5,9 +5,9 @@ import { Routes, Route, Link } from "react-router-dom";
 const MainPrologue = () => {
 
     //back에서 불러올 데이터
-    let diaryPrologueDateData = ['2022-10-25', '2022-10-23'] //다이어리 작성 날짜
-    let diaryPrologueTitleData = ['title2', 'title3'] //다이어리 작성 날짜
-    let diaryPrologueContentData = ['content2', 'content3'] //다이어리 작성 날짜
+    let diaryPrologueDateData = ['2022-10-26','2022-10-25', '2022-10-23'] //다이어리 작성 날짜
+    let diaryPrologueTitleData = ['title1', 'title2', 'title3'] //다이어리 작성 날짜
+    let diaryPrologueContentData = ['content1','content2', 'content3'] //다이어리 작성 날짜
     
     //프롤로그 관련
     const [visiblePrologueDefault, setVisiblePrologueDefault] = useState(false);
@@ -42,23 +42,23 @@ const MainPrologue = () => {
     return (
         <Col>
             <h3>Prologue✨</h3>
-            <Row className='box'>
+            <Row className='boxPrologue'>
                 {visiblePrologueDefault &&
                     <Col className='text-center'>
                         <p>일기를 작성해주세요</p>
                         <Link to="/diary-create"><Button>일기작성하러가기</Button></Link>
                     </Col>}
-                {visiblePrologue1 && <Col><Link to="/diary-detail">
+                {visiblePrologue1 && <Col><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
                     <h5>{diaryPrologueTitleData[0]}</h5>
                     <p>{diaryPrologueContentData[0]}</p>
                     <p>{diaryPrologueDateData[0]}</p>
                 </Link></Col>}
-                {visiblePrologue2 && <Col><Link to="/diary-detail">
+                {visiblePrologue2 && <Col><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
                     <h5>{diaryPrologueTitleData[1]}</h5>
                     <p>{diaryPrologueContentData[1]}</p>
                     <p>{diaryPrologueDateData[1]}</p>
                 </Link></Col>}
-                {visiblePrologue3 && <Col><Link to="/diary-detail">
+                {visiblePrologue3 && <Col><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
                     <h5>{diaryPrologueTitleData[2]}</h5>
                     <p>{diaryPrologueContentData[2]}</p>
                     <p>{diaryPrologueDateData[2]}</p>

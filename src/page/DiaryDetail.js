@@ -33,7 +33,7 @@ const DiaryDetail = ({setNavVisible}) => {
     type: 'video',
     videoDuration: 'long'
   });
-  console.log(process.env.YOUTUBE_API_KEY);
+  console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const { Header, Content, Footer } = Layout;
 
