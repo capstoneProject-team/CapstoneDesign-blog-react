@@ -5,7 +5,7 @@ import { notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
-import useLocalStorage from '../utils/useLocalStorage';
+import useLocalStorage, { setJwtAtStorage } from '../utils/useLocalStorage';
 import logo_detail from '../image/logo_detail.png';
 import kakaotalk_icon from '../image/kakaotalk_icon.png';
 
@@ -29,7 +29,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
 
   const [username, setId] = useState(null);
   const [password, setPassword] = useState(null);
-  const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", ""); //local 에 저장
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -41,7 +41,8 @@ const Login = ({ setNavVisible, setAuthentication }) => {
       const { user_id } = jwt_decode(token);
       const { nickname } = jwt_decode(token);
       localStorage.setItem('nickname', nickname);
-      setJwtToken(token);
+      setJwtAtStorage('jwtToken', token);
+      
       notification.open({
         message: "로그인 성공",
         icon: <SmileOutlined style={{ color: "#108ee9" }} />,

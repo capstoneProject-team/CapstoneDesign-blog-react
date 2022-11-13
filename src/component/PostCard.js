@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import Figure from 'react-bootstrap/Figure';
-import Container from 'react-bootstrap/Container';
-
+import React, {useState, useEffect} from 'react'
+import {Figure, Container, Row, Col} from 'react-bootstrap';
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 const PostCard = ({detail}) => {
   //상세페이지로 넘어가기 
   const moveToDetail = () => {
@@ -39,31 +39,31 @@ const PostCard = ({detail}) => {
 
   console.log('detail = ' + detail.title)
   return (
-    <div onClick={moveToDetail}>
+    <Link to={`/diary-detail/${detail.id}`}>
       <Container>
+        <Row>
+          <Col>{detail.title} </Col>
+        </Row>
+        <Row>
+          <Col>{moment(detail.created_at).format('YYYY년 MM월 DD일')}</Col>
+        </Row>
+        {
+          detail.photo && (
+            <Figure>
+              <Figure.Image
+                width={171}
+                height={180}
+                alt="게시물 사진"
+                src={detail.photo}
+              />
+            </Figure> 
+          )
+        }
       
-      <div style={{display : 'flex', justifyContent : 'space-between'}}>
-        <div style={{width : "70%"}}>
-          <h4>{emotionIcon} {detail.title}</h4>
-          <div style={{height : "150px", fontSize : '11.5pt'}}>{detail.content.substr(0,150)}...</div>
+        <br/><br/><br/> 
 
-          <div style={{fontSize : '10pt'}}>{detail.created_at}</div>
-        </div>
-
-        <Figure style={{float : "right", width : "20%" }}>
-        <Figure.Image
-          width={500}
-          height={500}
-          alt="게시물 사진"
-          // src={detail.photo}
-          src= "https://file.mk.co.kr/meet/neds/2022/08/image_readtop_2022_763920_16617714675151210.jpg"
-        />
-        </Figure>
-      </div>  
-      <hr/>
         </Container>
-    
-    </div>
+    </Link>
   )
 }
 

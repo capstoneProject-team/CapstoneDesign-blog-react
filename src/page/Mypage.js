@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import getStorageItem from '../utils/useLocalStorage'
+import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -26,7 +26,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   const namehandleClose = () => setnameShow(false);
   const namehandleShow = () => setnameShow(true);
 
-  const token = getStorageItem('jwtToken', '')[0]
+  const token = getJwtAtStorage(); // getStorageItem('jwtToken', '')[0]
   const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
   const { user_id } = jwt_decode(token);
   console.log(user_id)
@@ -43,7 +43,8 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
     try {
       let nickname = changeName;
       //바뀐 jwt token이 response에 들어올 예정
-      const response = await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/info/${user_id}/`, { nickname })
+      const response = await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/info/${user_id}/`, { nickname }, 
+      {headers: {Authorization: `Bearer ${token}`}})
       localStorage.setItem("nickname", response.data.nickname);
       // const tokenChange = response.data.access;
       // setJwtToken(tokenChange);
