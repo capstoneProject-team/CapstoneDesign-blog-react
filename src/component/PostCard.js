@@ -55,8 +55,8 @@ const PostCard = ({detail}) => {
           width={500}
           height={500}
           alt="게시물 사진"
-          src={detail.photo}
-          // src= "https://file.mk.co.kr/meet/neds/2022/08/image_readtop_2022_763920_16617714675151210.jpg"
+          // src={detail.photo}
+          src= "https://file.mk.co.kr/meet/neds/2022/08/image_readtop_2022_763920_16617714675151210.jpg"
         />
         </Figure>
       </div>  

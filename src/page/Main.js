@@ -28,7 +28,7 @@ const Main = ({ setNavVisible }) => {
 // }, [])
   return (
     <div>
-      <Container style={{paddingLeft : '6%', paddingRight : '6%'}}>
+      <Container style={{paddingLeft : '8%', paddingRight : '8%'}}>
         <Col className="body">
             <Row><WeatherDate todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek} /></Row>
       
@@ -41,7 +41,9 @@ const Main = ({ setNavVisible }) => {
             <Col><MainPrologue/></Col>
             <Col><MainTrend/></Col>
           </Row>
-
+        <br/>
+        <br/>
+        <br/>
         </Col>
 
       </Container>

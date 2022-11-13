@@ -31,9 +31,27 @@
 
 
 
+.mainBannerBox{
+  border-radius : 10px;
+  background-image: url(image/배너_7.jpeg);
+  background-repeat: no-repeat;
+  /* 이미지 여백이 나온 경우 */
+  background-size : cover;
+
+}
+
 .box{
   border-radius : 10px;
-  background-color: #D9D9D9;
+  background-color: #DFEBFC;
+  padding: 10px;
+
+}
+
+.boxPrologue{
+  border-radius : 10px;
+  background-color: #DFEBFC;
+  padding: 10px;
+  height : 356px;
 
 }
 

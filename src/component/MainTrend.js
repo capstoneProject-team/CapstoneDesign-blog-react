@@ -36,12 +36,38 @@ const MainTrend = () => {
         newDayArray.push(diaryOfweek);
     }
 
+    const[emotionIcon, setEmotionIcon] =  useState("")
+      
+    const textEmotionToIcon = (emotion) => {
+      if (emotion == 'happy'){
+        setEmotionIcon("😄")
+      }
+      if (emotion == 'sad'){
+        setEmotionIcon("😭")
+      }
+      if (emotion == 'angry'){
+        setEmotionIcon("🤬")
+      }
+      if (emotion == 'hurt'){
+        setEmotionIcon("🤕")
+      }
+      if (emotion == 'anxious'){
+        setEmotionIcon("😨")
+      }
+      if (emotion == 'statrled'){
+        setEmotionIcon("😳")
+      }
+    }
+    // useEffect(()=>{
+    //   textEmotionToIcon(emotion);
+    // }, [])
+  
     return (
         <div>
             <Col>
                 <h3>Trend📈</h3>
                 <Col className='box'>
-                    <Table striped>
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>날짜</th>
@@ -50,43 +76,43 @@ const MainTrend = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr style={{ backgroundColor: "#ffffff" }}>
                                 <td>{newDayArray[0]}</td>
                                 <td>{diaryEmotionData[0]}</td>
                                 <td>{diaryEmotionStaticData[0]}</td>
                             </tr>
-                            <tr>
+                            <tr >
                                 <td>{newDayArray[1]}</td>
-                                <td>{diaryEmotionData[1]}</td>
-                                <td>{diaryEmotionStaticData[1]}</td>
+                                <td>{diaryEmotionData[1]} </td>
+                                <td>{diaryEmotionStaticData[1]} </td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: "#ffffff" }}>
                                 <td>{newDayArray[2]}</td>
-                                <td>{diaryEmotionData[2]}</td>
-                                <td>{diaryEmotionStaticData[2]}</td>
+                                <td>{diaryEmotionData[2]} </td>
+                                <td>{diaryEmotionStaticData[2]} </td>
                             </tr>
                             <tr>
                                 <td>{newDayArray[3]}</td>
-                                <td>{diaryEmotionData[3]}</td>
+                                <td>{diaryEmotionData[3]} </td>
                                 <td>{diaryEmotionStaticData[3]}</td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: "#ffffff" }}>
                                 <td>{newDayArray[4]}</td>
-                                <td>{diaryEmotionData[4]}</td>
-                                <td>{diaryEmotionStaticData[4]}</td>
+                                <td>{diaryEmotionData[4]} </td>
+                                <td>{diaryEmotionStaticData[4]} </td>
                             </tr>
                             <tr>
                                 <td>{newDayArray[5]}</td>
-                                <td>{diaryEmotionData[5]}</td>
-                                <td>{diaryEmotionStaticData[5]}</td>
+                                <td>{diaryEmotionData[5]} </td>
+                                <td>{diaryEmotionStaticData[5]} </td>
                             </tr>
-                            <tr>
+                            <tr style={{ backgroundColor: "#ffffff" }}>
                                 <td>{newDayArray[6]}</td>
-                                <td>{diaryEmotionData[6]}</td>
-                                <td>{diaryEmotionStaticData[6]}</td>
+                                <td>{diaryEmotionData[6]} </td>
+                                <td>{diaryEmotionStaticData[6]} </td>
                             </tr>
                         </tbody>
-                    </Table>
+                    </table>
                 </Col>
             </Col>
         </div>

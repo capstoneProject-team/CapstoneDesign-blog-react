@@ -48,13 +48,13 @@ const DiaryList = ({ setNavVisible }) => {
   console.log(pageCnt)
 
   //더미 데이터
-  // const detail = {
-  //   'title': "일기test",
-  //   'content': "예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기",
-  //   'mainEmotion': 'sad',
-  //   'created_at': "2020-11-24",
-  //   'photo': "#"
-  // }
+  const detail = {
+    'title': "일기test",
+    'content': "예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기 예시 데이터 미리보기",
+    'mainEmotion': 'sad',
+    'created_at': "2020-11-24",
+    'photo': "#"
+  }
   return ( 
     <div>
       <br />
@@ -67,12 +67,12 @@ const DiaryList = ({ setNavVisible }) => {
         </div>
         <br />
         
-        {pageList.map(detail => (<PostCard detail={detail}/>))}
-        {/* <PostCard detail={detail} />
+        {/* {pageList.map(detail => (<PostCard detail={detail}/>))} */}
         <PostCard detail={detail} />
         <PostCard detail={detail} />
         <PostCard detail={detail} />
-        <PostCard detail={detail} /> */}
+        <PostCard detail={detail} />
+        <PostCard detail={detail} />
 
 
         <br />
