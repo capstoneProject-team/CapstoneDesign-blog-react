@@ -70,7 +70,7 @@ const DiaryDetail = ({setNavVisible}) => {
       <Container>
         <Row>
           <Col>
-          <title>{title}</title>
+           {title}
           </Col>
           <Col>{nickname} | {moment(created_at).format('YYYY년 MM월 DD일')}</Col>
           <Divider/>

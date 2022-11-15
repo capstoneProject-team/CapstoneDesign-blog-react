@@ -62,7 +62,10 @@ const DiaryCreate = ({ setNavVisible }) => {
     formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('photo', selectFile);
+    if(selectFile != null){
+      formData.append('photo', selectFile);
+    }
+
     console.log(selectFile);
     try {
       await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData, { headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
