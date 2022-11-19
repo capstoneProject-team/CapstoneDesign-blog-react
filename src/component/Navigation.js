@@ -8,12 +8,11 @@ import { Link } from "react-router-dom";
 import logo_detail from '../image/logo_detail.png';
 
 
-const Navigation = ({ isAuthenticated, setAuthentication }) => {
+const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInput,searchInput }) => {
   // isAuthenticated = undefined 나옴
-  console.log(isAuthenticated);
+  console.log("isAunthenticated : ",isAuthenticated);
   const navigate = useNavigate();
-
-
+  
   const login = () => {
     navigate('/login')
   }
@@ -29,6 +28,8 @@ const Navigation = ({ isAuthenticated, setAuthentication }) => {
     navigate('/mypage');
   }
   const diarylist = () => {
+    setSearchInput("");
+    setPage(1);
     navigate('/diary-list')
   }
 
