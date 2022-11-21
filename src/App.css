@@ -40,6 +40,14 @@
 
 }
 
+.loadingSpinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+}
+
 .box{
   border-radius : 10px;
   background-color: #DFEBFC;

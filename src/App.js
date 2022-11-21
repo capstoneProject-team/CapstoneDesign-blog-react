@@ -4,6 +4,7 @@ import Introduce from './page/Introduce';
 import Login from "./page/Login";
 import DiaryCreate from "./page/DiaryCreate";
 import DiaryDetail from "./page/DiaryDetail";
+import DiaryEdit from "./page/DiaryEdit";
 import DiaryList from "./page/DiaryList";
 import FindPassword from "./page/FindPassword";
 import Main from "./page/Main";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/Mypage" element={isAuthenticated==true ? <Mypage authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/Register" element={<Register setNavVisible={setNavVisible}/>}/>
         <Route path="/FindPassword" element={<FindPassword setNavVisible={setNavVisible}/>}/>
+        <Route path="/diary-edit/:post_id" element={isAuthenticated==true ? <DiaryEdit authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
       </Routes>
     </div>
 
