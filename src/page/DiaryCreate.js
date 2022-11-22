@@ -65,8 +65,9 @@ const DiaryCreate = ({ setNavVisible }) => {
     if (selectFile != null) {
       formData.append('photo', selectFile);
     }
-
-    console.log(selectFile);
+    for (let key of formData.keys()) {
+      console.log(key, ":", formData.get(key));
+    }
     try {
       await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
@@ -157,7 +158,7 @@ const DiaryCreate = ({ setNavVisible }) => {
               <Row className="mt-4">
                 <h4>날짜 선택</h4>
                 <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                <Col lg={9}><DatePicker selected={created_at} onChange={(date) => setDate_time(date)} /></Col>
+                <Col lg={9}><DatePicker onChange={(date) => setDate_time(date)} /></Col>
               </Row>
               <Row className="mt-5">
                 <Col lg={5}>

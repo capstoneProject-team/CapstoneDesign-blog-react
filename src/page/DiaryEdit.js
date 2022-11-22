@@ -35,13 +35,15 @@ const DiaryCreate = ({ setNavVisible }) => {
   //저장소
   const { post_id } = useParams();
   const [created_at, setCreate_at] = useState("");
+  const [editCreated_at, setEditCreated_at] = useState(new Date());
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [photo, setPhoto] = useState([]);
+  const [photo, setPhoto] = useState("");
   const dateFormat = 'YYYY/MM/DD';
   const [visiable, setVisiable] = useState(false);
-  const [disiable, setDisiable] = useState(true);
+  const [disiable, setDisiable] = useState(false);
+  const [selectFile, setSelectFile] = useState("");
 
 
   const changeTitle =(event)=>{
@@ -56,13 +58,19 @@ const DiaryCreate = ({ setNavVisible }) => {
     setCreate_at(data.created_at);
     setTitle(data.title);
     setContent(data.content);
-    if (data.photo == null) {
-      setVisiable(false);
+    console.log("데이터 : ", data)
+    console.log("만두는 즐거워", content)
+    // 사진이 있는 경우
+    // console.log("만두는 아름다워",data.photo);
+    if (data.photo != null) {
+      console.log("만두는 아름다워",data.photo);
       setPhoto(data.photo);
-    } else {
-      setPhoto(data.photo);
-      setVisiable(true);
-    }
+    } 
+    console.log("photo data : ", photo)
+    // else {
+    //   setPhoto(data.photo);
+    //   console.log("photo data : ",photo);
+    // }
     setLoadingSpinner(true);
   }
 
@@ -71,11 +79,21 @@ const DiaryCreate = ({ setNavVisible }) => {
     console.log("수정한 것들", created_at, title, content, "포토", selectFile);
 
     const formData = new FormData();
-    formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
+    if(editCreated_at == null){
+      formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
+    }
+    else{
+      formData.append('created_at', moment(editCreated_at).format('YYYY-MM-DD HH:mm:ss'));
+    }
     formData.append('title', title);
     formData.append('content', content);
-    if (selectFile != null) {
+
+    if (selectFile === "") {
+      formData.append('photo', photo);
+
+    }else{
       formData.append('photo', selectFile);
+      console.log("select data : ", selectFile);
     }
     for (let key of formData.keys()) {
       console.log(key, ":", formData.get(key));
@@ -101,7 +119,7 @@ const DiaryCreate = ({ setNavVisible }) => {
       };
     }
   }
-  const [selectFile, setSelectFile] = useState(null);
+
 
   //파일 선택 확인 
   const fileSelectedHandler = (event) => {
@@ -123,19 +141,20 @@ const DiaryCreate = ({ setNavVisible }) => {
   };
   const deleteImg = () => {
     setImageSrc('');
-    setSelectFile(null);
+    setSelectFile("");
 
   }
   const deleteBeforeImg = () => {
-    setVisiable(false);
-    setPhoto(null);
+    setPhoto("");
     setDisiable(false);
+
   }
 
   //다이어리 날짜  
 
   useEffect(() => {
     response();
+    console.log(content, photo) 
   }, []);
 
 
@@ -175,18 +194,20 @@ const DiaryCreate = ({ setNavVisible }) => {
                 <Row className="mt-4">
                   <h4>날짜 선택</h4>
                   <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                  <Col lg={9}><DatePicker onChange={(date) => setCreate_at(new Date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
-
+                  <Col lg={9}><DatePicker onChange={(date) => setEditCreated_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
+                  {console.log(created_at)}
                 </Row>
                 <Row className="mt-5">
                   <Col lg={5}>
                     <h4>이미지 업로드</h4>
-                    {visiable && <Row>
+                    <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>대표 이미지 1장 업로드해주세요.</p>
+                    {photo && <Row>
                       <Col><img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>
                       <Col><DeleteOutlined onClick={deleteBeforeImg} style={{ color: 'red' }} /></Col>
+                      <Form.Control type="file" onChange={fileSelectedHandler} disabled={true}/>
                     </Row>}
-                    <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>대표 이미지 1장 업로드해주세요.</p>
-                    <Form.Control type="file" onChange={fileSelectedHandler} disabled={disiable}/>
+
+                    {!photo && <Form.Control type="file" onChange={fileSelectedHandler} disabled={disiable}/>}
                     <br />
                     {imageSrc && <Row className='preview'>
                       <Col><img src={imageSrc} alt="preview-img" style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>
