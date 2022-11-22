@@ -26,7 +26,7 @@ function App() {
   let [searchInput, setSearchInput] = useState("");
   return (
     <div>
-    {navVisible && <Navigation isAuthenticated={isAuthenticated} setPage={setPage} setSearchInput={setSearchInput} searchInput={searchInput}/>}
+    {navVisible && <Navigation isAuthenticated={isAuthenticated} setAuthentication={setAuthentication} setPage={setPage} setSearchInput={setSearchInput} searchInput={searchInput}/>}
       <Routes>
         <Route path="/" element={<Introduce setNavVisible={setNavVisible} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-create" element={isAuthenticated==true ? <DiaryCreate authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
