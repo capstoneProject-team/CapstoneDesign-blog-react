@@ -60,10 +60,10 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
           setPageList(response.data.results);
           setPostCnt(response.data.count);
           noPost(response.data.count);
-          if(response.data.count%5 === 0){
-            setTotalPage(parseInt((response.data.count)/ 5));
+          if(response.data.count%7 === 0){
+            setTotalPage(parseInt((response.data.count)/ 7));
           }else{
-            setTotalPage(parseInt((response.data.count)/ 5)+1);
+            setTotalPage(parseInt((response.data.count)/ 7)+1);
           }
     
       }

@@ -13,6 +13,7 @@ const PostCard = ({detail}) => {
 
   const text = detail.content;
   const newtext = text.replace(/(<([^>]+)>)/ig,"");
+  const newnewtext = newtext.replace(/&nbsp;/g,"");
 
   const emotion = detail.mainEmotion;
 
@@ -55,7 +56,7 @@ const PostCard = ({detail}) => {
         <Row  align='middle' justify='center'>
           <Col span={3} style={{fontSize:"30px"}}>{emotionIcon}</Col>
           <Col span={15}><Title level={1}>{detail.title}</Title>
-          <br/><Title level={5} ellipsis={true} >{newtext}</Title>
+          <br/><Title level={5} ellipsis={true} >{newnewtext}</Title>
           <br/>{moment(detail.created_at).format('YYYY년 MM월 DD일')}</Col>
           <Col span={3}>{
           detail.photo && (
