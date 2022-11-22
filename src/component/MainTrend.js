@@ -2,10 +2,10 @@ import { React, useEffect, useState } from 'react'
 import { Container, Row, Col, Button, Table } from 'react-bootstrap';
 import { Routes, Route, Link } from "react-router-dom";
 
-const MainTrend = () => {
-    let diaryDateData = ['', 'x', '2022-10-25', 'x', '2022-10-23', '2022-10-22', '2022-10-21'] //다이어리 작성 날짜
-    let diaryEmotionData = ['', 'x', 'happy', 'x', 'sad', 'angry', 'sad', 'happy'] //다이어리 작성 날짜
-    let diaryEmotionStaticData = ['', 'x', '40%', 'x', '80%', '45%', '50%']
+const MainTrend = ({detail}) => {
+    let diaryDateData =  new Date(detail.created_at).toISOString().split('T')[0]; //다이어리 작성 날짜
+    let diaryEmotionData = detail.mainEmotion; //다이어리 작성 날짜
+    let diaryEmotionStaticData = ['', 'x', '40%', 'x', '80%', '45%', '50%'];
 
     let now = new Date();
     let newDay = new Date();
@@ -57,64 +57,31 @@ const MainTrend = () => {
       if (emotion == 'statrled'){
         setEmotionIcon("😳")
       }
+      else{
+        setEmotionIcon("🤪")
+      }
     }
-    // useEffect(()=>{
-    //   textEmotionToIcon(emotion);
-    // }, [])
+    useEffect(()=>{
+      textEmotionToIcon(diaryEmotionData);
+    }, [])
   
     return (
         <div>
+            <Link to={`/diary-detail/${detail.id}`} style={{ textDecoration: 'none' }}>
             <Col>
-                <h3>Trend📈</h3>
                 <Col className='box'>
                     <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th>날짜</th>
-                                <th>감정</th>
-                                <th>퍼센트</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr style={{ backgroundColor: "#ffffff" }}>
-                                <td>{newDayArray[0]}</td>
-                                <td>{diaryEmotionData[0]}</td>
-                                <td>{diaryEmotionStaticData[0]}</td>
-                            </tr>
-                            <tr >
-                                <td>{newDayArray[1]}</td>
-                                <td>{diaryEmotionData[1]} </td>
-                                <td>{diaryEmotionStaticData[1]} </td>
-                            </tr>
-                            <tr style={{ backgroundColor: "#ffffff" }}>
-                                <td>{newDayArray[2]}</td>
-                                <td>{diaryEmotionData[2]} </td>
-                                <td>{diaryEmotionStaticData[2]} </td>
-                            </tr>
-                            <tr>
-                                <td>{newDayArray[3]}</td>
-                                <td>{diaryEmotionData[3]} </td>
-                                <td>{diaryEmotionStaticData[3]}</td>
-                            </tr>
-                            <tr style={{ backgroundColor: "#ffffff" }}>
-                                <td>{newDayArray[4]}</td>
-                                <td>{diaryEmotionData[4]} </td>
-                                <td>{diaryEmotionStaticData[4]} </td>
-                            </tr>
-                            <tr>
-                                <td>{newDayArray[5]}</td>
-                                <td>{diaryEmotionData[5]} </td>
-                                <td>{diaryEmotionStaticData[5]} </td>
-                            </tr>
-                            <tr style={{ backgroundColor: "#ffffff" }}>
-                                <td>{newDayArray[6]}</td>
-                                <td>{diaryEmotionData[6]} </td>
-                                <td>{diaryEmotionStaticData[6]} </td>
+                                <td>{diaryDateData}</td>
+                                <td>{emotionIcon}</td>
+                                <td>{diaryEmotionStaticData}</td>
                             </tr>
                         </tbody>
                     </table>
                 </Col>
             </Col>
+            </Link>
         </div>
     )
 }
