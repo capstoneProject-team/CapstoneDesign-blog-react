@@ -1,10 +1,11 @@
 import { React, useEffect, useState } from 'react'
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
+import { Container, Button, Table } from 'react-bootstrap';
 import { Routes, Route, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from "axios";
-import {Divider, Space, Typography} from 'antd';
+import {Divider, Space, Typography, Card, Row, Col} from 'antd';
+import { Content } from 'antd/lib/layout/layout';
 
 const MainPrologue = ({detail}) => {
 
@@ -68,42 +69,16 @@ const MainPrologue = ({detail}) => {
         // });
 
     return (
-        <Col>
-            
-            <Row className='boxPrologue'>
             <Link to={`/diary-detail/${detail.id}`} style={{ textDecoration: 'none' }}>
-                <Container>
                     <Row>
-                        <Col>{diaryPrologueTitleData}</Col>
-                        <Col>{diaryPrologueContentData}</Col>
-                        <Col>{diaryPrologueDateData}</Col>
+                        <Col span={24}>
+                        <Card title={diaryPrologueTitleData} bordered={false}>
+                            <Content>{diaryPrologueContentData}</Content>
+                            <Content>{diaryPrologueDateData}</Content>
+                        </Card>
+                        </Col>
                     </Row>
-                </Container>
                 </Link>
-                {/* {visiblePrologueDefault &&
-                    <Col className='text-center'>
-                        <p>일기를 작성해주세요</p>
-                        <Link to="/diary-create"><Button>일기작성하러가기</Button></Link>
-                    </Col>} */}
-                {/* {visiblePrologue1 && <Row><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
-                    <Title level={3}>{diaryPrologueTitleData[0]} </Title>
-                    <Paragraph level={5} ellipsis={true}>{diaryPrologueContentData[0].replace(/(<([^>]+)>)/ig,"").replace(/&nbsp;/g,"")}</Paragraph>
-                    <Text ellipsis={true} type={'secondary'}>{new Date(diaryPrologueDateData[0]).toISOString().split('T')[0]}</Text>
-                </Link></Row>}
-                <Divider/>
-                {visiblePrologue2 && <Row><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
-                <Title level={3}>{diaryPrologueTitleData[1]} </Title>
-                    <Paragraph level={5} ellipsis={true}>{diaryPrologueContentData[1].replace(/(<([^>]+)>)/ig,"").replace(/&nbsp;/g,"")}</Paragraph>
-                    <Text ellipsis={true} type={'secondary'}>{new Date(diaryPrologueDateData[1]).toISOString().split('T')[0]}</Text>
-                </Link></Row>}
-                <Divider/>
-                {visiblePrologue3 && <Row><Link to="/diary-detail" style={{ textDecoration: 'none' }}>
-                <Title level={3}>{diaryPrologueTitleData[2]} </Title>
-                    <Paragraph level={5} ellipsis={true}>{diaryPrologueContentData[2].replace(/(<([^>]+)>)/ig,"").replace(/&nbsp;/g,"")}</Paragraph>
-                    <Text ellipsis={true} type={'secondary'}>{new Date(diaryPrologueDateData[2]).toISOString().split('T')[0]}</Text>
-                </Link></Row>} */}
-            </Row>
-        </Col>
     )
 }
 

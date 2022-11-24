@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react'
-import { Container, Row, Col, Button, Table } from 'react-bootstrap';
+import { Container, Button, Table } from 'react-bootstrap';
 import { Routes, Route, Link } from "react-router-dom";
+import {Col, Row, List, Card} from 'antd';
 
 const MainTrend = ({detail}) => {
     let diaryDateData =  new Date(detail.created_at).toISOString().split('T')[0]; //다이어리 작성 날짜
@@ -67,20 +68,12 @@ const MainTrend = ({detail}) => {
   
     return (
         <div>
-            <Link to={`/diary-detail/${detail.id}`} style={{ textDecoration: 'none' }}>
-            <Col>
-                <Col className='box'>
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr style={{ backgroundColor: "#ffffff" }}>
-                                <td>{diaryDateData}</td>
-                                <td>{emotionIcon}</td>
-                                <td>{diaryEmotionStaticData}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+          <Link to={`/diary-detail/${detail.id}`} style={{ textDecoration: 'none' }}>
+            <Row>
+              <Col span={24}>
+                <Card bordered={false}>{diaryDateData}{emotionIcon}{diaryEmotionStaticData}</Card>
                 </Col>
-            </Col>
+                </Row>
             </Link>
         </div>
     )
