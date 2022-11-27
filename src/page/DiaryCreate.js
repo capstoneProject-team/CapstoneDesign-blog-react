@@ -7,10 +7,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
-//부트스트랩
 import { Container, Form, Row, Col } from 'react-bootstrap';
 
-//antd
 import { DeleteOutlined } from '@ant-design/icons';
 import { Space, Upload, notification, DatePicker, Input } from 'antd';
 import Axios from 'axios';
