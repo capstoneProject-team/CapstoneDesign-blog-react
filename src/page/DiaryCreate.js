@@ -26,7 +26,6 @@ const DiaryCreate = ({ setNavVisible }) => {
   //다이어리 날짜  
   const [created_at, setDate_time] = useState(new Date());
 
-  //다이어리 title과 content
   const [diaryContent, setDiaryContent] = useState({
     title: '',
     content: ''
