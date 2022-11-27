@@ -36,11 +36,6 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
     }
   }
 
-  // const handleSetPageForSearch = (x) => {
-  //   setPageForSearch(x);
-  //   onSearch(searchInput);
-  // }
-
     const onSearch = (search) => {
       console.log("검색어 : ",search)
       setPage(1);
