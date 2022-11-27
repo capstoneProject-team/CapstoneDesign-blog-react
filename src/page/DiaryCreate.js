@@ -33,7 +33,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   })
 
   const navigate = useNavigate();
-  
+
   const getValue = (event) => {
     const { name, value } = event.target;
     setDiaryContent({
@@ -120,8 +120,6 @@ const DiaryCreate = ({ setNavVisible }) => {
               <hr style={{ marginTop: "-10px" }} />
               <CKEditor
                 editor={ClassicEditor}
-                // config={{editorConfiguration,
-                // placeholder: "내용을 입력하세요."}}
                 config={{
                   removePlugins: ["EasyImage", "ImageUpload", "MediaEmbed", "Table", "TableToolbar", "BlockQuote"],
                   placeholder: "내용을 입력하세요."
