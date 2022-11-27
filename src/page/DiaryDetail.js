@@ -45,6 +45,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   const [bestEmotion, setBestEmotion] = useState("");
   const [bestEmotionEmoticon, setBestEmotionEmoticon] = useState("");
   const [bestEmotionResult, setBestEmotionResult] = useState("");
+  const [bestEmotionName, setBestEmotionName] = useState("");
 
   const [params, setParams] = useState({
     key: `${process.env.REACT_APP_YOUTUBE_API_KEY}`,
@@ -86,67 +87,80 @@ const DiaryDetail = ({ setNavVisible }) => {
 
   //테스트 값만 넣어놓은 상태~
   const emotionList = [
-    {emotion : "happy", emoticon : "😄", result : 600},
-    {emotion : "sad", emoticon : "😭", result : 100},
-    {emotion : "angry", emoticon : "🤬", result : 200},
-    {emotion : "hurt", emoticon : "🤕", result : 0},
-    {emotion : "anxious", emoticon : "😨", result : 60},
-    {emotion : "statrled", emoticon : "😳", result : 10},
+    { emotion: "happy", emoticon: "😄", result: 1000, emotionName: "기쁨" },
+    { emotion: "sad", emoticon: "😭", result: 2000, emotionName: "슬픔" },
+    { emotion: "angry", emoticon: "🤬", result: 3000, emotionName: "분노" },
+    { emotion: "hurt", emoticon: "🤕", result: 4000, emotionName: "상처" },
+    { emotion: "anxious", emoticon: "😨", result: 5000, emotionName: "불안" },
+    { emotion: "statrled", emoticon: "😳", result: 6000, emotionName: "당황" },
   ]
-  
-  const emotionResultList = (emotionList)=> {
-    let emotionResult = emotionList.sort(function(a,b){
+
+  const emotionResultList = (emotionList) => {
+    let emotionResult = emotionList.sort(function (a, b) {
       return b.result - a.result; //내림차순 
     })
-    console.log(bestEmotion, "안돼 ㅠㅠ");
+
     setBestEmotion(emotionResult[0].emotion);
     setBestEmotionResult(emotionResult[0].result);
     setBestEmotionEmoticon(emotionResult[0].emoticon);
-  } 
+    setBestEmotionName(emotionResult[0].emotionName);
+  }
 
-  const emotionBackgroundColor =(bestEmotion)=>{
+  const emotionBackgroundColor = (bestEmotion) => {
     if (bestEmotion == "happy") {
       const happyStyle = {
-        backgroundColor: "#FFFFDD"
+        backgroundColor: "#FFFFDD",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return happyStyle;
     }
 
     else if (bestEmotion == "statrled") {
       const statrledStyle = {
-        backgroundColor: "#DDF2F8"
+        backgroundColor: "#DDF2F8",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return statrledStyle;
     }
 
     else if (bestEmotion == "angry") {
       const angryStyle = {
-        backgroundColor: "#F6C8C0"
+        backgroundColor: "#F6C8C0",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return angryStyle;
     }
 
     else if (bestEmotion == "anxious") {
       const anxiousStyle = {
-        backgroundColor: "#F2FAEC"
+        backgroundColor: "#F2FAEC",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return anxiousStyle;
     }
     else if (bestEmotion == "hurt") {
       const hurtStyle = {
-        backgroundColor: "#F5EEFE"
+        backgroundColor: "#F5EEFE",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return hurtStyle;
     }
     else if (bestEmotion == "sad") {
       const sadStyle = {
-        backgroundColor: "#DDE2F8"
+        backgroundColor: "#DDE2F8",
+        borderRadius : "20px",
+        padding : "2%"
       }
       return sadStyle;
     }
 
-    }
-    
+  }
+
 
   const youtube = async () => {
     const response = await Axios.get(`https://www.googleapis.com/youtube/v3/search`, { params });
@@ -158,10 +172,8 @@ const DiaryDetail = ({ setNavVisible }) => {
     response();
     youtube();
     emotionResultList(emotionList);
-    
-  },[]);
 
-
+  }, []);
 
 
   const shuffle = (arr) => {
@@ -203,90 +215,102 @@ const DiaryDetail = ({ setNavVisible }) => {
     return (
       <div>
         <br />
-        <div style={emotionBackgroundColor(bestEmotion)}> 
-        <Container style={{ paddingLeft: '6%', paddingRight: '6%', border : "1px", borderRadius : "20px" }}>
-          <div className='detailTop'>
-            <div className='detailTitle'>
-              <h2>{title}</h2>
-              <br />
-            </div>
-            <div className='line2' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: "-25px" }}>
-              <div className='writeDateWho' style={{ marginTop: "10px" }}>
-                <p style={{ fontSize: '10.5pt' }}>
-                  {nickname} &nbsp; <span style={{ color: 'grey' }}>{moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
-              </div>
-              <Dropdown>
-                <Dropdown.Toggle className="shadow-none" drop="start" key="start"
-                  style={{ backgroundColor: "white", border: "none", outline: "none" }}>
-                  <MoreOutlined style={{ color: "grey" }} />
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
-                  <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </div>
-          <Divider />
-          <div className='body'>
-            <div className='detailImage' style={{ textAlign: 'center' }}>
-              {console.log(visiable, "이미지")}
-              {visiable && <img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} />}</div>
-            <p dangerouslySetInnerHTML={{ __html: content }}></p>
-          </div>
-          <Col>
-
-          </Col>
-          <Divider />
-          <Row>
-            <Col>
+        <div>
+          <Container style={{ paddingLeft: '6%', paddingRight: '6%', border: "1px", borderRadius: "20px" }}>
+            <div className='detailTop'>
               <div className='detailTitle'>
-                <h3>일기감정분석결과</h3>
+                <h2>{title}</h2>
+                <br />
+              </div>
+              <div className='line2' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: "-25px" }}>
+                <div className='writeDateWho' style={{ marginTop: "10px" }}>
+                  <p style={{ fontSize: '10.5pt' }}>
+                    {nickname} &nbsp; <span style={{ color: 'grey' }}>{moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
+                </div>
+                <Dropdown>
+                  <Dropdown.Toggle className="shadow-none" drop="start" key="start"
+                    style={{ backgroundColor: "white", border: "none", outline: "none" }}>
+                    <MoreOutlined style={{ color: "grey" }} />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
+                    <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </div>
+            <Divider />
+            <div className='body'>
+              <div className='detailImage' style={{ textAlign: 'center' }}>
+                {console.log(visiable, "이미지")}
+                {visiable && <img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} />}</div>
+              <p dangerouslySetInnerHTML={{ __html: content }}></p>
+            </div>
+            <Divider />
+
+
+            <div>
+              <div className='detailTitle'>
+                <h4>일기감정분석결과 📈</h4>
               </div>
 
-              <Col className="mt-3" style={{ paddingLeft: "3%", paddingRight: "3%" }}>
-                <Row style={{ justifyContent: "center", backgroundColor: "grey" }}>
-                  <Col className='mt-4' sm={2}>
+            <div className="mt-3" style={emotionBackgroundColor(bestEmotion)}>
+              <div style={{ display: "flex", justifyContent: "space-between", paddingLeft: "3%", paddingRight: "3%" }}>
+
+                <div style={{ display: "flex", width: "70%" }}>
+                  <div>
                     <div style={{ fontSize: "40pt" }}>{bestEmotionEmoticon}</div>
-                  </Col>
-                  <Col className='mt-4' sm={4}>
-                    <Row>
-                      <Col sm={2}><p>기쁨</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={happyResult} label={`${now}%`} /> </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={2}><p>슬픔</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={sadResult} label={`${now}%`} /> </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={2}><p>분노</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={angryResult} label={`${now}%`} /> </Col>
-                    </Row>
-                  </Col>
-                  <Col className='mt-4' sm={4}>
-                    <Row>
-                      <Col sm={2}><p>상처</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={hurtResult} label={`${now}%`} /> </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={2}><p>당황</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={statrledResult} label={`${now}%`} /> </Col>
-                    </Row>
-                    <Row>
-                      <Col sm={2}><p>불안</p></Col>
-                      <Col sm={8}><ProgressBar variant="warning" now={anxiousResult} label={`${now}%`} /> </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </Col>
+                  </div>
+                  <div style={{ marginLeft: "5%", marginRight: "5%", width: "250px" }}>
+                    <div className='happyNow' style={{ marginBottom: "10px" }}>
+                      <p>기쁨 😄</p>
+                      <ProgressBar variant="warning" now={30} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white" }} />
+                    </div>
+                    <div className='sadNow' style={{ marginBottom: "10px" }}>
+                      <p>슬픔 😭</p>
+                      <ProgressBar variant="warning" now={40} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white"  }} />
+                    </div>
+                    <div className='angryNow' style={{ marginBottom: "10px" }}>
+                      <p>분노 🤬</p>
+                      <ProgressBar variant="warning" now={50} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white"  }} />
+                    </div>
+                  </div>
+                  <div style={{ marginLeft: "5%", marginRight: "5%", width: "250px" }}>
+                    <div className='statrledNow' style={{ marginBottom: "10px" }}>
+                      <p>당황 😳</p>
+                      <ProgressBar variant="warning" now={60} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white"  }} />
+                    </div>
+                    <div className='hurtNow' style={{ marginBottom: "10px" }}>
+                      <p>상처 🤕</p>
+                      <ProgressBar variant="warning" now={70} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white"  }} />
+                    </div>
+                    <div className='anxiousNow' style={{ marginBottom: "10px" }}>
+                      <p>불안 😨</p>
+                      <ProgressBar variant="warning" now={80} label={`${now}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor : "white"  }} />
+                    </div>
+
+                  </div>
+                </div>
+
+                <div className='mt-3 text' style={{ width: "30%", textAlign:"center" }}>
+                  <h5>오늘 {nickname}님의 하루는?</h5>
+                  
+                  <p>오늘 {nickname}님의 <br/> 
+                  메인 감정은 <span style={{fontSize : "12pt"}}><b>{bestEmotionName}</b></span>입니다.<br />
+                  HED가 감정에 어울리는 노래를 선곡했어요.<br /> 음악과 함께 하루를 마무리 해보세요.<br />
+                  늘 {nickname}을 응원합니다.<br /> 내일 또 봐요.
+                    
+                  </p>
+                </div>
+                </div>
+              </div>
               <Divider />
-            </Col>
+            </div>
             <Col>
               <div className='detailTitle'>
-                <h3>추천 플레이리스트</h3>
+                <h4>추천 플레이리스트 🎶</h4>
               </div>
-              <Col>
                 {
                   shuffle(youtubeVideos).slice(0, 3).map((element) => {
                     return (
@@ -294,27 +318,25 @@ const DiaryDetail = ({ setNavVisible }) => {
                     )
                   })
                 }
-              </Col>
             </Col>
-          </Row>
 
-        </Container>
+          </Container>
         </div>
 
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>일기 삭제</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>일기를 삭제하시겠습니까?</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                취소
-              </Button>
-              <Button variant="danger" onClick={deleteDiary}>
-                삭제
-              </Button>
-            </Modal.Footer>
-          </Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>일기 삭제</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>일기를 삭제하시겠습니까?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              취소
+            </Button>
+            <Button variant="danger" onClick={deleteDiary}>
+              삭제
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div >
     )
   }

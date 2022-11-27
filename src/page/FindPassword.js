@@ -4,8 +4,13 @@ import {notification} from "antd";
 import Axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import {SmileOutlined, FrownOutlined} from "@ant-design/icons";
- 
-const FindPassword = (props) => {
+import { getJwtAtStorage } from '../utils/useLocalStorage';
+
+
+
+const FindPassword = ({setNavVisible}) => {
+  setNavVisible(true);
+  
   const navigate = useNavigate();
   const [user_id,setUser_id] =useState('');
   let [user, setUser] = useState({
@@ -64,7 +69,7 @@ const FindPassword = (props) => {
 
     try {
       const password=newPassword.password1
-      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/pwd/${user_id}/`,{password})
+      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/pwd/${user_id}/`,{password},{ headers: { Authorization: `Bearer ${getJwtAtStorage()}`}})
       notification.open({
         message:"비밀번호 변경 성공!",
         icon:<SmileOutlined/>
@@ -84,10 +89,10 @@ const FindPassword = (props) => {
 }
 
     return (
-    <Container>
+    <Container style={{paddingLeft : "20%", paddingRight : "20%"}}>
         <Col>
-          <Row className="mt-3"><h2>비밀번호 찾기</h2>
-            <p>*본인 확인을 위해 가입 이메일과 회원가입 시 입력했던, 힌트에 답변해주세요.</p></Row>
+          <Row className="mt-3"><h2>본인 인증</h2>
+            <p>*본인 확인을 위해 가입 이메일과 회원가입 시 입력했던 힌트에 답변해주세요.</p></Row>
           <Col>
             <Row>
               <Form onSubmit={onSubmit1}>
@@ -109,8 +114,8 @@ const FindPassword = (props) => {
                   onChange={handleChange}/>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                  확인
+                <Button  style={{ backgroundColor: '#4A93FF', border: 'none', float : "right", width : "100px" }} type="submit">
+                  인증하기
                 </Button>
                 </Form>
             </Row>
@@ -137,8 +142,8 @@ const FindPassword = (props) => {
                 </Form.Group>
               </Row>
 
-              <Button variant="primary" type="submit">
-                비밀번호 변경하기
+              <Button  style={{ backgroundColor: '#4A93FF', border: 'none', float : "right", width : "100px" }} type="submit">
+                완료
               </Button>
 
             </Form>
