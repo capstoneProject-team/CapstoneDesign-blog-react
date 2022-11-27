@@ -16,8 +16,6 @@ import { Container, Form, Row, Col } from 'react-bootstrap';
 import { SmileOutlined, FrownOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Space, Upload, notification, DatePicker, Input, Spin } from 'antd';
 import Axios from 'axios';
-import dayjs from 'dayjs';
-// import DatePicker from "react-datepicker";
 
 //etc
 import { useNavigate } from 'react-router-dom';
@@ -35,7 +33,6 @@ const DiaryCreate = ({ setNavVisible }) => {
   //저장소
   const { post_id } = useParams();
   const [created_at, setCreate_at] = useState("");
-  const [editCreated_at, setEditCreated_at] = useState(new Date());
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -44,9 +41,10 @@ const DiaryCreate = ({ setNavVisible }) => {
   const [visiable, setVisiable] = useState(false);
   const [disiable, setDisiable] = useState(false);
   const [selectFile, setSelectFile] = useState("");
+  const [editCreated_at, setEditCreate_at] = useState("");
 
 
-  const changeTitle =(event)=>{
+  const changeTitle = (event) => {
     setTitle(event.target.value);
     console.log(title);
   }
@@ -58,48 +56,47 @@ const DiaryCreate = ({ setNavVisible }) => {
     setCreate_at(data.created_at);
     setTitle(data.title);
     setContent(data.content);
-    console.log("데이터 : ", data)
-    console.log("만두는 즐거워", content)
+
     // 사진이 있는 경우
     // console.log("만두는 아름다워",data.photo);
     if (data.photo != null) {
-      console.log("만두는 아름다워",data.photo);
       setPhoto(data.photo);
-    } 
+    }
     console.log("photo data : ", photo)
-    // else {
-    //   setPhoto(data.photo);
-    //   console.log("photo data : ",photo);
-    // }
+
     setLoadingSpinner(true);
   }
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("수정한 것들", created_at, title, content, "포토", selectFile);
 
     const formData = new FormData();
-    if(editCreated_at == null){
+    if (editCreated_at == "") {
       formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
-    }
-    else{
+      console.log("날짜 수정 안함")
+    } else {
       formData.append('created_at', moment(editCreated_at).format('YYYY-MM-DD HH:mm:ss'));
+      console.log("날짜 수정함")
     }
+
     formData.append('title', title);
     formData.append('content', content);
-
-    if (selectFile === "") {
+    if (selectFile == "") {
+      // var arSplitUrl = photo.split("/");    //   "/" 로 전체 url 을 나눈다
+      // var nArLength = arSplitUrl.length;
+      // var arFileName = arSplitUrl[nArLength - 1];   // 나누어진 배열의 맨 끝이 파일명이다
       formData.append('photo', photo);
+      console.log("파일선택 안됨 : ", photo);
 
-    }else{
+    } else {
       formData.append('photo', selectFile);
-      console.log("select data : ", selectFile);
+      console.log("파일 선택 됨 : ", selectFile);
     }
     for (let key of formData.keys()) {
       console.log(key, ":", formData.get(key));
     }
     try {
-      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}`}});
+      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
         message: "수정 완료!",
         description: "일기를 성공적으로 수정하였습니다.",
@@ -154,7 +151,7 @@ const DiaryCreate = ({ setNavVisible }) => {
 
   useEffect(() => {
     response();
-    console.log(content, photo) 
+    console.log(content, photo)
   }, []);
 
 
@@ -164,7 +161,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   if (loadingSpinner == false) {
     return (
       <div className='loadingSpinner'>
-        <LoadingOutlined style={{ fontSize: 100, color: 'blue'}} spin />
+        <LoadingOutlined style={{ fontSize: 100, color: 'blue' }} spin />
       </div>
     )
   } else {
@@ -176,7 +173,7 @@ const DiaryCreate = ({ setNavVisible }) => {
               <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="diaryCreateTitle">
                   <Input size="large" onChange={changeTitle} value={title} bordered={false} name='title' type="text" placeholder="제목" style={{ fontSize: "20pt" }} />
-                  </Form.Group>
+                </Form.Group>
                 <hr style={{ marginTop: "-10px" }} />
                 <CKEditor
                   editor={ClassicEditor}
@@ -194,8 +191,8 @@ const DiaryCreate = ({ setNavVisible }) => {
                 <Row className="mt-4">
                   <h4>날짜 선택</h4>
                   <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                  <Col lg={9}><DatePicker onChange={(date) => setEditCreated_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
-                  {console.log(created_at)}
+                  <Col lg={9}><DatePicker onChange={(date) => setEditCreate_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
+                  {console.log(editCreated_at)}
                 </Row>
                 <Row className="mt-5">
                   <Col lg={5}>
@@ -204,10 +201,10 @@ const DiaryCreate = ({ setNavVisible }) => {
                     {photo && <Row>
                       <Col><img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>
                       <Col><DeleteOutlined onClick={deleteBeforeImg} style={{ color: 'red' }} /></Col>
-                      <Form.Control type="file" onChange={fileSelectedHandler} disabled={true}/>
+                      <Form.Control type="file" onChange={fileSelectedHandler} disabled={true} />
                     </Row>}
 
-                    {!photo && <Form.Control type="file" onChange={fileSelectedHandler} disabled={disiable}/>}
+                    {!photo && <Form.Control type="file" onChange={fileSelectedHandler} disabled={disiable} />}
                     <br />
                     {imageSrc && <Row className='preview'>
                       <Col><img src={imageSrc} alt="preview-img" style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>

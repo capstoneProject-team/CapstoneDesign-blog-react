@@ -82,23 +82,15 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
   // handlePage(1);
 
   return (
-    <div>
+    <div style={{paddingLeft : "15%", paddingRight : "15%"}}>
       <Link to="/diary-create">
           <img src={editIcon} style={{filter: "drop-shadow(1.5px 1.5px 1.5px #000)", color : "#4A93FF" ,width:'50px', height:'50px', position: 'fixed', top: '85%', left: '85%', zIndex : '2' }}/></Link>
         <Container>
-        <Row >
-          <Col ><h5>{postCnt}개의 글</h5></Col>
+          <p style={{float : "right"}}>{postCnt}개의 글</p>
           <Divider />
-
-        </Row>
-        </Container><br/>
-        
-        {pageList.map(detail => (<PostCard detail={detail}/>))}
-  
-        <br />
-
-        {visible && <div style={{justifyContent:"center"}}>
-          <Container>
+          {pageList.map(detail => (<PostCard detail={detail}/>))}
+          
+          {visible && <div style={{justifyContent:"center"}}>
             <Row style={{padding:"100px 0px 100px 0px"}}>
               <Col  span={24} align='middle' justify='center'>
                 <Title disabled strong>
@@ -106,13 +98,9 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
                 </Title>
               </Col>
             </Row>
-          </Container> 
         </div>}
 
-        <br />
-
-        <Container id="">
-          <Row style={{padding:"0px 0px 100px 0px"}}>
+          <Row>
             <Col span={24} align='middle' justify='center'>
             <br/>
               <Input.Group compact>
@@ -126,9 +114,8 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
               <br/>
             </Col>
           </Row>
-        </Container>
 
-        <div class='pagination' style={{padding:"0px 0px 200px 0px"}}>
+          <div class='pagination' style={{padding:"0px 0px 200px 0px"}}>
           <Pagination size="sm">
             <Pagination.First />
             <Pagination.Prev />
@@ -139,12 +126,12 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
             &nbsp;&nbsp;&nbsp;&nbsp;
           </Pagination>
         </div>
-        {/* <Select>
-        <Search addonBefore="제목" placeholder="input search text" onSearch={onSearch} enterButton />
-        <Search addonBefore="내용" placeholder="input search text" onSearch={onSearch} enterButton />
-        <Search addonBefore="날짜" placeholder="input search text" onSearch={onSearch} enterButton />
-        </Select> */}
-
+        </Container><br/>
+        
+        
+  
+        <br />
+        <br />
 
         
     </div>
