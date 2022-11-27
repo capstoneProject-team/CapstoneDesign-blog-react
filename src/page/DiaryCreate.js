@@ -3,10 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Navigation from '../component/Navigation'
 import { Routes, Route, Link } from "react-router-dom";
 
-//datepicker 불러오기
-// import DatePicker from "react-datepicker";
-// import 'react-datepicker/dist/react-datepicker.css';
-
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
