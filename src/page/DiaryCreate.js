@@ -33,8 +33,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   })
 
   const navigate = useNavigate();
-
-  //event가 생기면 값을 받아오는 것
+  
   const getValue = (event) => {
     const { name, value } = event.target;
     setDiaryContent({
