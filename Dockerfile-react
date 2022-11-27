@@ -8,7 +8,7 @@ COPY /package.json /capstone_deploy/frontend/package.json
 RUN npm install
 
 COPY . /capstone_deploy/frontend
-RUN npm build
+RUN npm run-script build
 
 FROM nginx
 
