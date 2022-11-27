@@ -1,0 +1,76 @@
+.pagination{
+  margin: 0 auto;
+}
+
+.bannerContent{
+  display : flex;
+  justify-content : space-between;
+}
+
+.listNav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    min-height: 400px;
+    margin-bottom: 20px;
+  }
+
+.log{
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.ant-notification-topRight {
+  position: absolute;
+}
+
+
+
+.mainBannerBox{
+  border-radius : 10px;
+  background-image: url(image/배너_7.jpeg);
+  background-repeat: no-repeat;
+  /* 이미지 여백이 나온 경우 */
+  background-size : cover;
+
+}
+
+.loadingSpinner{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+}
+
+.box{
+  border-radius : 10px;
+  background-color: #DFEBFC;
+  padding: 10px;
+
+}
+
+.boxPrologue{
+  border-radius : 10px;
+  background-color: #DFEBFC;
+  padding: 10px;
+  height : 356px;
+
+}
+
+.inBox{
+  border-radius : 10px;
+  background-color: #FFFFFF;
+  
+}
+
+.bannerImage{
+  width: 250px;
+  height: 200px;
+}
+
