@@ -40,7 +40,7 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
       console.log("검색어 : ",search)
       setPage(1);
       setSearchInput(search);
-        }
+    }
 
 
 
