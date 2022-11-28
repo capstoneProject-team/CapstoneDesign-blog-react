@@ -60,7 +60,7 @@ const DiaryCreate = ({ setNavVisible }) => {
       console.log(key, ":", formData.get(key));
     }
     try {
-      await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
+      await Axios.post(`http://3.36.254.187:8000/post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
         message: "저장 완료!",
         description: "일기를 성공적으로 저장하였습니다.",

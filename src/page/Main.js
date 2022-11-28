@@ -61,7 +61,7 @@ const Main = ({ setNavVisible }) => {
 
 
   const getData = async() => {
-    const res = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post?page=1&author_id=${user_id}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
+    const res = await Axios.get(`http://3.36.254.187:8000/post?page=1&author_id=${user_id}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
     setPost(res.data.results);
     setPostCnt(res.data.count);
     setLoadingSpinner(true);

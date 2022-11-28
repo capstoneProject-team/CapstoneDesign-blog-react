@@ -60,7 +60,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   console.log(youtubeVideos)
 
   const response = async () => {
-    const res = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
+    const res = await Axios.get(`http://3.36.254.187:8000/post/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
     const data = res.data;
     console.log(data);
     setCreate_at(data.created_at);
@@ -187,7 +187,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   const deleteDiary = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.delete(`${process.env.REACT_APP_LOCAL_DJ_IP}post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
+      const response = await Axios.delete(`http://3.36.254.187:8000/post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
       handleClose();
       notification.open({
         message: "일기가 삭제되었습니다.",

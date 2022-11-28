@@ -43,7 +43,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
     try {
       let nickname = changeName;
       //바뀐 jwt token이 response에 들어올 예정
-      const response = await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/info/${user_id}/`, { nickname }, 
+      const response = await Axios.patch(`http://3.36.254.187:8000/user/edit/info/${user_id}/`, { nickname }, 
       {headers: {Authorization: `Bearer ${token}`}})
       localStorage.setItem("nickname", response.data.nickname);
       // const tokenChange = response.data.access;
@@ -67,7 +67,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   const deleteAccount = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.delete(`${process.env.REACT_APP_LOCAL_DJ_IP}user/delete/${user_id}/`)
+      const response = await Axios.delete(`http://3.36.254.187:8000/user/delete/${user_id}/`)
       window.localStorage.clear();
       handleClose();
       notification.open({

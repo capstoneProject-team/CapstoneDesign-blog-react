@@ -36,7 +36,7 @@ const Register = ({ setNavVisible, props }) => {
     let { nickname, username, password, hint1, hint2, location, question1, question2, question3 } = values;
 
     try {
-      await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}user/signup/`,
+      await Axios.post(`http://3.36.254.187:8000/user/signup/`,
         { nickname, username, password, hint1, hint2, location, question1, question2, question3 })
 
       notification.open({

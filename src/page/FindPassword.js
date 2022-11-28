@@ -39,7 +39,7 @@ const FindPassword = ({setNavVisible}) => {
     console.log(user);
 
     try {
-        const response = await Axios.post(`${process.env.REACT_APP_LOCAL_DJ_IP}user/findPassword/`,{user})
+        const response = await Axios.post(`http://3.36.254.187:8000/user/findPassword/`,{user})
 
         setUser_id(response.data[0].id);
         notification.open({
@@ -69,7 +69,7 @@ const FindPassword = ({setNavVisible}) => {
 
     try {
       const password=newPassword.password1
-      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}user/edit/pwd/${user_id}/`,{password},{ headers: { Authorization: `Bearer ${getJwtAtStorage()}`}})
+      await Axios.patch(`http://3.36.254.187:8000/user/edit/pwd/${user_id}/`,{password},{ headers: { Authorization: `Bearer ${getJwtAtStorage()}`}})
       notification.open({
         message:"비밀번호 변경 성공!",
         icon:<SmileOutlined/>

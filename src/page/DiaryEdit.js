@@ -52,7 +52,7 @@ const DiaryCreate = ({ setNavVisible }) => {
 
   //다이어리 보여지기 관련
   const response = async () => {
-    const res = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
+    const res = await Axios.get(`http://3.36.254.187:8000/post/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
     const data = res.data;
     setCreate_at(data.created_at);
     setTitle(data.title);
@@ -101,7 +101,7 @@ const DiaryCreate = ({ setNavVisible }) => {
       console.log(key, ":", formData.get(key));
     }
     try {
-      await Axios.patch(`${process.env.REACT_APP_LOCAL_DJ_IP}post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
+      await Axios.patch(`http://3.36.254.187:8000/post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
         message: "수정 완료!",
         description: "일기를 성공적으로 수정하였습니다.",

@@ -51,7 +51,7 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
 
   useEffect(() => {
       const pageData = async() => {
-          const response = await Axios.get(`${process.env.REACT_APP_LOCAL_DJ_IP}post?page=${page}&author_id=${user_id}&${type}=${searchInput}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
+          const response = await Axios.get(`http://3.36.254.187:8000/post?page=${page}&author_id=${user_id}&${type}=${searchInput}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
           setPageList(response.data.results);
           setPostCnt(response.data.count);
           noPost(response.data.count);
