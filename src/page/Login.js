@@ -33,7 +33,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.post(`http://3.36.254.187:8080/user/token/`, { username, password })
+      const response = await Axios.post(`http://3.36.254.187:8000/user/token/`, { username, password })
       console.log(response)
       const token = response.data.access;
       console.log(token)
