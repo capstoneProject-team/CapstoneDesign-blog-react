@@ -1,8 +1,7 @@
 import { React, useState, useEffect } from 'react'
-import Navigation from '../component/Navigation'
-import { Routes, Route, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import Pagination from 'react-bootstrap/Pagination';
-import { Container, Button, Table, Dropdown, SplitButton } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import PostCard from '../component/PostCard';
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
@@ -115,7 +114,6 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
             <Pagination.First />
             <Pagination.Prev />
             {pageCnt.map(x => (<Pagination.Item onClick={()=> handlePage(x)} >{x}</Pagination.Item>))}        
-            {/* <Pagination.Item>1</Pagination.Item> */}
             <Pagination.Next />
             <Pagination.Last />
             &nbsp;&nbsp;&nbsp;&nbsp;

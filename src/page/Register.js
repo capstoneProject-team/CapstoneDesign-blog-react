@@ -7,7 +7,7 @@ import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import logo_detail from '../image/logo_detail.png';
-import { Popover, Steps } from "antd";
+import { Steps } from "antd";
 
 
 const Register = ({ setNavVisible, props }) => {
@@ -26,10 +26,6 @@ const Register = ({ setNavVisible, props }) => {
   const [current, setCurrent] = useState(0)
 
   const navigate = useNavigate();
-
-  const naviageIntroduce = () => {
-    navigate("/");
-  }
 
   const submit = async (values) => {
     console.log(values);
@@ -63,7 +59,7 @@ const Register = ({ setNavVisible, props }) => {
       {/* 이미지 */}
       <div style={{ textAlign: "center" }}>
         <br />
-        <Link to="/"><img src={logo_detail} width="250" height="120" /></Link></div>
+        <Link to="/"><img src={logo_detail} width="250" height="120" alt='해당 이미지를 찾을 수 없습니다.'/></Link></div>
 
       <Formik
         initialValues={{
