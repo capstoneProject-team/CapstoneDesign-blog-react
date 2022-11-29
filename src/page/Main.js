@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { Routes, Route, Link } from "react-router-dom";
-import { Container, Button, Table } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import WeatherDate from '../component/MainWeather';
 import MainBanner from '../component/MainBanner';
 import MainPrologue from '../component/MainPrologue';
@@ -57,16 +56,6 @@ const Main = ({ setNavVisible }) => {
     console.log(currentSlide);
   };
 
-  const contentStyle = {
-    margin: 0,
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-  };
-  
-
   useEffect(() => {
     getData();
   },[loadingSpinner]);
@@ -84,7 +73,7 @@ const Main = ({ setNavVisible }) => {
     noPost(postCnt);
   },[post]);
 
-  if (loadingSpinner == false) {
+  if (loadingSpinner === false) {
     return (
       <div className='loadingSpinner'>
         <LoadingOutlined style={{ fontSize: 100, color: 'blue'}} spin />
@@ -118,11 +107,9 @@ const Main = ({ setNavVisible }) => {
             </Row>
           </Container> 
         </div>}
-          {/* {slicedPost.map(detail => (<MainPrologue detail={detail}/>))} */}
           </Col>
           <Col span={12} style={{padding:"0px 50px 0px 50px"}}><h3>Trend📈</h3>
           <br/>
-          {/* {post.map(detail => (<MainTrend detail={detail}/>))} */}
           
           <List
             header={<div>최근 일기</div>}

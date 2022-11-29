@@ -1,13 +1,12 @@
-import { React, useState, useEffect } from 'react'
-import { Button, Col, Row, Form } from 'react-bootstrap';
+import { React, useState} from 'react'
+import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
-import useLocalStorage, { setJwtAtStorage } from '../utils/useLocalStorage';
+import { setJwtAtStorage } from '../utils/useLocalStorage';
 import logo_detail from '../image/logo_detail.png';
-import kakaotalk_icon from '../image/kakaotalk_icon.png';
 
 const Login = ({ setNavVisible, setAuthentication }) => {
   setNavVisible(false);
@@ -16,16 +15,6 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   const navigateRegister = () => {
     navigate("/Register")
   }
-
-  const CLIENT_ID = "72fdb50b45b98b1c98170dae7fae4529";
-  const REDIRECT_URI = "http://localhost:3000/oauth/callback/kakao";
-
-  // 프런트엔드 리다이랙트 URI 예시
-  // const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
-
-  // 백엔드 리다이랙트 URI 예시
-  // const REDIRECT_URI =  "http://localhost:5000/kakao/code";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const [username, setId] = useState(null);
   const [password, setPassword] = useState(null);
@@ -69,8 +58,6 @@ const Login = ({ setNavVisible, setAuthentication }) => {
           <Link to="/"><img src={logo_detail} width="250" height="120" /></Link>
         </div>
 
-
-
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>E-mail</Form.Label>
           <Form.Control type="email" placeholder="이메일" onChange={e => setId(e.target.value)} />
@@ -87,7 +74,6 @@ const Login = ({ setNavVisible, setAuthentication }) => {
 
         <div className='loginButton mt-3'>
           <Button className="w-100 mb-2" style={{ backgroundColor: '#4A93FF', border: 'none' }} type="submit" >로그인</Button>
-            <a href={KAKAO_AUTH_URL}><Button className="w-100 mb-3 btn-warning " style={{ backgroundColor: "#f7dc09", border: 'none' }}><img src={kakaotalk_icon} width='25' height='14' />Kakao 로그인</Button></a>
           <hr />
           <p style={{ textAlign : 'center', fontSize : "10pt" }}>HED의 회원이 아니신가요? <Link to='/Register' style={{ textDecoration: 'none' }}>회원가입</Link></p>
 
