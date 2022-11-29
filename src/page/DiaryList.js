@@ -10,7 +10,7 @@ import editIcon from '../image/editicon.png'
 import {Input, Select, Divider, Row, Col, Typography} from 'antd';
 
 const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
-  const { Option } = Select;
+  const { Option } = Select ;
   const { Title} = Typography;
   const [visible, setVisible] = useState(false);
   const [pageForSearch,setPageForSearch] = useState(1);
