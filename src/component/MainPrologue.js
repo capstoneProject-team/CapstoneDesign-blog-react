@@ -93,7 +93,7 @@ const MainPrologue = ({detail}) => {
                         <Card
                             // headStyle={{backgroundColor:'#E7EFFB'}}
                             bodyStyle={{ backgroundColor: '#E7EFFB', borderBlockColor: '#E7EFFB'}}
-                            style={{ width: 400}}
+                            style={{ width: 400, justifyContent: 'center'}}
                             cover={
                                 <img
                                 src={diaryPrologueContentPhoto} alt='image'

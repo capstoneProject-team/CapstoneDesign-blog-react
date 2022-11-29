@@ -9,7 +9,7 @@ import jwt_decode from "jwt-decode";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
-import {Row, Col, Carousel, List} from 'antd';
+import {Row, Col, Carousel, List, Typography} from 'antd';
 
 const Main = ({ setNavVisible }) => {
   //메인 새로고침(데이터 변경 시, 반영을 위해서)
@@ -20,6 +20,8 @@ const Main = ({ setNavVisible }) => {
 
   // spinner
   const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+  const {Title} = Typography;
 
 
   // 날짜 가져오기
@@ -40,6 +42,16 @@ const Main = ({ setNavVisible }) => {
   const [slicedPost, setSlicedPost] = useState([]);
 
   const [postCnt, setPostCnt] = useState(0);
+
+  const noPost = (cnt) => {
+    if(cnt === 0){
+      setVisible(true);
+    }else{
+      setVisible(false);
+    }
+  }
+
+  const [visible, setVisible] = useState(false);
 
   const onChange = (currentSlide) => {
     console.log(currentSlide);
@@ -69,6 +81,7 @@ const Main = ({ setNavVisible }) => {
 
   useEffect(() => {
     setSlicedPost(Array.from(post).slice(0,3));
+    noPost(postCnt);
   },[post]);
 
   if (loadingSpinner == false) {
@@ -94,6 +107,17 @@ const Main = ({ setNavVisible }) => {
           <Carousel afterChange={onChange} >
           {slicedPost.map(detail => (<MainPrologue detail={detail}/>))}
       </Carousel>
+      {visible && <div style={{justifyContent:"center"}}>
+          <Container>
+            <Row style={{padding:"100px 0px 100px 0px"}}>
+              <Col  span={24} align='middle' justify='center'>
+                <Title disabled strong>
+                  작성하신 일기가 없습니다 🥲
+                </Title>
+              </Col>
+            </Row>
+          </Container> 
+        </div>}
           {/* {slicedPost.map(detail => (<MainPrologue detail={detail}/>))} */}
           </Col>
           <Col span={12} style={{padding:"0px 50px 0px 50px"}}><h3>Trend📈</h3>
