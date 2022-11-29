@@ -37,6 +37,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [photo, setPhoto] = useState("");
+  const [photoFile, setPhotoFile] = useState("");
   const dateFormat = 'YYYY/MM/DD';
   const [visiable, setVisiable] = useState(false);
   const [disiable, setDisiable] = useState(false);
@@ -61,7 +62,11 @@ const DiaryCreate = ({ setNavVisible }) => {
     // console.log("만두는 아름다워",data.photo);
     if (data.photo != null) {
       setPhoto(data.photo);
+      await convertURLtoFile(data.photo).then(async(res) => {
+        setPhotoFile(res);
+      })
     }
+    console.log("photoFile : ", photoFile)
     console.log("photo data : ", photo)
 
     setLoadingSpinner(true);
@@ -85,8 +90,8 @@ const DiaryCreate = ({ setNavVisible }) => {
       // var arSplitUrl = photo.split("/");    //   "/" 로 전체 url 을 나눈다
       // var nArLength = arSplitUrl.length;
       // var arFileName = arSplitUrl[nArLength - 1];   // 나누어진 배열의 맨 끝이 파일명이다
-      formData.append('photo', photo);
-      console.log("파일선택 안됨 : ", photo);
+      formData.append('photo', photoFile);
+      console.log("파일선택 안됨 : ", photoFile);
 
     } else {
       formData.append('photo', selectFile);
@@ -123,6 +128,17 @@ const DiaryCreate = ({ setNavVisible }) => {
     setSelectFile(event.target.files[0]);
     encodeFileToBase64(event.target.files[0]);
   }
+
+  const convertURLtoFile = async (url) => {
+    const response = await fetch(
+        `${url}`,
+    );
+    const data = await response.blob();
+    const filename = `uploadImg.${url.split('.').reverse()[0]}`; // url 구조에 맞게 수정할 것
+    const metadata = { type: `image/${url.split('.').reverse()[0]}` };
+    console.log(response);
+    return new File([data], filename, metadata);
+};
 
   //이미지 미리보기
   const [imageSrc, setImageSrc] = useState('');
@@ -192,7 +208,7 @@ const DiaryCreate = ({ setNavVisible }) => {
                   <h4>날짜 선택</h4>
                   <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
                   <Col lg={9}><DatePicker onChange={(date) => setEditCreate_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
-                  {console.log(editCreated_at)}
+                  {console.log("moment 수정 확인",editCreated_at)}
                 </Row>
                 <Row className="mt-5">
                   <Col lg={5}>
