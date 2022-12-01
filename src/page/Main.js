@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from 'react'
-import { Routes, Route, Link } from "react-router-dom";
-import { Container, Button, Table } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import WeatherDate from '../component/MainWeather';
 import MainBanner from '../component/MainBanner';
 import MainPrologue from '../component/MainPrologue';
@@ -9,7 +8,7 @@ import jwt_decode from "jwt-decode";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
-import {Row, Col, Carousel, List} from 'antd';
+import {Row, Col, Carousel, List, Typography} from 'antd';
 
 const Main = ({ setNavVisible }) => {
   //메인 새로고침(데이터 변경 시, 반영을 위해서)
@@ -20,6 +19,8 @@ const Main = ({ setNavVisible }) => {
 
   // spinner
   const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+  const {Title} = Typography;
 
 
   // 날짜 가져오기
@@ -41,19 +42,19 @@ const Main = ({ setNavVisible }) => {
 
   const [postCnt, setPostCnt] = useState(0);
 
+  const noPost = (cnt) => {
+    if(cnt === 0){
+      setVisible(true);
+    }else{
+      setVisible(false);
+    }
+  }
+
+  const [visible, setVisible] = useState(false);
+
   const onChange = (currentSlide) => {
     console.log(currentSlide);
   };
-
-  const contentStyle = {
-    margin: 0,
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-  };
-  
 
   useEffect(() => {
     getData();
@@ -69,9 +70,10 @@ const Main = ({ setNavVisible }) => {
 
   useEffect(() => {
     setSlicedPost(Array.from(post).slice(0,3));
+    noPost(postCnt);
   },[post]);
 
-  if (loadingSpinner == false) {
+  if (loadingSpinner === false) {
     return (
       <div className='loadingSpinner'>
         <LoadingOutlined style={{ fontSize: 100, color: 'blue'}} spin />
@@ -94,11 +96,20 @@ const Main = ({ setNavVisible }) => {
           <Carousel afterChange={onChange} >
           {slicedPost.map(detail => (<MainPrologue detail={detail}/>))}
       </Carousel>
-          {/* {slicedPost.map(detail => (<MainPrologue detail={detail}/>))} */}
+      {visible && <div style={{justifyContent:"center"}}>
+          <Container>
+            <Row style={{padding:"100px 0px 100px 0px"}}>
+              <Col  span={24} align='middle' justify='center'>
+                <Title disabled strong>
+                  작성하신 일기가 없습니다 🥲
+                </Title>
+              </Col>
+            </Row>
+          </Container> 
+        </div>}
           </Col>
           <Col span={12} style={{padding:"0px 50px 0px 50px"}}><h3>Trend📈</h3>
           <br/>
-          {/* {post.map(detail => (<MainTrend detail={detail}/>))} */}
           
           <List
             header={<div>최근 일기</div>}
