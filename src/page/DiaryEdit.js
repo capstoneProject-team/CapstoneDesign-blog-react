@@ -25,6 +25,8 @@ import { getJwtAtStorage } from '../utils/useLocalStorage';
 //date format
 import moment from 'moment';
 
+import baseImg from '../image/기본이미지1.jpeg'
+
 
 const DiaryCreate = ({ setNavVisible }) => {
   //네비게이션
@@ -42,6 +44,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   const [visiable, setVisiable] = useState(false);
   const [disiable, setDisiable] = useState(false);
   const [selectFile, setSelectFile] = useState("");
+  const [emptyFile, setEmptyFile] = useState(false);
   const [editCreated_at, setEditCreate_at] = useState("");
 
 
@@ -87,12 +90,8 @@ const DiaryCreate = ({ setNavVisible }) => {
     formData.append('title', title);
     formData.append('content', content);
     if (selectFile == "") {
-      // var arSplitUrl = photo.split("/");    //   "/" 로 전체 url 을 나눈다
-      // var nArLength = arSplitUrl.length;
-      // var arFileName = arSplitUrl[nArLength - 1];   // 나누어진 배열의 맨 끝이 파일명이다
       formData.append('photo', photoFile);
       console.log("파일선택 안됨 : ", photoFile);
-
     } else {
       formData.append('photo', selectFile);
       console.log("파일 선택 됨 : ", selectFile);
@@ -154,13 +153,15 @@ const DiaryCreate = ({ setNavVisible }) => {
   };
   const deleteImg = () => {
     setImageSrc('');
-    setSelectFile("");
-
+    setEmptyFile(true);
   }
-  const deleteBeforeImg = () => {
+  const deleteBeforeImg = async (event) => {
     setPhoto("");
+    setPhotoFile("");
     setDisiable(false);
-
+    await convertURLtoFile({baseImg}).then(async(res) => {
+      setPhotoFile(res);
+    })
   }
 
   //다이어리 날짜  

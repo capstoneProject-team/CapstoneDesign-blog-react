@@ -16,6 +16,16 @@ const Login = ({ setNavVisible, setAuthentication }) => {
     navigate("/Register")
   }
 
+  const CLIENT_ID = "c0e623d493a756e23825d84d5a28587a";
+  const REDIRECT_URI = "http://3.36.254.187:3000/main";
+
+  // 프런트엔드 리다이랙트 URI 예시
+  // const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
+
+  // 백엔드 리다이랙트 URI 예시
+  // const REDIRECT_URI =  "http://localhost:5000/kakao/code";
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  
   const [username, setId] = useState(null);
   const [password, setPassword] = useState(null);
 
