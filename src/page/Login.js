@@ -18,7 +18,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   }
 
   const CLIENT_ID = "c0e623d493a756e23825d84d5a28587a";
-  const REDIRECT_URI = "http://localhost:3000/main";
+  const REDIRECT_URI = "http://3.36.254.187:3000/main";
 
   // 프런트엔드 리다이랙트 URI 예시
   // const REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
