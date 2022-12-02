@@ -55,7 +55,7 @@ const DiaryCreate = ({ setNavVisible }) => {
     formData.append('content', content);
     if (selectFile != null) {
       formData.append('photo', selectFile);
-    }
+    } 
     for (let key of formData.keys()) {
       console.log(key, ":", formData.get(key));
     }
@@ -102,7 +102,7 @@ const DiaryCreate = ({ setNavVisible }) => {
   };
   const deleteImg =()=>{
     setImageSrc('');
-    setSelectFile(null);
+    setSelectFile("");
 
   }
 

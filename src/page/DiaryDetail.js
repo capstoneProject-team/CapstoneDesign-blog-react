@@ -8,7 +8,7 @@ import Axios from 'axios';
 //antd
 import { Divider, notification } from 'antd';
 import { MoreOutlined, SmileOutlined, FrownOutlined, LoadingOutlined } from '@ant-design/icons';
-
+import youtubeAPI from  '../youtubeAPI.json';
 import moment from 'moment';
 
 const DiaryDetail = ({ setNavVisible }) => {
@@ -48,16 +48,14 @@ const DiaryDetail = ({ setNavVisible }) => {
   const [bestEmotionName, setBestEmotionName] = useState("");
 
   const [params, setParams] = useState({
-    key: `${process.env.REACT_APP_YOUTUBE_API_KEY}`,
+    key: `${youtubeAPI.REACT_APP_YOUTUBE_API_KEY}`,
     part: 'snippet',
     q: `${'슬플 때'}노래모음`,
     maxResults: 10,
     type: 'video',
     videoDuration: 'long'
   });
-  console.log(process.env.REACT_APP_YOUTUBE_API_KEY);
   const [youtubeVideos, setYoutubeVideos] = useState([]);
-  console.log(youtubeVideos)
 
   const response = async () => {
     const res = await Axios.get(`http://3.36.254.187:8000/post/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })

@@ -12,7 +12,6 @@ import "../static/CSS/Login.css";
 const Login = ({ setNavVisible, setAuthentication }) => {
   setNavVisible(false);
   const navigate = useNavigate();
-
   const [username, setId] = useState(null);
   const [password, setPassword] = useState(null);
 
