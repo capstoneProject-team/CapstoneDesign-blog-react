@@ -56,11 +56,11 @@ const Register = ({ setNavVisible, props }) => {
     };
   }
   return (
-    <div id='div1'>
+    <div className='div1'>
       {/* 이미지 */}
-      <div id='div2'>
+      <div className='div2'>
         <br />
-        <Link to="/"><img src={logo_detail} id='logo' alt='해당 이미지를 찾을 수 없습니다.'/></Link></div>
+        <Link to="/"><img src={logo_detail} id='logo' alt='해당 이미지를 찾을 수 없습니다.' /></Link></div>
 
       <Formik
         initialValues={{

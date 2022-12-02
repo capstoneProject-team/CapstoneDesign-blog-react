@@ -1,7 +1,14 @@
-#Button {
+#Button1 {
     text-decoration-color: white;
     background-color: #4A93FF;
     text-align: center;
+    border : none;
+}
+#Button2 {
+    text-decoration-color: white;
+    background-color: #4A93FF;
+    text-align: center;
+    border : none;
 }
 
 #Container {

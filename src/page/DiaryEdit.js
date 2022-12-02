@@ -41,11 +41,11 @@ const DiaryCreate = ({ setNavVisible }) => {
   const [photo, setPhoto] = useState("");
   const [photoFile, setPhotoFile] = useState("");
   const dateFormat = 'YYYY/MM/DD';
-  const [visiable, setVisiable] = useState(false);
   const [disiable, setDisiable] = useState(false);
   const [selectFile, setSelectFile] = useState("");
   const [emptyFile, setEmptyFile] = useState(false);
   const [editCreated_at, setEditCreate_at] = useState("");
+  const [keyword, setKeyword] = useState("");
 
 
   const changeTitle = (event) => {
@@ -60,12 +60,13 @@ const DiaryCreate = ({ setNavVisible }) => {
     setCreate_at(data.created_at);
     setTitle(data.title);
     setContent(data.content);
+    setKeyword(data.keyword);
 
     // 사진이 있는 경우
     // console.log("만두는 아름다워",data.photo);
     if (data.photo != null) {
       setPhoto(data.photo);
-      await convertURLtoFile(data.photo).then(async(res) => {
+      await convertURLtoFile(data.photo).then(async (res) => {
         setPhotoFile(res);
       })
     }
@@ -130,14 +131,14 @@ const DiaryCreate = ({ setNavVisible }) => {
 
   const convertURLtoFile = async (url) => {
     const response = await fetch(
-        `${url}`,
+      `${url}`,
     );
     const data = await response.blob();
     const filename = `uploadImg.${url.split('.').reverse()[0]}`; // url 구조에 맞게 수정할 것
     const metadata = { type: `image/${url.split('.').reverse()[0]}` };
     console.log(response);
     return new File([data], filename, metadata);
-};
+  };
 
   //이미지 미리보기
   const [imageSrc, setImageSrc] = useState('');
@@ -159,7 +160,7 @@ const DiaryCreate = ({ setNavVisible }) => {
     setPhoto("");
     setPhotoFile("");
     setDisiable(false);
-    await convertURLtoFile({baseImg}).then(async(res) => {
+    await convertURLtoFile({ baseImg }).then(async (res) => {
       setPhotoFile(res);
     })
   }
@@ -209,8 +210,14 @@ const DiaryCreate = ({ setNavVisible }) => {
                   <h4>날짜 선택</h4>
                   <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
                   <Col lg={9}><DatePicker onChange={(date) => setEditCreate_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
-                  {console.log("moment 수정 확인",editCreated_at)}
+                  {console.log("moment 수정 확인", editCreated_at)}
                 </Row>
+                <Row className="mt-5">
+                  <h4>오늘의 키워드</h4>
+                  <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>오늘 하루를 나타내는 키워드를 적어주세요.</p>
+                  <Input style={{ width: "15%", marginLeft: "15px" }} name='keyword' type="text" placeholder="ex) 짝사랑" value={keyword} onChange={(event) => setKeyword(event.target.value)} />
+                </Row>
+
                 <Row className="mt-5">
                   <Col lg={5}>
                     <h4>이미지 업로드</h4>
