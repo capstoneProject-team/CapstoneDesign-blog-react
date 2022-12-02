@@ -1,7 +1,7 @@
 import { React, useState} from 'react'
 import { Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from "react-router-dom";
-import { notification } from "antd";
+import { notification, Divider } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
@@ -44,14 +44,13 @@ const Login = ({ setNavVisible, setAuthentication }) => {
   }
 
   return (
-
-    <div id='div1'>
-      <Form className="LoginForm" onSubmit={onSubmit} id='submit'>
-        <div className="logoImage" id='div2'>
-          <Link to="/"><img src={logo_detail} id='logoImage'/></Link>
+    <div className='div1Login'>
+      <Form className="loginForm" onSubmit={onSubmit}>
+        <div className="logoImage">
+          <Link to="/"><img src={logo_detail} id='logoImage' /></Link>
         </div>
 
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3 mt-3" controlId="formBasicEmail">
           <Form.Label>E-mail</Form.Label>
           <Form.Control type="email" placeholder="이메일" onChange={e => setId(e.target.value)} />
         </Form.Group>
@@ -65,8 +64,8 @@ const Login = ({ setNavVisible, setAuthentication }) => {
         <br />
 
         <div className='loginButton mt-3'>
-          <Button className="w-100 mb-2" id='loginButton' type="submit" >로그인</Button>
-          <hr />
+          <Button className="w-100" id='loginButton' type="submit" >로그인</Button>
+          <Divider/>
           <p id='register'>HED의 회원이 아니신가요? <Link to='/Register' id='link'>회원가입</Link></p>
         </div>
       </Form>

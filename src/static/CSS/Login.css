@@ -2,10 +2,21 @@
     color: #108ee9;
 }
 
-#div1 {
+.loginForm {
+    width : 300px;
+}
+
+.logoImage {
+    text-align: center;
+}
+
+.div1Login {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
+    margin-bottom: 150px;
+
 }
 
 #submit {
@@ -13,21 +24,18 @@
     width: 300px;
 }
 
-#div2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-}
+
 
 #logoImage {
     width: 250px;
     height: 120px;
+
+
 }
 
 #findPassword {
     float: right;
-    font-size: 10px;
+    font-size: 10pt;
 }
 
 #link {
@@ -36,7 +44,7 @@
 
 #register {
     text-align: center;
-    font-size: 10px;
+    font-size: 10pt;
 }
 
 #loginButton {

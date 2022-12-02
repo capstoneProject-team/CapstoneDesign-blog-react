@@ -2,16 +2,17 @@ import "../static/CSS/Introduce.css";
 import React from 'react'
 import {Link} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
-import {Col, Row, Button, Typography} from 'antd';
+import {Col, Row, Typography} from 'antd';
+import {Button} from 'react-bootstrap';
 import { Image } from 'antd';
-import introduce_1 from '../image/introduce_1.jpg';
-import introduce_2 from '../image/introduce_2.jpg';
-import introduce_3 from '../image/introduce_3.jpg';
-import introduce_4 from '../image/introduce_4.jpg';
-import introduce_5 from '../image/introduce_5.jpg';
-import introduce_6 from '../image/introduce_6.jpg';
-import introduce_7 from '../image/introduce_7.jpg';
-import introduce_8 from '../image/introduce_8.jpg';
+import introduce_1 from '../static/image/introduce_1.png';
+import introduce_2 from '../static/image/introduce_2.png';
+import introduce_3 from '../static/image/introduce_3.png';
+import introduce_4 from '../static/image/introduce_4.png';
+import introduce_5 from '../static/image/introduce_5.png';
+import introduce_6 from '../static/image/introduce_6.png';
+import introduce_7 from '../static/image/introduce_7.png';
+import introduce_8 from '../static/image/introduce_8.png';
 
 
 
@@ -33,13 +34,13 @@ const Introduce = ({setNavVisible, setAuthentication}) => {
               <h3>내 이야기를 기록해보세요.<br/>오늘 나의 감정을 분석해줍니다 :)</h3>
               <pre>HED를 통해 나를 자세히 알아보세요!</pre>
 
-​              <Link to="/login"><Button variant="info" type='primary' id='Button'>Start</Button></Link>
+​              <Link to="/login"><Button id='Button1'>시작하기</Button></Link>
 ​          </Col>
 ​          <Col span={12}>
 ​          <Image  preview={false} src={introduce_4} id='Big'/>
 ​          </Col>
 ​        </Row>
-<br/><br/><br/>
+          <br/><br/><br/>
 ​        <Row align='middle' justify='center'><Col id="Center"><Title level={1}>"HED와 함께 소중한 하루를 마무리해보세요"</Title><br/><br/></Col></Row>
 ​        <Row id="Center">
 ​          <Col id="Center" span={8}><Image preview={false} src={introduce_2} id='Small'/><pre>일기내용을 통한 감정분석</pre></Col>
@@ -71,7 +72,7 @@ const Introduce = ({setNavVisible, setAuthentication}) => {
 ​        </Row>
 ​        <Row id="Center_padding">
 ​          <Col id="Center">
-​          <Link to="/login"><Button variant="info" type='primary' id='Button'>오늘 하루 진단받기</Button></Link>
+​          <Link to="/login"><Button id='Button2'>오늘 하루 진단받기</Button></Link>
 ​          </Col>
 ​        </Row>
 ​        </Container >

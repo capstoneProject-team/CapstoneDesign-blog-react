@@ -35,7 +35,7 @@ const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInpu
 
 
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar id="sticky-nav" className="fixed-top shadow-sm" bg="light" collapseOnSelect expand="lg">
       <Container style={{paddingLeft : '5%', paddingRight : '5%'}}>
         <Link to={'/main'}><Navbar.Brand href="#">
           <img

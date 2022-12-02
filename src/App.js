@@ -14,6 +14,7 @@ import './App.css';
 import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './component/Navigation';
+import Footer from './component/footer';
 import KakaoRedirectHandler from './component/KakaoRedirectHandler';
 import getStorageItem from './utils/useLocalStorage';
 
@@ -27,6 +28,7 @@ function App() {
   return (
     <div>
     {navVisible && <Navigation isAuthenticated={isAuthenticated} setAuthentication={setAuthentication} setPage={setPage} setSearchInput={setSearchInput} searchInput={searchInput}/>}
+      <div className='pt-5' id="font-family">
       <Routes>
         <Route path="/" element={<Introduce setNavVisible={setNavVisible} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-create" element={isAuthenticated==true ? <DiaryCreate authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
@@ -40,6 +42,7 @@ function App() {
         <Route path="/FindPassword" element={<FindPassword setNavVisible={setNavVisible}/>}/>
         <Route path="/diary-edit/:post_id" element={isAuthenticated==true ? <DiaryEdit authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
       </Routes>
+      <Footer/></div>
     </div>
 
   );

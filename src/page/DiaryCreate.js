@@ -25,12 +25,11 @@ const DiaryCreate = ({ setNavVisible }) => {
   setNavVisible(true);
   //다이어리 날짜  
   const [created_at, setDate_time] = useState(new Date());
-
   const [diaryContent, setDiaryContent] = useState({
     title: '',
     content: ''
   })
-
+  const [keyword, setKeyword] = useState("");
   const navigate = useNavigate();
 
   const getValue = (event) => {
@@ -50,9 +49,10 @@ const DiaryCreate = ({ setNavVisible }) => {
 
     let { title, content } = diaryContent;
     const formData = new FormData();
-    formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
     formData.append('title', title);
     formData.append('content', content);
+    formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
+    formData.append('keyword', keyword);
     if (selectFile != null) {
       formData.append('photo', selectFile);
     } 
@@ -105,7 +105,7 @@ const DiaryCreate = ({ setNavVisible }) => {
     setSelectFile("");
 
   }
-
+  
 
   return (
     <div>
@@ -147,13 +147,20 @@ const DiaryCreate = ({ setNavVisible }) => {
               <Row className="mt-4">
                 <h4>날짜 선택</h4>
                 <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                <Col lg={9}><DatePicker onChange={(date) => setDate_time(date)} /></Col>
+                 <DatePicker onChange={(date) => setDate_time(date)} style={{width : "15%", marginLeft : "15px"}}/>
               </Row>
+
               <Row className="mt-5">
-                <Col lg={5}>
+                <h4>오늘의 키워드</h4>
+                <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>오늘 하루를 나타내는 키워드를 적어주세요.</p>
+                <Input style={{width : "15%", marginLeft : "15px"}} name='keyword' type="text" placeholder="ex) 짝사랑" onChange={(event)=>setKeyword(event.target.value)}/> 
+              </Row>
+
+              <Row className="mt-5">
+                <Col>
                   <h4>이미지 업로드</h4>
                   <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>대표 이미지 1장 업로드해주세요. jpeg/jpg, png파일만 가능합니다.</p>
-                  <Form.Control type="file" onChange={fileSelectedHandler}/>
+                  <Form.Control style={{width : "40%"}} type="file" onChange={fileSelectedHandler}/>
 
                   <br/>
                   {imageSrc && <Row className='preview'>
