@@ -192,7 +192,7 @@ const DiaryDetail = ({ setNavVisible }) => {
       notification.open({
         message: "일기가 삭제되었습니다.",
         icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
       navigate('/diary-list')
     } catch (e) {
@@ -200,7 +200,7 @@ const DiaryDetail = ({ setNavVisible }) => {
       notification.open({
         message: "일기 삭제 실패, 다시 시도해 주세요.",
         icon: <FrownOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
 
     }

@@ -28,7 +28,7 @@ function App() {
   return (
     <div>
     {navVisible && <Navigation isAuthenticated={isAuthenticated} setAuthentication={setAuthentication} setPage={setPage} setSearchInput={setSearchInput} searchInput={searchInput}/>}
-      <div className='pt-5' id="font-family">
+      <div className="topPadding" id="font-family">
       <Routes>
         <Route path="/" element={<Introduce setNavVisible={setNavVisible} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-create" element={isAuthenticated==true ? <DiaryCreate authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>

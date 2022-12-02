@@ -54,13 +54,13 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
       notification.open({
         message: "이름변경 성공",
         icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
     } catch (e) {
       notification.open({
         message: "이름변경 실패! 다시 시도해주세요..",
         icon: <FrownOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
     }
   }

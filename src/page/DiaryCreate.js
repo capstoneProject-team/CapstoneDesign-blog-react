@@ -64,7 +64,9 @@ const DiaryCreate = ({ setNavVisible }) => {
       notification.open({
         message: "저장 완료!",
         description: "일기를 성공적으로 저장하였습니다.",
+        placement: 'bottomeRight',
         icon: <SmileOutlined />
+        
       });
       console.log('success')
       navigate('/diary-list')
@@ -75,6 +77,7 @@ const DiaryCreate = ({ setNavVisible }) => {
         notification.open({
           message: "로그인/회원가입이 되어있는지 확인해주세요.",
           description: "로그인 후 일기를 써보세요.",
+          placement: 'bottomeRight',
           icon: <FrownOutlined />
         })
       };
