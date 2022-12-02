@@ -1,0 +1,30 @@
+#Container {
+    padding-left: 8%;
+    padding-right: 8%;
+}
+
+#row1 {
+    padding: 0px 0px 100px 0px;
+}
+
+#row2 {
+    padding: 100px 0px 100px 0px;
+}
+
+#col {
+    padding: 0px 50px 0px 50px;
+}
+
+#div {
+    justify-content: center;
+}
+
+#Carousel {
+    box-shadow: inset;
+    text-shadow: 10px;
+}
+
+#Spinner {
+    font-size: 100px;
+    color: #4A93FF;
+}

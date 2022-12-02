@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 import {Card, Row, Col} from 'antd';
 import no_image from '../image/no_image.jpg';
+import "../static/CSS/MainPrologue.css";
 
 const MainPrologue = ({detail}) => {
 
@@ -29,16 +30,16 @@ const MainPrologue = ({detail}) => {
     },[])
 
     return (
-            <Link to={`/diary-detail/${detail.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/diary-detail/${detail.id}`} id='link'>
                     <Row>
                         <Col>
                         <Card
                             bodyStyle={{ backgroundColor: '#E7EFFB', borderBlockColor: '#E7EFFB'}}
-                            style={{ width: 400, justifyContent: 'center'}}
+                            id='cardStyle'
                             cover={
                                 <img
                                 src={diaryPrologueContentPhoto} alt='image'
-                                style={{width:400, height:400, alignContent:'center'}}
+                                id='cardImage'
                                 />
                             }
                             >

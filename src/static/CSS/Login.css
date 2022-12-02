@@ -1,0 +1,45 @@
+#notification {
+    color: #108ee9;
+}
+
+#div1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submit {
+    margin-top: 50px;
+    width: 300px;
+}
+
+#div2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#logoImage {
+    width: 250px;
+    height: 120px;
+}
+
+#findPassword {
+    float: right;
+    font-size: 10px;
+}
+
+#link {
+    text-decoration: none;;
+}
+
+#register {
+    text-align: center;
+    font-size: 10px;
+}
+
+#loginButton {
+    background-color: #4A93FF;
+    border: none;
+}
