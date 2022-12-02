@@ -1,6 +1,7 @@
+import "../static/CSS/MainWeather.css";
 import { React, useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode";
-import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage';
+import { getJwtAtStorage } from '../utils/useLocalStorage';
 
 const WeatherDate = (props) => {
 

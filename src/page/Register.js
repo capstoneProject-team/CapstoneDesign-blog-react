@@ -8,6 +8,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import logo_detail from '../image/logo_detail.png';
 import { Steps } from "antd";
+import "../static/CSS/Register.css";
 
 
 const Register = ({ setNavVisible, props }) => {
@@ -55,11 +56,11 @@ const Register = ({ setNavVisible, props }) => {
     };
   }
   return (
-    <div style={{ marginLeft: "20%", marginRight: "20%", justifyContent: "center" }}>
+    <div id='div1'>
       {/* 이미지 */}
-      <div style={{ textAlign: "center" }}>
+      <div id='div2'>
         <br />
-        <Link to="/"><img src={logo_detail} width="250" height="120" alt='해당 이미지를 찾을 수 없습니다.'/></Link></div>
+        <Link to="/"><img src={logo_detail} id='logo' alt='해당 이미지를 찾을 수 없습니다.'/></Link></div>
 
       <Formik
         initialValues={{
@@ -97,14 +98,14 @@ const Register = ({ setNavVisible, props }) => {
           {/* 전체를 덮는 div */}
           <div>
             {/* Step */}
-            <div style={{ justifyContent: "center", padding: "50px 200px 0px 200px" }}>
-              <Steps current={current} labelPlacement='vertical' style={{ display: "flex", justifyContent: "center", padding: "0px 0px 50px 0px" }}>
+            <div id='div3'>
+              <Steps current={current} labelPlacement='vertical' id='step'>
                 <Step title="기본정보" description={description1} onClick={() => { setVisible1(false); setVisible2(true); setCurrent(1); }}></Step>
                 <Step title="음악취향조사" description={description2} onClick={(c) => { setVisible1(true); setVisible2(false); setCurrent(0); }}></Step>
               </Steps>
             </div>
             {/* 기본정보 용도 */}
-            {visible1 && <div style={{ justifyContent: "center", padding: "0px 100px 300px 100px" }}>
+            {visible1 && <div id='Info'>
               <Form.Group controlId="formNickname">
                 <Form.Label>사용자명</Form.Label>
                 <Form.Control type="text" name="nickname" placeholder="사용하고자 하는 이름을 입력하세요"
@@ -195,10 +196,10 @@ const Register = ({ setNavVisible, props }) => {
                 {touched.location && errors.location && <Form.Control.Feedback type="invalid">{errors.location}</Form.Control.Feedback>}
               </Form.Group>
               <br />
-              <Button style={{ backgroundColor: '#4A93FF', border: 'none', float: "right", width: "100px" }} onClick={() => { setVisible1(false); setVisible2(true); setCurrent(1); }}>다음</Button>
+              <Button id='nextButton' onClick={() => { setVisible1(false); setVisible2(true); setCurrent(1); }}>다음</Button>
             </div>}
             {/* 설문조사 */}
-            {visible2 && <div style={{ justifyContent: "center", padding: "0px 100px 300px 100px" }}>
+            {visible2 && <div id='Info'>
               <Form.Group controlId="question1">
                 <Form.Label>질문1. 평상시에 음악을 얼마나 들으시나요?</Form.Label>
                 <Form.Select name='question1'
@@ -266,7 +267,8 @@ const Register = ({ setNavVisible, props }) => {
                 {touched.question3 && errors.question3 && <Form.Control.Feedback type="invalid">{errors.question3}</Form.Control.Feedback>}
               </Form.Group>
               <br />
-              <Button style={{ border: 'none', float: "left", width: "100px" }} variant="secondary" onClick={() => { setVisible1(true); setVisible2(false); setCurrent(0); }}>이전</Button><Button style={{ backgroundColor: '#4A93FF', border: 'none', float: "right", width: "100px" }} variant="primary" type="submit" disabled={isSubmitting}>회원가입</Button>
+              <Button id='previousButton' variant="secondary" onClick={() => { setVisible1(true); setVisible2(false); setCurrent(0); }}>이전</Button>
+              <Button id='nextButton' variant="primary" type="submit" disabled={isSubmitting}>회원가입</Button>
             </div>}
           </div>
         </Form>)}

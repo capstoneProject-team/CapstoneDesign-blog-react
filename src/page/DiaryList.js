@@ -8,12 +8,12 @@ import Axios from "axios";
 import { getJwtAtStorage } from '../utils/useLocalStorage'
 import editIcon from '../image/editicon.png'
 import {Input, Select, Divider, Row, Col, Typography} from 'antd';
+import "../static/CSS/DiaryList.css";
 
-const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
+const DiaryList = ({page,setPage,searchInput,setSearchInput}) => {
   const { Option } = Select ;
   const { Title} = Typography;
   const [visible, setVisible] = useState(false);
-  const [pageForSearch,setPageForSearch] = useState(1);
   const [type, setType] = useState("title");
   const [pageList, setPageList] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
@@ -76,17 +76,17 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
   // handlePage(1);
 
   return (
-    <div style={{paddingLeft : "15%", paddingRight : "15%"}}>
+    <div id='divPadding'>
       <Link to="/diary-create">
-          <img src={editIcon} style={{filter: "drop-shadow(1.5px 1.5px 1.5px #000)", color : "#4A93FF" ,width:'50px', height:'50px', position: 'fixed', top: '85%', left: '85%', zIndex : '2' }}/></Link>
+          <img src={editIcon} id='create_icon'/></Link>
         <Container>
-          <p style={{float : "right"}}>{postCnt}개의 글</p>
+          <p id='counter'>{postCnt}개의 글</p>
           <Divider />
           {pageList.map(detail => (<PostCard detail={detail}/>))}
           
           {visible && <div style={{justifyContent:"center"}}>
-            <Row style={{padding:"100px 0px 100px 0px"}}>
-              <Col  span={24} align='middle' justify='center'>
+            <Row id='ifnone'>
+              <Col span={24} align='middle' justify='center'>
                 <Title disabled strong>
                   작성하신 일기가 없습니다 🥲
                 </Title>
@@ -109,7 +109,7 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
             </Col>
           </Row>
 
-          <div class='pagination' style={{padding:"0px 0px 200px 0px"}}>
+          <div class='pagination' id='pagination'>
           <Pagination size="sm">
             <Pagination.First />
             <Pagination.Prev />
@@ -119,14 +119,11 @@ const DiaryList = ({setNavVisible,page,setPage,searchInput,setSearchInput}) => {
             &nbsp;&nbsp;&nbsp;&nbsp;
           </Pagination>
         </div>
-        </Container><br/>
+        </Container>
         
-        
-  
-        <br />
-        <br />
-
-        
+        <br/>
+        <br/>
+        <br/>
     </div>
   )
 }

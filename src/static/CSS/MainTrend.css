@@ -1,0 +1,15 @@
+#fontBig {
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#fontSmall {
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#noblue { 
+    text-decoration: none;
+}

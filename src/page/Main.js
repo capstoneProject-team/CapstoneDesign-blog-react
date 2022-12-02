@@ -9,6 +9,7 @@ import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from "axios";
 import { LoadingOutlined } from '@ant-design/icons';
 import {Row, Col, Carousel, List, Typography} from 'antd';
+import "../static/CSS/Main.css";
 
 const Main = ({ setNavVisible }) => {
   //메인 새로고침(데이터 변경 시, 반영을 위해서)
@@ -76,14 +77,14 @@ const Main = ({ setNavVisible }) => {
   if (loadingSpinner === false) {
     return (
       <div className='loadingSpinner'>
-        <LoadingOutlined style={{ fontSize: 100, color: 'blue'}} spin />
+        <LoadingOutlined id='Spinner' spin />
       </div>
     )
   } else {
   return (
     <div>
-      <Container style={{paddingLeft : '8%', paddingRight : '8%'}}>
-        <Row gutter={12}  style={{padding:"0px 0px 100px 0px"}}>
+      <Container id='Container'>
+        <Row gutter={12} id='row1'>
           <Col span={24}>
             <WeatherDate todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek} />
             <MainBanner todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek}/>
@@ -91,14 +92,14 @@ const Main = ({ setNavVisible }) => {
         </Row>
         
         <Row>
-          <Col span={12} style={{padding:"0px 50px 0px 50px"}}><h3>Prologue✨</h3>
+          <Col span={12} id='col'><h3>Prologue✨</h3>
           <br/>
-          <Carousel afterChange={onChange} >
+          <Carousel afterChange={onChange} id='Carousel'>
           {slicedPost.map(detail => (<MainPrologue detail={detail}/>))}
       </Carousel>
-      {visible && <div style={{justifyContent:"center"}}>
+      {visible && <div id='div'>
           <Container>
-            <Row style={{padding:"100px 0px 100px 0px"}}>
+            <Row id='row2'>
               <Col  span={24} align='middle' justify='center'>
                 <Title disabled strong>
                   작성하신 일기가 없습니다 🥲
@@ -108,7 +109,7 @@ const Main = ({ setNavVisible }) => {
           </Container> 
         </div>}
           </Col>
-          <Col span={12} style={{padding:"0px 50px 0px 50px"}}><h3>Trend📈</h3>
+          <Col span={12} id='col'><h3>Trend📈</h3>
           <br/>
           
           <List

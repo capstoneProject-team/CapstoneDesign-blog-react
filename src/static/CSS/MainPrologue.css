@@ -1,0 +1,15 @@
+#link {
+    text-decoration: none;
+}
+
+#cardStyle {
+    flex: auto;
+    justify-content: center;
+}
+
+#cardImage {
+    width: 400px;
+    height: 400px;
+    align-content: center;
+    object-fit: cover;
+}
