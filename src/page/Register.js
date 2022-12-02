@@ -39,6 +39,7 @@ const Register = ({ setNavVisible, props }) => {
       notification.open({
         message: "회원가입 성공",
         description: "로그인 페이지로 이동합니다.",
+        placement: 'bottomeRight',
         icon: <SmileOutlined />
       });
       navigate('/login')
@@ -49,6 +50,7 @@ const Register = ({ setNavVisible, props }) => {
         notification.open({
           message: "회원가입 실패",
           description: "아이디/비밀번호를 확인해주세요.",
+          placement: 'bottomeRight',
           icon: <FrownOutlined />
         })
       }

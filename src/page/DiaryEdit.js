@@ -105,6 +105,7 @@ const DiaryCreate = ({ setNavVisible }) => {
       notification.open({
         message: "수정 완료!",
         description: "일기를 성공적으로 수정하였습니다.",
+        placement: 'bottomeRight',
         icon: <SmileOutlined />
       });
       console.log('success')
@@ -114,8 +115,9 @@ const DiaryCreate = ({ setNavVisible }) => {
       console.log(e)
       if (e.response) {
         notification.open({
-          message: "로그인/회원가입이 되어있는지 확인해주세요.",
+          message: "일기 수정에 실패했습니다.",
           description: "로그인 후 일기를 써보세요.",
+          placement: 'bottomeRight',
           icon: <FrownOutlined />
         })
       };

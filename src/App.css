@@ -2,6 +2,9 @@
   font-family: 'AppleSDGothicNeoL', 'Noto Sans KR', sans-serif;
 }
 
+.topPadding {
+  padding-top: 90px;
+}
 
 .pagination{
   margin: 0 auto;

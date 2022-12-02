@@ -30,7 +30,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
       notification.open({
         message: "로그인 성공",
         icon: <SmileOutlined id='notification'/>,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
       navigate('/main')
     }
@@ -38,7 +38,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
       notification.open({
         message: "로그인 실패",
         icon: <FrownOutlined id='notification'/>,
-        placement: 'topRight'
+        placement: 'bottomeRight'
       });
     }
   }
