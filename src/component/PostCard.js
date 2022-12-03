@@ -52,7 +52,7 @@ const PostCard = ({ detail }) => {
         <div style={{display:"flex", justifyContent : "space-between"}}>
           <div style={{width:"75%"}}>
             <MainEmtoion detail={detail}/>
-            <h4>{emotionIcon} &nbsp; {detail.title}</h4>
+            <h4>&nbsp; {detail.title}</h4>
             <br/>
             <div style={{fontSize:"10pt", color: "grey", paddingLeft:"6%", paddingRight:"6%"}}>
             <p style={{ color: "grey"}}>{newnewtext.substr(0, 200)}...</p> 
