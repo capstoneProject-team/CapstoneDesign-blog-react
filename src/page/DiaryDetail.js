@@ -179,7 +179,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   useEffect(() => {
     response();
     youtube();
-  }, [calResult]);
+  }, []);
 
   // useLayoutEffect(() => {
   //   response();
