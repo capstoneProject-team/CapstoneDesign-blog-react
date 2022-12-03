@@ -1,6 +1,12 @@
-#font-family{
-  font-family: 'AppleSDGothicNeoL', 'Noto Sans KR', sans-serif;
+@font-face {
+  font-family: "AppleSDGothicNeo";
+  src: url("/src/static/font/AppleSDGothicNeoM.ttf");
 }
+
+#font-family{
+  font-family: 'AppleSDGothicNeo' !important;
+}
+
 
 .topPadding {
   padding-top: 90px;
@@ -21,11 +27,6 @@
   justify-content: space-evenly;
 }
 
-.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-    min-height: 400px;
-    margin-bottom: 20px;
-  }
-
 .log{
   width: 30%;
   justify-content: center;
@@ -33,9 +34,9 @@
 
 }
 
-.ant-notification-topRight {
+/* .ant-notification-topRight {
   position: absolute;
-}
+} */
 
 
 

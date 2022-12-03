@@ -1,11 +1,7 @@
-#div1 {
-    margin-left: 20%;
-    margin-right: 20%;
-    justify-content: center;
-}
-
-#div2 {
+.wrapper {
+    display: flex;
     text-align: center;
+    justify-content: center;
 }
 
 #logo {
@@ -13,20 +9,16 @@
     height: 120px;
 }
 
-#div3 {
-    justify-content: center;
-    padding: 50px 200px 0px 200px;
-}
-
 #step {
-    display: flex;
-    justify-content: center;
-    padding: 0px 0px 50px 0px;
+    margin-top: 50px;
+    margin-bottom : 30px; 
 }
 
 #Info {
-    justify-content: center;
-    padding: 0px 100px 300px 100px;
+    width: 400px;
+    text-align: left;
+    margin-bottom: 100px;
+
 }
 
 #nextButton {
