@@ -47,6 +47,9 @@ const DiaryCreate = ({ setNavVisible }) => {
     if (selectFile != null) {
       formData.append('photo', selectFile);
     }
+    for (var value of formData.values()) {
+      console.log(value);
+    }
 
     try {
       await Axios.post(`http://3.36.254.187:8000/post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });

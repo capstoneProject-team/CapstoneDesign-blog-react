@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useLayoutEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import { Container, Col, Button, Dropdown, Modal, ProgressBar } from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
@@ -72,9 +72,10 @@ const DiaryDetail = ({ setNavVisible }) => {
     setHurtResult(data.hurt);
     setAnxiousResult(data.anxious);
     setStatrledResult(data.startled);
-
     setKeyword(data.keyword);
+    emotionResultList(emotionList);
     setLoadingSpinner(true);
+    
   }
 
   //테스트 값만 넣어놓은 상태~
@@ -100,9 +101,9 @@ const DiaryDetail = ({ setNavVisible }) => {
     setBestEmotionResult(emotionResult[0].result);
     setBestEmotionEmoticon(emotionResult[0].emoticon);
     setBestEmotionName(emotionResult[0].emotionName);
+
+    console.log("emotionList",emotionResult)
   }
-
-
 
   const emotionBackgroundColor = (bestEmotion) => {
     if (bestEmotion == "happy") {
@@ -178,9 +179,11 @@ const DiaryDetail = ({ setNavVisible }) => {
   useEffect(() => {
     response();
     youtube();
-    emotionResultList(emotionList);
+  }, [calResult]);
 
-  }, []);
+  // useLayoutEffect(() => {
+  //   response();
+  // }, []);
 
   const handleImageError = (e) => {
     e.target.src = noimage;
