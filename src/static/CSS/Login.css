@@ -36,6 +36,7 @@
 #findPassword {
     float: right;
     font-size: 10pt;
+
 }
 
 #link {
@@ -45,6 +46,7 @@
 #register {
     text-align: center;
     font-size: 10pt;
+    color : gray;
 }
 
 #loginButton {

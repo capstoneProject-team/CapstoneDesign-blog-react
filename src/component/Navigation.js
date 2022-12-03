@@ -3,22 +3,18 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from "react-router-dom";
-import { setStorageItem } from '../utils/useLocalStorage'
 import { Link } from "react-router-dom";
 import logo_detail from '../image/logo_detail.png';
 
 
-const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInput,searchInput }) => {
-  // isAuthenticated = undefined 나옴
-  console.log("isAunthenticated : ",isAuthenticated);
+const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInput }) => {
   const navigate = useNavigate();
-  
+
   const login = () => {
     navigate('/login')
   }
 
   const logout = () => {
-    // setStorageItem('jwtToken', '');
     localStorage.removeItem('jwtToken');
     setAuthentication(false);
     window.localStorage.clear();
@@ -33,10 +29,9 @@ const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInpu
     navigate('/diary-list')
   }
 
-
   return (
     <Navbar id="sticky-nav" className="fixed-top shadow-sm" bg="light" collapseOnSelect expand="lg">
-      <Container style={{paddingLeft : '5%', paddingRight : '5%'}}>
+      <Container style={{ paddingLeft: '5%', paddingRight: '5%' }}>
         <Link to={'/main'}><Navbar.Brand href="#">
           <img
             alt=""

@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import {notification} from "antd";
 import Axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {SmileOutlined, FrownOutlined} from "@ant-design/icons";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
-
+import "../static/CSS/FindPassword.css";
 
 
 const FindPassword = ({setNavVisible}) => {
@@ -36,7 +36,6 @@ const FindPassword = ({setNavVisible}) => {
 
   const onSubmit1 = async (event) => {
     event.preventDefault();
-    console.log(user);
 
     try {
         const response = await Axios.post(`http://3.36.254.187:8000/user/findPassword/`,{user})
@@ -83,7 +82,6 @@ const FindPassword = ({setNavVisible}) => {
     if (e.response) {
       notification.open({
         message:"비밀번호 변경 실패!",
-        description:"무엇이 문제일까요?",
         icon:<SmileOutlined/>
       })
     }
@@ -93,14 +91,15 @@ const FindPassword = ({setNavVisible}) => {
     return (
     <Container style={{paddingLeft : "20%", paddingRight : "20%"}}>
         <Col>
-          <Row className="mt-3"><h2>본인 인증</h2>
-            <p>*본인 확인을 위해 가입 이메일과 회원가입 시 입력했던 힌트에 답변해주세요.</p></Row>
+          <Row className="mt-3">
+            <h3>본인 인증</h3>
+            <p className='explain'>본인 확인을 위해 가입 이메일과 회원가입 시 입력했던 힌트에 답변해주세요.</p></Row>
           <Col>
             <Row>
               <Form onSubmit={onSubmit1}>
               <Form.Group className="mb-3" controlId="username">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="text" name="username" placeholder="가입 시 입력했던 이메일을 입력해주세요."
+                  <Form.Control type="text" name="username" placeholder="Email"
                   onChange={handleChange}/>
                 </Form.Group>
 
@@ -116,7 +115,7 @@ const FindPassword = ({setNavVisible}) => {
                   onChange={handleChange}/>
                 </Form.Group>
 
-                <Button  style={{ backgroundColor: '#4A93FF', border: 'none', float : "right", width : "100px" }} type="submit">
+                <Button className="button"type="submit">
                   인증하기
                 </Button>
                 </Form>
@@ -124,11 +123,11 @@ const FindPassword = ({setNavVisible}) => {
           </Col>
         
 
-        {visible && <div>
+        {visible && <div className='mb-5'>
           <Row className="mt-3">
             <hr/>
-            <h2>비밀번호 변경</h2>
-            <p>새로운 비밀번호를 입력해주세요.</p>
+            <h3>비밀번호 변경</h3>
+            <p className='explain'>새로운 비밀번호를 입력해주세요.</p>
           </Row>
           <Row>
             <Form onSubmit={onSubmit2}>
@@ -144,7 +143,7 @@ const FindPassword = ({setNavVisible}) => {
                 </Form.Group>
               </Row>
 
-              <Button  style={{ backgroundColor: '#4A93FF', border: 'none', float : "right", width : "100px" }} type="submit">
+              <Button className="button" type="submit">
                 완료
               </Button>
 

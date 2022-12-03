@@ -58,10 +58,10 @@ const Register = ({ setNavVisible, props }) => {
     };
   }
   return (
-    <div className='div1'>
+    <div className='wrapper'>
       {/* 이미지 */}
+      <div className="div1">
       <div className='div2'>
-        <br />
         <Link to="/"><img src={logo_detail} id='logo' alt='해당 이미지를 찾을 수 없습니다.' /></Link></div>
 
       <Formik
@@ -109,8 +109,8 @@ const Register = ({ setNavVisible, props }) => {
             {/* 기본정보 용도 */}
             {visible1 && <div id='Info'>
               <Form.Group controlId="formNickname">
-                <Form.Label>사용자명</Form.Label>
-                <Form.Control type="text" name="nickname" placeholder="사용하고자 하는 이름을 입력하세요"
+                <Form.Label>닉네임</Form.Label>
+                <Form.Control type="text" name="nickname" placeholder="닉네임을 입력해주세요"
                   value={values.nickname}
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.nickname && !errors.nickname}
@@ -143,7 +143,7 @@ const Register = ({ setNavVisible, props }) => {
               <br />
               <Form.Group controlId="formGroupPassword2">
                 <Form.Label>비밀번호 확인</Form.Label>
-                <Form.Control type="password" name="password2" placeholder="비밀번호를 재입력해주세요"
+                <Form.Control type="password" name="password2" placeholder="비밀번호를 재입력하세요"
                   value={values.password2}
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.password2 && !errors.password2}
@@ -153,8 +153,8 @@ const Register = ({ setNavVisible, props }) => {
               </Form.Group>
               <br />
               <Form.Group controlId="formGroupHit1">
-                <Form.Label>가장 좋아하는 색깔은?</Form.Label>
-                <Form.Control type="text" name="hint1" placeholder="비밀번호 찾기시에 활용됩니다"
+                <Form.Label>가장 좋아하는 색깔은 무엇인가요?</Form.Label>
+                <Form.Control type="text" name="hint1" placeholder="비밀번호 찾기 시에 활용됩니다"
                   value={values.hint1}
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.hint1 && !errors.hint1}
@@ -164,8 +164,8 @@ const Register = ({ setNavVisible, props }) => {
               </Form.Group>
               <br />
               <Form.Group controlId="formGroupHint2">
-                <Form.Label>가장 좋아하는 음식은?</Form.Label>
-                <Form.Control type="text" name="hint2" placeholder="비밀번호 찾기시에 활용됩니다"
+                <Form.Label>가장 좋아하는 음식은 무엇인가요?</Form.Label>
+                <Form.Control type="text" name="hint2" placeholder="비밀번호 찾기 시에 활용됩니다"
                   value={values.hint2}
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.hint2 && !errors.hint2}
@@ -182,7 +182,7 @@ const Register = ({ setNavVisible, props }) => {
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.location && !errors.location}
                   isInvalid={touched.location && errors.location ? true : false}>
-                  <option>지역을 선택해 주세요.</option>
+                  <option>지역을 선택해 주세요</option>
                   <option value={"서울"}>서울</option>
                   <option value={"경기도"}>경기도</option>
                   <option value={"강원도"}>강원도</option>
@@ -209,7 +209,7 @@ const Register = ({ setNavVisible, props }) => {
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.question1 && !errors.question1}
                   isInvalid={touched.question1 && errors.question1 ? true : false}>
-                  <option>답변을 선택해 주세요.</option>
+                  <option>답변을 선택해 주세요</option>
                   <option value={"틈날 때 마다"}>(1) 틈날 때 마다</option>
                   <option value={"여유가 될 때"}>(2) 여유가 될 때</option>
                   <option value={"생각나는 노래가 있을 때"}>(3) 생각나는 노래가 있을 때</option>
@@ -227,7 +227,7 @@ const Register = ({ setNavVisible, props }) => {
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.question2 && !errors.question2}
                   isInvalid={touched.question2 && errors.question2 ? true : false}>
-                  <option>답변을 선택해 주세요.</option>
+                  <option>답변을 선택해 주세요</option>
                   <option value={"따로 시간을 내서"}>(1) 따로 시간을 내서</option>
                   <option value={"이동 중에"}>(2) 이동 중에</option>
                   <option value={"감정적일 때"}>(3) 감정적일 때</option>
@@ -247,7 +247,7 @@ const Register = ({ setNavVisible, props }) => {
                   onChange={handleChange} onBlur={handleBlur}
                   isValid={touched.question3 && !errors.question3}
                   isInvalid={touched.question3 && errors.question3 ? true : false}>
-                  <option>답변을 선택해 주세요.</option>
+                  <option>답변을 선택해 주세요</option>
                   <option value={"클래식"}>(1) 클래식</option>
                   <option value={"재즈"}>(2) 재즈</option>
                   <option value={"CCM"}>(3) CCM</option>
@@ -275,6 +275,7 @@ const Register = ({ setNavVisible, props }) => {
           </div>
         </Form>)}
       </Formik>
+      </div>
     </div>
   );
 }

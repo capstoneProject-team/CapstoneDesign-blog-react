@@ -314,15 +314,16 @@ const DiaryDetail = ({ setNavVisible }) => {
               </div>
               <Divider />
             </div>
-            <div style={{marginBottom : "20px"}}>
-              <div className='detailTitle'>
+            <div style={{marginBottom : "50px", textAlign:"center"}}>
+              <div className='detailTitle' style={{textAlign :"start"}}>
                 <h4>추천 플레이리스트 🎶</h4>
               </div>
+              <div className="mt-3"> 
               {youtubeVideos.slice(0, 3).map((element) => {
                   return (
-                      <iframe src={`https://www.youtube.com/embed/${element.id.videoId}`} style={{width : "350px", height : "200px", margin : "10px"}}
+                      <iframe src={`https://www.youtube.com/embed/${element.id.videoId}`} style={{width : "360px", height : "230px", margin : "10px", borderRadius : "20px"}}
                       frameborder='0' allow='accelerometer; autoplay; clip-board-write; gyroscope; picture-in-picture' allowFullscreen onError={handleImageError}></iframe>)
-                })}
+                })}</div>
             </div>
           </Container>
         </div>

@@ -1,25 +1,17 @@
 import React, { useState } from 'react'
-import Button from 'react-bootstrap/Button';
-import Navigation from '../component/Navigation'
-import { Routes, Route, Link } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-
-import { Container, Form, Row, Col } from 'react-bootstrap';
-
+import { Container, Form, Button } from 'react-bootstrap';
 import { DeleteOutlined } from '@ant-design/icons';
-import { Space, Upload, notification, DatePicker, Input } from 'antd';
+import { notification, DatePicker, Input } from 'antd';
 import Axios from 'axios';
-
-//etc
 import { useNavigate } from 'react-router-dom';
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
-
-//date format
+import "../static/CSS/DiaryCreate.css";
 import moment from 'moment';
+
 
 const DiaryCreate = ({ setNavVisible }) => {
   setNavVisible(true);
@@ -45,7 +37,6 @@ const DiaryCreate = ({ setNavVisible }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(created_at, diaryContent);
 
     let { title, content } = diaryContent;
     const formData = new FormData();
@@ -55,10 +46,8 @@ const DiaryCreate = ({ setNavVisible }) => {
     formData.append('keyword', keyword);
     if (selectFile != null) {
       formData.append('photo', selectFile);
-    } 
-    for (let key of formData.keys()) {
-      console.log(key, ":", formData.get(key));
     }
+
     try {
       await Axios.post(`http://3.36.254.187:8000/post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
@@ -66,17 +55,15 @@ const DiaryCreate = ({ setNavVisible }) => {
         description: "일기를 성공적으로 저장하였습니다.",
         placement: 'bottomeRight',
         icon: <SmileOutlined />
-        
+
       });
-      console.log('success')
       navigate('/diary-list')
     }
     catch (e) {
-      console.log(e)
       if (e.response) {
+        console.log(e.response)
         notification.open({
-          message: "로그인/회원가입이 되어있는지 확인해주세요.",
-          description: "로그인 후 일기를 써보세요.",
+          message: "일기를 저장하지 못했습니다.",
           placement: 'bottomeRight',
           icon: <FrownOutlined />
         })
@@ -93,33 +80,34 @@ const DiaryCreate = ({ setNavVisible }) => {
 
   //이미지 미리보기
   const [imageSrc, setImageSrc] = useState('');
-  const encodeFileToBase64 = (fileBlob)=>{
+  const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
-    return new Promise((resolve)=>{
-      reader.onload = ()=>{
+    return new Promise((resolve) => {
+      reader.onload = () => {
         setImageSrc(reader.result);
         resolve();
       }
     })
   };
-  const deleteImg =()=>{
+  const deleteImg = () => {
     setImageSrc('');
     setSelectFile("");
 
   }
-  
+
 
   return (
     <div>
-      <Container style={{ paddingLeft: "8%", paddingRight: "8%" }}>
-        <Col>
-          <Row className="mt-3">
+      <div className="containerCreate">
+        <div>
+          <div className="mt-3">
             <Form onSubmit={onSubmit}>
               <Form.Group className="mb-3" controlId="diaryCreateTitle">
-                <Input size="large" bordered={false} name='title' type="text" placeholder="제목" onChange={getValue} style={{ fontSize: "20pt" }} />
+                <Input id="titleInput" size="large" bordered={false} name='title'
+                  type="text" placeholder="제목" onChange={getValue} />
               </Form.Group>
-              <hr style={{ marginTop: "-10px" }} />
+              <hr id="hrReduceTop" />
               <CKEditor
                 editor={ClassicEditor}
                 config={{
@@ -127,61 +115,51 @@ const DiaryCreate = ({ setNavVisible }) => {
                   placeholder: "내용을 입력하세요."
                 }}
 
-                onReady={editor => {
-                  console.log('Editor is ready to use!', editor);
-
-                }}
                 onChange={(event, editor) => {
                   const data = editor.getData();
                   setDiaryContent({
                     ...diaryContent,
                     content: data
                   })
-
-                }}
-                onBlur={(event, editor) => {
-                  //   console.log('Blur.', editor);
-                }}
-                onFocus={(event, editor) => {
-                  //   console.log('Focus.', editor);
                 }}
               />
 
-              <Row className="mt-4">
+              <div className="mt-4">
                 <h4>날짜 선택</h4>
-                <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                 <DatePicker onChange={(date) => setDate_time(date)} style={{width : "15%", marginLeft : "15px"}}/>
-              </Row>
+                <p className='explain' >날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
+                <DatePicker className='datepickerSize' onChange={(date) => setDate_time(date)} />
+              </div>
 
-              <Row className="mt-5">
+              <div className="mt-5">
                 <h4>오늘의 키워드</h4>
-                <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>오늘 하루를 나타내는 키워드를 적어주세요.</p>
-                <Input style={{width : "15%", marginLeft : "15px"}} name='keyword' type="text" placeholder="ex) 짝사랑" onChange={(event)=>setKeyword(event.target.value)}/> 
-              </Row>
+                <p className='explain'>오늘 하루를 나타내는 키워드를 적어주세요.</p>
+                <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
+                  onChange={(event) => setKeyword(event.target.value)} />
+              </div>
 
-              <Row className="mt-5">
-                <Col>
+              <div className="mt-5">
+                <div>
                   <h4>이미지 업로드</h4>
-                  <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>대표 이미지 1장 업로드해주세요. jpeg/jpg, png파일만 가능합니다.</p>
-                  <Form.Control style={{width : "40%"}} type="file" onChange={fileSelectedHandler}/>
+                  <p className='explain'>대표 이미지 1장 업로드해주세요. jpg/png/gif 파일만 가능합니다.</p>
+                  <Form.Control id="fileWidth" type="file" onChange={fileSelectedHandler} />
 
-                  <br/>
-                  {imageSrc && <Row className='preview'>
-                    <Col><img src={imageSrc} alt="preview-img" style={{ width:'auto', height : 'auto', maxWidth : "300px", maxHeight : "300px"}}/></Col>
-                    <Col><DeleteOutlined onClick={deleteImg} style={{color : 'red'}}/></Col>
-                  </Row>}
-                </Col>
-              </Row>
+                  <br />
+                  {imageSrc && <div className='preview'>
+                    <div><img src={imageSrc} id="previewImg" alt="지원하지 않는 파일 형식의 이미지" /></div>
+                    <div><DeleteOutlined onClick={deleteImg} id="deleteIcon"/></div>
+                    
+                  </div>}
+                </div>
+              </div>
 
-              <div className='mt-5' style={{ float: "right" }}>
-                <Button type="submit" style={{ width: "90px", backgroundColor: '#4A93FF', border: 'none' }}>저장</Button>
-                <Link to="/diary-list"><Button variant="secondary" style={{ width: "90px", border: 'none' }}>취소</Button></Link>
+              <div className='mt-5'>
+                <Button type="submit" id="saveButton">저장</Button>
+                <Link to="/diary-list"><Button variant="secondary" id="cancleButton">취소</Button></Link>
               </div>
             </Form>
-          </Row>
-        </Col>
-      </Container>
-      <br /><br /><br />
+          </div>
+        </div>
+      </div>
     </div>
 
   )

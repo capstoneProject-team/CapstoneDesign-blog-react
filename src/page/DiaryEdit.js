@@ -1,36 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
-import Navigation from '../component/Navigation'
-import { Routes, Route, Link, useParams } from "react-router-dom";
-import { LoadingOutlined } from '@ant-design/icons';
+import { Link, useParams } from "react-router-dom";
 
-//editer 불러오기
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-
-//부트스트랩
-import { Container, Form, Row, Col } from 'react-bootstrap';
-
-//antd
+import { Container, Form, Button } from 'react-bootstrap';
 import { SmileOutlined, FrownOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Space, Upload, notification, DatePicker, Input, Spin } from 'antd';
+import { notification, DatePicker, Input, Spin } from 'antd';
 import Axios from 'axios';
-
-//etc
 import { useNavigate } from 'react-router-dom';
-
 import { getJwtAtStorage } from '../utils/useLocalStorage';
-
-//date format
 import moment from 'moment';
+import "../static/CSS/DiaryEdit.css";
+import LoadingSpinner from '../component/LoadingSpinner';
 
-import baseImg from '../image/기본이미지1.jpeg'
 
-
-const DiaryCreate = ({ setNavVisible }) => {
+const DiaryEdit = ({ setNavVisible }) => {
   //네비게이션
   setNavVisible(true);
+
+  const navigate = useNavigate();
 
   //저장소
   const { post_id } = useParams();
@@ -43,10 +31,8 @@ const DiaryCreate = ({ setNavVisible }) => {
   const dateFormat = 'YYYY/MM/DD';
   const [disiable, setDisiable] = useState(false);
   const [selectFile, setSelectFile] = useState("");
-  const [emptyFile, setEmptyFile] = useState(false);
   const [editCreated_at, setEditCreate_at] = useState("");
   const [keyword, setKeyword] = useState("");
-
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
@@ -63,16 +49,12 @@ const DiaryCreate = ({ setNavVisible }) => {
     setKeyword(data.keyword);
 
     // 사진이 있는 경우
-    // console.log("만두는 아름다워",data.photo);
     if (data.photo != null) {
       setPhoto(data.photo);
       await convertURLtoFile(data.photo).then(async (res) => {
         setPhotoFile(res);
       })
     }
-    console.log("photoFile : ", photoFile)
-    console.log("photo data : ", photo)
-
     setLoadingSpinner(true);
   }
 
@@ -82,24 +64,20 @@ const DiaryCreate = ({ setNavVisible }) => {
     const formData = new FormData();
     if (editCreated_at == "") {
       formData.append('created_at', moment(created_at).format('YYYY-MM-DD HH:mm:ss'));
-      console.log("날짜 수정 안함")
+
     } else {
       formData.append('created_at', moment(editCreated_at).format('YYYY-MM-DD HH:mm:ss'));
-      console.log("날짜 수정함")
+
     }
 
     formData.append('title', title);
     formData.append('content', content);
     if (selectFile == "") {
       formData.append('photo', photoFile);
-      console.log("파일선택 안됨 : ", photoFile);
     } else {
       formData.append('photo', selectFile);
-      console.log("파일 선택 됨 : ", selectFile);
     }
-    for (let key of formData.keys()) {
-      console.log(key, ":", formData.get(key));
-    }
+
     try {
       await Axios.patch(`http://3.36.254.187:8000/post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
       notification.open({
@@ -116,14 +94,12 @@ const DiaryCreate = ({ setNavVisible }) => {
       if (e.response) {
         notification.open({
           message: "일기 수정에 실패했습니다.",
-          description: "로그인 후 일기를 써보세요.",
           placement: 'bottomeRight',
           icon: <FrownOutlined />
         })
       };
     }
   }
-
 
   //파일 선택 확인 
   const fileSelectedHandler = (event) => {
@@ -136,7 +112,7 @@ const DiaryCreate = ({ setNavVisible }) => {
       `${url}`,
     );
     const data = await response.blob();
-    const filename = `uploadImg.${url.split('.').reverse()[0]}`; // url 구조에 맞게 수정할 것
+    const filename = `uploadImg.${url.split('.').reverse()[0]}`; 
     const metadata = { type: `image/${url.split('.').reverse()[0]}` };
     console.log(response);
     return new File([data], filename, metadata);
@@ -156,45 +132,35 @@ const DiaryCreate = ({ setNavVisible }) => {
   };
   const deleteImg = () => {
     setImageSrc('');
-    setEmptyFile(true);
+
   }
   const deleteBeforeImg = async (event) => {
     setPhoto("");
     setPhotoFile("");
     setDisiable(false);
-    await convertURLtoFile({ baseImg }).then(async (res) => {
-      setPhotoFile(res);
-    })
-  }
 
-  //다이어리 날짜  
+  }
 
   useEffect(() => {
     response();
-    console.log(content, photo)
   }, []);
-
-
-  const navigate = useNavigate();
 
 
   if (loadingSpinner == false) {
     return (
-      <div className='loadingSpinner'>
-        <LoadingOutlined style={{ fontSize: 100, color: 'blue' }} spin />
-      </div>
+      <LoadingSpinner/>
     )
   } else {
     return (
-      <div>
-        <Container style={{ paddingLeft: "8%", paddingRight: "8%" }}>
-          <Col>
-            <Row className="mt-3">
+        <div className="containerEdit">
+          <div>
+            <div className="mt-3">
               <Form onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="diaryCreateTitle">
-                  <Input size="large" onChange={changeTitle} value={title} bordered={false} name='title' type="text" placeholder="제목" style={{ fontSize: "20pt" }} />
+                  <Input size="large" id="titleInput" onChange={changeTitle}
+                    value={title} bordered={false} name='title' type="text" placeholder="제목" />
                 </Form.Group>
-                <hr style={{ marginTop: "-10px" }} />
+                <hr id="hrReduceTopEdit" />
                 <CKEditor
                   editor={ClassicEditor}
                   data={content}
@@ -208,50 +174,49 @@ const DiaryCreate = ({ setNavVisible }) => {
                   }}
                 />
 
-                <Row className="mt-4">
+                <div className="mt-4">
                   <h4>날짜 선택</h4>
-                  <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
-                  <Col lg={9}><DatePicker onChange={(date) => setEditCreate_at(date)} defaultValue={moment(created_at, dateFormat)} format={dateFormat} /></Col>
-                  {console.log("moment 수정 확인", editCreated_at)}
-                </Row>
-                <Row className="mt-5">
-                  <h4>오늘의 키워드</h4>
-                  <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>오늘 하루를 나타내는 키워드를 적어주세요.</p>
-                  <Input style={{ width: "15%", marginLeft: "15px" }} name='keyword' type="text" placeholder="ex) 짝사랑" value={keyword} onChange={(event) => setKeyword(event.target.value)} />
-                </Row>
+                  <p className='explain'>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
+                  <DatePicker className='datepickerSize' onChange={(date) => setEditCreate_at(date)}
+                    defaultValue={moment(created_at, dateFormat)} format={dateFormat} />
 
-                <Row className="mt-5">
-                  <Col lg={5}>
-                    <h4>이미지 업로드</h4>
-                    <p className='explain' style={{ fontSize: "11pt", color: "grey" }}>대표 이미지 1장 업로드해주세요.</p>
-                    {photo && <Row>
-                      <Col><img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>
-                      <Col><DeleteOutlined onClick={deleteBeforeImg} style={{ color: 'red' }} /></Col>
-                      <Form.Control type="file" onChange={fileSelectedHandler} disabled={true} />
-                    </Row>}
-
-                    {!photo && <Form.Control type="file" onChange={fileSelectedHandler} disabled={disiable} />}
-                    <br />
-                    {imageSrc && <Row className='preview'>
-                      <Col><img src={imageSrc} alt="preview-img" style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "300px" }} /></Col>
-                      <Col><DeleteOutlined onClick={deleteImg} style={{ color: 'red' }} /></Col>
-                    </Row>}
-                  </Col>
-                </Row>
-
-                <div className='mt-5' style={{ float: "right" }}>
-                  <Button type="submit" style={{ width: "90px", backgroundColor: '#4A93FF', border: 'none' }}>수정</Button>
-                  <Link to="/diary-list"><Button variant="secondary" style={{ width: "90px", border: 'none' }}>취소</Button></Link>
                 </div>
+                <div className="mt-5">
+                  <h4>오늘의 키워드</h4>
+                  <p className='explain'>오늘 하루를 나타내는 키워드를 적어주세요.</p>
+                  <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
+                    value={keyword} onChange={(event) => setKeyword(event.target.value)} />
+                </div>
+
+                <div className="mt-5">
+                  <div>
+                    <h4>이미지 업로드</h4>
+                    <p className='explain'>대표 이미지 1장 업로드해주세요. jpg/png/gif 파일만 가능합니다.</p>
+                    {photo && <div>
+                      <Form.Control id="fileWidth1" type="file" onChange={fileSelectedHandler} disabled={true} />
+                      <div className='preview'>
+                      <div><br/><img src={photo} alt='지원하지 않는 파일 형식의 이미지' id="photo-Img" /></div>
+                      <div><br/><DeleteOutlined onClick={deleteBeforeImg} id="deleteIcon"/></div></div>
+                    </div>}
+
+                    {!photo && <Form.Control id="fileWidth2"type="file" onChange={fileSelectedHandler} disabled={disiable} />}
+                    <br />
+                    {imageSrc && <div className='preview'>
+                      <div><img src={imageSrc} alt="지원하지 않는 파일 형식의 이미지" id="imageSrc-Img"  /></div>
+                      <div><DeleteOutlined onClick={deleteImg} id="deleteIcon" /></div>
+                    </div>}
+                  </div>
+                </div>
+
+                <Button type="submit" id="saveButton">수정</Button>
+                <Link to="/diary-list"><Button id="cancleButton" variant="secondary">취소</Button></Link>
               </Form>
-            </Row>
-          </Col>
-        </Container>
-        <br /><br /><br />
-      </div>
+            </div>
+          </div>
+        </div>
 
     )
   }
 }
 
-export default DiaryCreate
+export default DiaryEdit
