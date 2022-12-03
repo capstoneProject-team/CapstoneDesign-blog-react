@@ -196,7 +196,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   const deleteDiary = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.delete(`http://127.0.0.1:8000/post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
+      const response = await Axios.delete(`http://3.36.254.187:8000/post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
       handleClose();
       notification.open({
         message: "일기가 삭제되었습니다.",
