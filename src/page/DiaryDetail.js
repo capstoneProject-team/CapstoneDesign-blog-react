@@ -1,26 +1,26 @@
 import { React, useState, useEffect } from 'react'
-import { Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
-import { Container, Row, Col, Button, Dropdown, Modal, ProgressBar } from 'react-bootstrap';
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Col, Button, Dropdown, Modal, ProgressBar } from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
-import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage';
+import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from 'axios';
 import noimage from '../image/noimage.png';
-
-//antd
 import { Divider, notification } from 'antd';
 import { MoreOutlined, SmileOutlined, FrownOutlined, LoadingOutlined } from '@ant-design/icons';
 import youtubeAPI from '../youtubeAPI.json';
 import moment from 'moment';
+import "../static/CSS/DiaryDetail.css";
+import LoadingSpinner from '../component/LoadingSpinner';
 
 const DiaryDetail = ({ setNavVisible }) => {
   setNavVisible(true);
-
   const navigate = useNavigate();
+
   const navigateEditDiary = () => {
     navigate(`/diary-edit/${post_id}`)
   }
 
-  const token = getJwtAtStorage(); //getStorageItem('jwtToken', '')[0];
+  const token = getJwtAtStorage();
   const [loadingSpinner, setLoadingSpinner] = useState(false);
   //작성글 관련 useState
   const { nickname } = jwt_decode(token);
@@ -39,7 +39,7 @@ const DiaryDetail = ({ setNavVisible }) => {
   const [hurtResult, setHurtResult] = useState(0);
   const [anxiousResult, setAnxiousResult] = useState(0);
   const [statrledResult, setStatrledResult] = useState(0);
-  const [visiable, setVisiable] = useState(false);
+
 
   //best emotion 관련 UseState
   const [bestEmotion, setBestEmotion] = useState("");
@@ -159,11 +159,20 @@ const DiaryDetail = ({ setNavVisible }) => {
 
   }
 
-
   const youtube = async () => {
-    const response = await Axios.get(`https://www.googleapis.com/youtube/v3/search`, { params });
-    console.log(response.data.items);
-    setYoutubeVideos(response.data.items);
+    try{
+      const response = await Axios.get(`https://www.googleapis.com/youtube/v3/search`, { params });
+      setYoutubeVideos(response.data.items);
+    }
+    catch{
+      notification.open({
+        message: "추천 음악을 불러오지 못했습니다",
+        description : "새로고침을 해주세요",
+        icon: <FrownOutlined style={{ color: "#108ee9" }} />,
+        placement: 'bottomeRight'
+      });
+    }
+
   }
 
   useEffect(() => {
@@ -172,13 +181,10 @@ const DiaryDetail = ({ setNavVisible }) => {
     emotionResultList(emotionList);
 
   }, []);
+
   const handleImageError = (e) => {
     e.target.src = noimage;
   }
-
-  // const shuffle = (arr) => {
-  //   return arr.sort(() => Math.random() - 0.5);
-  // }
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -207,125 +213,134 @@ const DiaryDetail = ({ setNavVisible }) => {
   }
   if (loadingSpinner == false) {
     return (
-      <div className='loadingSpinner'>
-        <LoadingOutlined style={{ fontSize: 100, color: 'blue', margin: '300px 300px' }} spin />
-      </div>
+      <LoadingSpinner />
     )
   } else {
     return (
-      <div>
-        <br />
-        <div>
-          <Container style={{ paddingLeft: '6%', paddingRight: '6%', border: "1px", borderRadius: "20px" }}>
-            <div className='detailTop'>
-              <div className='detailTitle'>
-                <h2>{title}</h2>
-                <br />
+      <div className="body&modal">
+        <div className="containerDetail">
+          {/* 제목 작성자, 토글 */}
+          <div className='detailTitle'>
+            <div className='detailTitle'>
+              <h2>{title}</h2>
+              <br />
+            </div>
+            <div className='writerToggle'>
+              <div className='contentInfo'>
+                <p>
+                  {nickname} &nbsp; 
+                  <span style={{ color: 'grey' }}>
+                    {moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
               </div>
-              <div className='line2' style={{ display: 'flex', justifyContent: 'space-between', marginBottom: "-25px" }}>
-                <div className='writeDateWho' style={{ marginTop: "10px" }}>
-                  <p style={{ fontSize: '10.5pt' }}>
-                    {nickname} &nbsp; <span style={{ color: 'grey' }}>{moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
-                </div>
-                <Dropdown>
-                  <Dropdown.Toggle className="shadow-none" drop="start" key="start"
-                    style={{ backgroundColor: "white", border: "none", outline: "none" }}>
-                    <MoreOutlined style={{ color: "grey" }} />
-                  </Dropdown.Toggle>
+              <Dropdown>
+                <Dropdown.Toggle className="shadow-none" drop="start" key="start"
+                  style={{ backgroundColor: "white", border: "none", outline: "none" }}>
+                  <MoreOutlined style={{ color: "grey" }} />
+                </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
-                    <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </div>
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
+                  <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
             <Divider />
-            <div className='body'>
-              <div style={{display : "flex", justifyContent : "space-between"}}>
-               <Col> <p dangerouslySetInnerHTML={{ __html: content }}></p></Col>
-                {photo && <Col lg={4}>
-                  <div>
-                    <img src={photo} alt='image' style={{ width: 'auto', height: 'auto', maxWidth: "300px", maxHeight: "50%", marginLeft:"40px" }} />
-                    </div></Col>}
-              </div>
-              {keyword && <div>
-                <Divider/>
-                <p>오늘의 키워드 : {keyword}</p>
-              </div>}
+          </div>
+
+          
+          <div className='detailContent'>
+            <div className="content">
+              <div><p dangerouslySetInnerHTML={{ __html: content }}></p></div>
+              <div>{photo && <div>
+                  <img src={photo} alt='image' id="contentImg"/>
+                </div>}</div>
             </div>
-            <Divider />
+          </div>
 
-
-            <div>
-              <div className='detailTitle'>
-                <h4>일기감정분석결과 📈</h4>
-              </div>
-
-              <div className="mt-3" style={emotionBackgroundColor(bestEmotion)}>
-                <div style={{ display: "flex", justifyContent: "space-between", paddingLeft: "3%", paddingRight: "3%" }}>
-
-                  <div style={{ display: "flex", width: "70%" }}>
-                    <div>
-                      <div style={{ fontSize: "40pt" }}>{bestEmotionEmoticon}</div>
-                    </div>
-                    <div style={{ marginLeft: "5%", marginRight: "5%", width: "250px" }}>
-                      <div className='happyNow' style={{ marginBottom: "10px" }}>
-                        <p>기쁨 😄</p>
-                        <ProgressBar variant="warning" now={emotionList[0].result} label={`${emotionList[0].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-                      <div className='sadNow' style={{ marginBottom: "10px" }}>
-                        <p>슬픔 😭</p>
-                        <ProgressBar variant="warning" now={emotionList[1].result} label={`${emotionList[1].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-                      <div className='angryNow' style={{ marginBottom: "10px" }}>
-                        <p>분노 🤬</p>
-                        <ProgressBar variant="warning" now={emotionList[2].result} label={`${emotionList[2].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-                    </div>
-                    <div style={{ marginLeft: "5%", marginRight: "5%", width: "250px" }}>
-                      <div className='statrledNow' style={{ marginBottom: "10px" }}>
-                        <p>당황 😳</p>
-                        <ProgressBar variant="warning" now={emotionList[5].result} label={`${emotionList[5].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-                      <div className='hurtNow' style={{ marginBottom: "10px" }}>
-                        <p>상처 🤕</p>
-                        <ProgressBar variant="warning" now={emotionList[3].result} label={`${emotionList[3].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-                      <div className='anxiousNow' style={{ marginBottom: "10px" }}>
-                        <p>불안 😨</p>
-                        <ProgressBar variant="warning" now={emotionList[4].result} label={`${emotionList[4].result}%`} style={{ height: "25px", marginTop: "-10px", backgroundColor: "white" }} />
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div className='mt-3 text' style={{ width: "30%", textAlign: "center" }}>
-                    <h5>오늘 {nickname}님의 하루는?</h5>
-
-                    <p>오늘 {nickname}님의 <br />
-                      메인 감정은 <span style={{ fontSize: "12pt" }}><b>{bestEmotionName}</b></span>입니다.<br />
-                      HED가 감정에 어울리는 노래를 선곡했어요.<br /> 음악과 함께 하루를 마무리 해보세요.<br />
-                      늘 {nickname}을 응원합니다.<br /> 내일 또 봐요.
-
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div className="detailKeyword">
+          {keyword && <div>
               <Divider />
+              <p>오늘의 키워드 : {keyword}</p>
+            </div>}
+            <Divider />  
+          </div>
+
+
+          <div className='detailResult'>
+            <div className="diaryResult">
+            <div className='diaryResultTitle'>
+              <h4>일기감정분석결과 📈</h4>
             </div>
-            <div style={{marginBottom : "50px", textAlign:"center"}}>
-              <div className='detailTitle' style={{textAlign :"start"}}>
-                <h4>추천 플레이리스트 🎶</h4>
+
+            <div className="mt-3" style={emotionBackgroundColor(bestEmotion)}>
+              <div className="resultContent">
+
+                <div className="contentLeft">
+                  <div>
+                    <div id="bestEmotionEmoticon">{bestEmotionEmoticon}</div>
+                  </div>
+                  <div className="emotionResult">
+                    <div className='emotionTitle'>
+                      <p>기쁨 😄</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[0].result} label={`${emotionList[0].result}%`} />
+                    </div>
+                    <div className='emotionTitle'>
+                      <p>슬픔 😭</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[1].result} label={`${emotionList[1].result}%`}  />
+                    </div>
+                    <div className='emotionTitle'>
+                      <p>분노 🤬</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[2].result} label={`${emotionList[2].result}%`}  />
+                    </div>
+                  </div>
+                  <div className="emotionResult">
+                    <div className='emotionTitle'>
+                      <p>당황 😳</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[5].result} label={`${emotionList[5].result}%`}  />
+                    </div>
+                    <div className='emotionTitle'>
+                      <p>상처 🤕</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[3].result} label={`${emotionList[3].result}%`}  />
+                    </div>
+                    <div className='emotionTitle'>
+                      <p>불안 😨</p>
+                      <ProgressBar id="progressBar" variant="warning" 
+                      now={emotionList[4].result} label={`${emotionList[4].result}%`}  />
+                    </div>
+
+                  </div>
+                </div>
+
+                <div className='resultText'>
+                  <br/>
+                  <p>오늘 {nickname}님의 <br />
+                    메인 감정은 <span style={{ fontSize: "12pt" }}><b>{bestEmotionName}</b></span>입니다.<br />
+                    <br/>HED가 추천해 준 노래를 듣고 <br/>하루를 마무리해보세요!<br/>늘 응원합니다 :-)
+                  </p>
+                </div>
+                </div>
               </div>
-              <div className="mt-3"> 
-              {youtubeVideos.slice(0, 3).map((element) => {
-                  return (
-                      <iframe src={`https://www.youtube.com/embed/${element.id.videoId}`} style={{width : "360px", height : "230px", margin : "10px", borderRadius : "20px"}}
-                      frameborder='0' allow='accelerometer; autoplay; clip-board-write; gyroscope; picture-in-picture' allowFullscreen onError={handleImageError}></iframe>)
-                })}</div>
             </div>
-          </Container>
+            <Divider />
+          </div>
+          <div className="recommendMusic" >
+            <div className='recommendMusicTitle'>
+              <h4>추천 플레이리스트 🎶</h4>
+            </div>
+            <div className="mt-3">
+              {youtubeVideos.slice(0, 3).map((element) => {
+                return (
+                  <iframe className="iframeYoutube" src={`https://www.youtube.com/embed/${element.id.videoId}`} 
+                    frameborder='0' allow='accelerometer; autoplay; clip-board-write; gyroscope; picture-in-picture' 
+                    allowFullscreen></iframe>)
+              })}</div>
+          </div>
+
         </div>
 
         <Modal show={show} onHide={handleClose}>
