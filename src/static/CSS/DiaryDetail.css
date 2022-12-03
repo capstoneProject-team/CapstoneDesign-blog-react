@@ -1,0 +1,120 @@
+@media (max-width: 800px) {
+    .content {
+        flex-direction: column;
+      }
+  }
+
+  @media (max-width: 600px) {
+    .resultContent {
+        flex-direction: column;
+      }
+    .contentLeft {
+        flex-direction: column;
+    }
+
+  }
+
+.containerDetail{
+    padding-left: 13%;
+    padding-right: 13%;
+    padding-top : 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.detailTitle{
+    width : "100%"
+}
+
+.writerToggle{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -25px;
+}
+
+.contentInfo{
+    margin-top: 10px;
+    font-size: 10.5pt;
+}
+
+
+.detailContent{
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#contentImg{
+    width : auto;
+    height: auto;
+    max-width: 300px;
+    max-height: 50%;
+    margin-left: 40px;
+
+}
+
+.resultContent{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+
+.contentLeft{
+    display: flex;
+    width: 70%;
+}
+
+
+#bestEmotionEmoticon{
+    font-size: 40pt;
+}
+
+.emotionTitle{
+    margin-bottom: 10px;
+}
+
+.emotionResult{
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 250px;
+}
+
+#progressBar{
+    height : 25px;
+    margin-top: -10px;
+    background-color: white;
+
+}
+
+.resultText{
+    width : 30%;
+    text-align : center;
+
+}
+
+.recommendMusic{
+    margin-bottom: 50px;
+    text-align: center;
+
+}
+
+.recommendMusicTitle{
+    text-align: start;
+}
+
+.iframeYoutube{
+    width : 330px;
+    height: 210px;
+    margin : 10px;
+    border-radius: 10px;
+    /* style={{ margin: "10px", borderRadius: "20px" }} */
+}
