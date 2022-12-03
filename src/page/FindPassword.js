@@ -44,7 +44,7 @@ const FindPassword = ({setNavVisible}) => {
         notification.open({
           message:"인증 성공!",
           description:"변경할 비밀번호를 입력해주세요.",
-          placement: 'bottomeRight',
+          placement: 'bottomRight',
           icon:<SmileOutlined/>
         });
 
@@ -57,7 +57,7 @@ const FindPassword = ({setNavVisible}) => {
         notification.open({
           message:"인증 실패!",
           description:"이메일 혹은 답변을 확인해주세요.",
-          placement: 'bottomeRight',
+          placement: 'bottomRight',
           icon:<FrownOutlined/>
         })
       }
@@ -82,6 +82,7 @@ const FindPassword = ({setNavVisible}) => {
     if (e.response) {
       notification.open({
         message:"비밀번호 변경 실패!",
+        placement: 'bottomRight',
         icon:<SmileOutlined/>
       })
     }

@@ -1,18 +1,14 @@
 import React, { useState } from 'react'
-import getStorageItem, { getJwtAtStorage } from '../utils/useLocalStorage'
+import  { getJwtAtStorage } from '../utils/useLocalStorage'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { Row, Col } from 'react-bootstrap'
-// import backgroundImagetest from '../image/background.jpeg';
-
 import { notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import useLocalStorage from '../utils/useLocalStorage';
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
-import { Link, useNavigate } from "react-router-dom";
-import { Container } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
+import "../static/CSS/Mypage.css"
 
 
 const Mypage = ({ setAuthentication, setNavVisible }) => {
@@ -27,28 +23,22 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   const namehandleShow = () => setnameShow(true);
 
   const token = getJwtAtStorage(); // getStorageItem('jwtToken', '')[0]
-  const [jwtToken, setJwtToken] = useLocalStorage("jwtToken", "");
   const { user_id } = jwt_decode(token);
-  console.log(user_id)
   let nickname = localStorage.getItem('nickname');
   const { email } = jwt_decode(token);
   const {location} = jwt_decode(token);
   const [changeName, setChangeName] = useState('');
-  console.log(token);
-
 
   const updateName = async (event) => {
     event.preventDefault();
-    console.log(changeName)
+
     try {
       let nickname = changeName;
-      //바뀐 jwt token이 response에 들어올 예정
+
       const response = await Axios.patch(`http://3.36.254.187:8000/user/edit/info/${user_id}/`, { nickname }, 
       {headers: {Authorization: `Bearer ${token}`}})
       localStorage.setItem("nickname", response.data.nickname);
-      // const tokenChange = response.data.access;
-      // setJwtToken(tokenChange);
-      // console.log(tokenChange);
+
 
       namehandleClose();
       notification.open({
@@ -90,18 +80,16 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   return (
     <div>
       <br/>
-      <Container style={{paddingLeft : '6%', paddingRight : '6%'}}>
-        <h3><b>마이페이지</b></h3> <hr />
+      <div className="containerMypage">
         <div>
-          <Form style={{padding: '20px'}}>
-            
-            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
-              <div className='explain' style={{width : '300px'}}>
+          <Form>
+            <div className="myPageCard" >
+              <div className='explain'>
                 <h5><b>닉네임 변경</b></h5>
-                <p style={{width:'200px'}}>사용자가 원하는 닉네임으로 언제든지 변경이 가능합니다.</p>
+                <p className="explain2">사용자가 원하는 닉네임으로 언제든지 변경이 가능합니다.</p>
               </div>
 
-            <div className="box" style={{width : '500px', padding : '30px'}}>
+            <div className="mypageBox" >
             <Form.Label>닉네임</Form.Label>
               <Form.Group id="inputGroup-sizing-default">
                 <Form.Control
@@ -109,18 +97,18 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
                   placeholder={nickname}
                   aria-describedby="inputGroup-sizing-small"/>
                   <br/>
-                  <Button style={{ backgroundColor: '#4A93FF', border: 'none', float:"right"}} variant='primary' onClick={namehandleShow}>변경사항 저장</Button>
+                  <Button id="changeButton" onClick={namehandleShow}>변경사항 저장</Button>
               </Form.Group></div>
             </div>
 
 
-            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
-              <div className='explain' style={{width : '300px'}}>
+            <div className="myPageCard" >
+              <div className='explain'>
                 <h5><b>개인정보</b></h5>
-                <p style={{width:'200px'}}>사용자가 회원가입 시 입력한 개인정보를 확인할 수 있습니다.</p>
+                <p className="explain2">사용자가 회원가입 시 입력한 개인정보를 확인할 수 있습니다.</p>
               </div>
 
-            <div className="box" style={{width : '500px', padding : '30px'}}>
+            <div className="mypageBox">
               <Form.Group id="inputGroup-sizing-default">
               <Form.Label>E-mail</Form.Label>
               <Form.Control
@@ -142,13 +130,13 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
               </div>
             </div>
 
-            <div className="myPageCard" style={{display : 'flex', justifyContent : 'center', margin : '30px'}}>
-              <div className='explain' style={{width : '300px'}}>
+            <div className="myPageCard" >
+              <div className='explain'>
                 <h5><b>회원 탈퇴</b></h5>
               </div>
 
-            <div className="box" style={{width : '500px', padding : '30px', textAlign : 'center'}}>
-            <Button variant="danger" onClick={handleShow} style={{width : '200px'}}>
+            <div className="deleteBox">
+            <Button variant="danger" id="deleteButton" onClick={handleShow} style={{width : "200px"}}>
               회원 탈퇴 진행
             </Button>
             </div>
@@ -187,7 +175,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
           </Form>
         </div>
         <br />
-      </Container>
+      </div>
 
 
     </div>

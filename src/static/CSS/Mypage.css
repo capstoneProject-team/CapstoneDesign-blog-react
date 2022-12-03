@@ -1,0 +1,42 @@
+.containerMypage{
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.myPageCard{
+    display: flex;
+    justify-content: center;
+    margin : 30px;
+}
+
+.explain {
+    width: 300px;
+}
+
+.explain2{
+    width : 200px;
+}
+
+.mypageBox{
+    border-radius : 10px;
+    background-color: #DFEBFC;
+    padding: 30px;
+    width:500px;
+
+
+}
+
+.deleteBox{
+    border-radius : 10px;
+    background-color: #DFEBFC;
+    padding: 30px;
+    width:500px;
+    text-align: center;
+}
+
+
+#changeButton{
+    background-color: #4A93FF;
+    border : none;
+    float : "right"
+}
