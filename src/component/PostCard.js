@@ -4,47 +4,48 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Divider, Col, Row, Typography } from 'antd';
 import noimage from '../image/noimage.png';
-import MainEmtoion from './MainEmotion.js'
+
 const PostCard = ({ detail }) => {
-
-
   const text = detail.content;
+  const happy = detail.happy;
+  const sad = detail.sad;
+  const angry = detail.angry;
+  const hurt = detail.hurt;
+  const anxious = detail.anxious;
+  const startled = detail.startled;
+
   const newtext = text.replace(/(<([^>]+)>)/ig, "");
   const newnewtext = newtext.replace(/&nbsp;/g, "");
   const handleImageError = (e) => {
     e.target.src = noimage;
   }
+
+  const calResult = happy + sad + angry + hurt + anxious + startled;
+
+  const emotionList = [
+    { emotion: "happy", emoticon: "😄", result: ((happy/ calResult) * 100).toFixed(1), emotionName: "기쁨" },
+    { emotion: "sad", emoticon: "😭", result: ((sad / calResult) * 100).toFixed(1), emotionName: "슬픔" },
+    { emotion: "angry", emoticon: "🤬", result: ((angry / calResult) * 100).toFixed(1), emotionName: "분노" },
+    { emotion: "hurt", emoticon: "🤕", result: ((hurt/ calResult) * 100).toFixed(1), emotionName: "상처" },
+    { emotion: "anxious", emoticon: "😨", result: ((anxious / calResult) * 100).toFixed(1), emotionName: "불안" },
+    { emotion: "statrled", emoticon: "😳", result: ((startled/ calResult) * 100).toFixed(1), emotionName: "당황" },
+  ]
   //best emotion 관련 UseState
   const [bestEmotion, setBestEmotion] = useState("");
   const [bestEmotionEmoticon, setBestEmotionEmoticon] = useState("🔎");
   const [bestEmotionResult, setBestEmotionResult] = useState("");
   const [bestEmotionName, setBestEmotionName] = useState("");
 
-  console.log(detail.happy);
-
-  const calResult = detail.happy + detail.sad + detail.angry + detail.hurt + detail.anxious + detail.statrled;
-
-
-  const emotionList = [
-    { emotion: "happy", emoticon: "😄", result: ((detail.happy / calResult) * 100).toFixed(1), emotionName: "기쁨" },
-    { emotion: "sad", emoticon: "😭", result: ((detail.sad / calResult) * 100).toFixed(1), emotionName: "슬픔" },
-    { emotion: "angry", emoticon: "🤬", result: ((detail.angry / calResult) * 100).toFixed(1), emotionName: "분노" },
-    { emotion: "hurt", emoticon: "🤕", result: ((detail.hurt / calResult) * 100).toFixed(1), emotionName: "상처" },
-    { emotion: "anxious", emoticon: "😨", result: ((detail.anxious / calResult) * 100).toFixed(1), emotionName: "불안" },
-    { emotion: "statrled", emoticon: "😳", result: ((detail.statrled / calResult) * 100).toFixed(1), emotionName: "당황" },
-  ]
-  console.log(emotionList[0])
   const emotionResultList = (emotionList) => {
     let emotionResult = emotionList.sort(function (a, b) {
       return b.result - a.result; //내림차순 
     })
-
     setBestEmotion(emotionResult[0].emotion);
     setBestEmotionResult(emotionResult[0].result);
     setBestEmotionEmoticon(emotionResult[0].emoticon);
     setBestEmotionName(emotionResult[0].emotionName);
-  }
 
+  }
 
   useEffect(() => {
     emotionResultList(emotionList);
@@ -57,7 +58,6 @@ const PostCard = ({ detail }) => {
       <Container style={{ paddingLeft: "5%", paddingRight: "5%" }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div style={{ width: "75%" }}>
-            <MainEmtoion detail={detail} />
             <h4>{bestEmotionEmoticon} &nbsp; {detail.title}</h4>
             <br />
             <div style={{ fontSize: "10pt", color: "grey", paddingLeft: "6%", paddingRight: "6%" }}>
@@ -72,7 +72,6 @@ const PostCard = ({ detail }) => {
           )}
           </div>
         </div>
-
         <Divider />
         <br />
 
