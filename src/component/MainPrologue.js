@@ -7,7 +7,6 @@ import no_image from '../image/no_image.jpg';
 import "../static/CSS/MainPrologue.css";
 
 const MainPrologue = ({ detail }) => {
-    console.log(detail,"왜 유튜브를 불러?")
     // jwt token
     let jwt = localStorage.getItem('jwtToken');
     jwt = jwt.substring(1, jwt.length - 1)
