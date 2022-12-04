@@ -11,6 +11,8 @@ const MainBanner = (props) => {
     const nickname = localStorage.getItem('nickname') || '반가운';
     let today = props.todayYear + "-" + props.todayMonth + "-" + props.todayDate;
     
+    console.log(props.data)
+
     //백에서 불러올 데이터
     let diaryDateData = ['2022-10-29', 'x', '2022-10-25', 'x', '2022-10-23', '2022-10-22', '2022-10-21'] //다이어리 작성 날짜
     let diaryEmotionData = ['angry', 'x', 'happy', 'x', 'sad', 'angry', 'sad', 'happy'] //다이어리 작성 날짜
