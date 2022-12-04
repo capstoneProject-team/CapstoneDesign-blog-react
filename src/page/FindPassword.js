@@ -70,7 +70,7 @@ const FindPassword = ({setNavVisible}) => {
 
     try {
       const password=newPassword.password1
-      await Axios.patch(`http://3.36.254.187:8000/user/edit/pwd/${user_id}/`,{password},{ headers: { Authorization: `Bearer ${getJwtAtStorage()}`}})
+      await Axios.patch(`http://3.36.254.187:8000/user/edit/pwd/${user_id}/`,{password})
       notification.open({
         message:"비밀번호 변경 성공!",
         icon:<SmileOutlined/>
