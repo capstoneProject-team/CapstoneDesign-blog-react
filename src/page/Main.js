@@ -40,8 +40,8 @@ const Main = ({ setNavVisible }) => {
   // 전체 정보가 담긴 list
   const [post, setPost] = useState([]);
   const [slicedPost, setSlicedPost] = useState([]);
-
   const [postCnt, setPostCnt] = useState(0);
+  const [data, setData] = useState([])
 
   const noPost = (cnt) => {
     if(cnt === 0){
@@ -51,11 +51,7 @@ const Main = ({ setNavVisible }) => {
     }
   }
 
-  const [visible, setVisible] = useState(false);
-
-  const onChange = (currentSlide) => {
-    console.log(currentSlide);
-  };
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
     getData();
@@ -66,6 +62,7 @@ const Main = ({ setNavVisible }) => {
     const res = await Axios.get(`http://3.36.254.187:8000/post?page=1&author_id=${user_id}`, {headers: {Authorization: `Bearer ${getJwtAtStorage()}`}});
     setPost(res.data.results);
     setPostCnt(res.data.count);
+    setData(res.data)
     setLoadingSpinner(true);
   }
 
@@ -87,14 +84,14 @@ const Main = ({ setNavVisible }) => {
         <Row gutter={12} id='row1'>
           <Col span={24}>
             <WeatherDate todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek} />
-            <MainBanner todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek}/>
+            <MainBanner detail={data} todayYear={todayYear} todayMonth={todayMonth} todayDate={todayDate} dayOfweek={dayOfweek}/>
           </Col>
         </Row>
         
         <Row>
           <Col span={12} id='col'><h3>Prologue✨</h3>
           <br/>
-          <Carousel afterChange={onChange} id='Carousel'>
+          <Carousel id='Carousel' autoplay>
           {slicedPost.map(detail => (<MainPrologue detail={detail}/>))}
       </Carousel>
       {visible && <div id='div'>

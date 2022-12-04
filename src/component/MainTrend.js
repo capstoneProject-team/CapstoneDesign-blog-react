@@ -1,51 +1,63 @@
 import "../static/CSS/MainTrend.css";
 import { React, useEffect, useState } from 'react'
 import { Container, Col, Row} from 'react-bootstrap';
-import { Link } from "react-router-dom";;
+import { Link } from "react-router-dom";
+import moment from 'moment';
 
 
 const MainTrend = ({detail}) => {
-    let diaryDateData =  new Date(detail.created_at).toISOString().split('T')[0]; //다이어리 작성 날짜
-    let diaryEmotionData = detail.mainEmotion; //다이어리 작성 날짜
-    let diaryEmotionStaticData = ['50%'];
 
-    const[emotionIcon, setEmotionIcon] =  useState("")
-      
-    const textEmotionToIcon = (emotion) => {
-      if (emotion == 'happy'){
-        setEmotionIcon("😄")
-      }
-      if (emotion == 'sad'){
-        setEmotionIcon("😭")
-      }
-      if (emotion == 'angry'){
-        setEmotionIcon("🤬")
-      }
-      if (emotion == 'hurt'){
-        setEmotionIcon("🤕")
-      }
-      if (emotion == 'anxious'){
-        setEmotionIcon("😨")
-      }
-      if (emotion == 'statrled'){
-        setEmotionIcon("😳")
-      }
-      else{
-        setEmotionIcon("🤪")
-      }
-    }
-    useEffect(()=>{
-      textEmotionToIcon(diaryEmotionData);
-    }, [])
+
+    // let diaryDateData =  new Date(detail.created_at).toISOString().split('T')[0]; //다이어리 작성 날짜
+    const text = detail.content;
+    const happy = detail.happy;
+    const sad = detail.sad;
+    const angry = detail.angry;
+    const hurt = detail.hurt;
+    const anxious = detail.anxious;
+    const startled = detail.startled;
+    const calResult = happy + sad + angry + hurt + anxious + startled;
+
+    const emotionList = [
+      { emotion: "happy", emoticon: "😄", result: ((happy/ calResult) * 100).toFixed(1), emotionName: "기쁨" },
+      { emotion: "sad", emoticon: "😭", result: ((sad / calResult) * 100).toFixed(1), emotionName: "슬픔" },
+      { emotion: "angry", emoticon: "🤬", result: ((angry / calResult) * 100).toFixed(1), emotionName: "분노" },
+      { emotion: "hurt", emoticon: "🤕", result: ((hurt/ calResult) * 100).toFixed(1), emotionName: "상처" },
+      { emotion: "anxious", emoticon: "😨", result: ((anxious / calResult) * 100).toFixed(1), emotionName: "불안" },
+      { emotion: "statrled", emoticon: "😳", result: ((startled/ calResult) * 100).toFixed(1), emotionName: "당황" },
+    ]
+    //best emotion 관련 UseState
+    const [bestEmotion, setBestEmotion] = useState("");
+    const [bestEmotionEmoticon, setBestEmotionEmoticon] = useState("🔎");
+    const [bestEmotionResult, setBestEmotionResult] = useState("");
+    const [bestEmotionName, setBestEmotionName] = useState("");
   
+    const emotionResultList = (emotionList) => {
+      let emotionResult = emotionList.sort(function (a, b) {
+        return b.result - a.result; //내림차순 
+      })
+      setBestEmotion(emotionResult[0].emotion);
+      setBestEmotionResult(emotionResult[0].result);
+      setBestEmotionEmoticon(emotionResult[0].emoticon);
+      setBestEmotionName(emotionResult[0].emotionName);
+  
+    }
+  
+    useEffect(() => {
+      emotionResultList(emotionList);
+  
+    }, [calResult])
+  
+      
+
     return (
       
           <Container>
             <Link id="noblue" to={`/diary-detail/${detail.id}`}>
             <Row>
-              <Col id='fontSmall'>{diaryDateData}</Col>
-              <Col id='fontBig'>{emotionIcon}</Col>
-              <Col id='fontSmall'>{diaryEmotionStaticData}</Col>
+              <Col id='fontSmall'>{moment(detail.created_at).format('YYYY-MM-DD')}</Col>
+              <Col id='fontBig'>{bestEmotionEmoticon}</Col>
+              <Col id='fontSmall'>{bestEmotionResult}</Col>
             </Row>
             </Link>
           </Container>
