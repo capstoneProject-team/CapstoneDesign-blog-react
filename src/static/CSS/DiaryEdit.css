@@ -1,0 +1,84 @@
+.containerEdit{
+    padding-left: 15%;
+    padding-right : 15%;
+    margin-bottom: 150px;
+}
+
+#titleInput{
+    font-size: 20pt;
+}
+
+#hrReduceTopEdit{
+    margin-top: -10px;
+}
+
+.explain{
+    font-size : 11pt;
+    color:gray;
+}
+
+.datepickerSize{
+    width : 15%;
+
+}
+
+#keywordSize{
+    width : 15%;
+    
+}
+
+
+.preview{
+    display: flex;
+}
+
+#photo-Img{
+    width:auto;
+    height:auto;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#imageSrc-Img{
+    width:auto;
+    height:auto;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.deleteIcon{
+    color:red;
+    margin-left: 10px;
+}
+.button {
+    margin-top: 30px;
+    
+}
+
+#fileWidth1{
+    width: 40%;
+}
+
+#fileWidth2{
+    width: 40%;
+}
+
+
+#saveButton{
+    width: 90px;
+    background-color: #4A93FF;
+    border: none;
+    float : right;
+}
+
+#cancleButton{
+    width: 90px;
+    border: none;
+    margin-right: 5px;
+    float : right;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+    min-height: 400px;
+    margin-bottom: 20px;
+  }

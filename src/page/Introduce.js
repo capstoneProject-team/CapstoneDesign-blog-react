@@ -1,44 +1,84 @@
+import "../static/CSS/Introduce.css";
 import React from 'react'
-import Button from 'react-bootstrap/Button';
-import { Routes, Route ,Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import {Col, Row, Typography} from 'antd';
+import {Button} from 'react-bootstrap';
+import { Image } from 'antd';
+import introduce_1 from '../static/image/introduce_1.png';
+import introduce_2 from '../static/image/introduce_2.png';
+import introduce_3 from '../static/image/introduce_3.png';
+import introduce_4 from '../static/image/introduce_4.png';
+import introduce_5 from '../static/image/introduce_5.png';
+import introduce_6 from '../static/image/introduce_6.png';
+import introduce_7 from '../static/image/introduce_7.png';
+import introduce_8 from '../static/image/introduce_8.png';
 
 
 
 
-const Introduce = () => {
+
+const Introduce = ({setNavVisible, setAuthentication}) => {
+  const {Title} = Typography;
+  setNavVisible(true);
+  setAuthentication(false);
+
   return (
     <div>
-    {/* 네비게이션 바 추가 필요 */}
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Container>
-      <Navbar.Brand href="/">
-        <img
-          alt=""
-          src="/logo.svg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
-        Haru Emotion Diary</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end"> 
-        <Nav>
-          <Nav.Link href="/login">Sign In</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
 
-    <h1>소개 페이지 (Introduce)</h1>
+​      <Container id='Containter'>
+​        <Row id="Center">
+​          <Col id="Center" span={12}>
 
-    <Link to="/login"><Button variant="info">Start</Button></Link>
-    <Link to="/login"><Button variant="info">오늘 하루 진단받기</Button></Link>
+              <h2>오늘 하루 어떠셨나요?</h2>
+              <h3>내 이야기를 기록해보세요.<br/>오늘 나의 감정을 분석해줍니다 :)</h3>
+              <pre>HED를 통해 나를 자세히 알아보세요!</pre>
+
+​              <Link to="/login"><Button id='Button1'>시작하기</Button></Link>
+​          </Col>
+​          <Col span={12}>
+​          <Image  preview={false} src={introduce_4} id='Big'/>
+​          </Col>
+​        </Row>
+          <br/><br/><br/>
+​        <Row align='middle' justify='center'><Col id="Center"><Title level={1}>"HED와 함께 소중한 하루를 마무리해보세요"</Title><br/><br/></Col></Row>
+​        <Row id="Center">
+​          <Col id="Center" span={8}><Image preview={false} src={introduce_2} id='Small'/><pre>일기내용을 통한 감정분석</pre></Col>
+​          <Col className='text-center' span={8}><Image preview={false}  src={introduce_3} id='Small'/><pre>감정분석 결과를 통한 음악 추천</pre></Col>
+​          <Col className='text-center' span={8}><Image preview={false}  src={introduce_1} id='Small'/><pre>일기내용을 통한 감정분석</pre></Col>
+​          </Row>
+
+​        <Row id='Center'>
+​          <Col className='text-center' span={12}><Title level={3}>HED는 특별한 경험을 선사하는 일기장입니다</Title><Title level={5}>인공지능을 통해 일기가 가진 생각과 고민을 이해하고,<br/>더 나아가 노래를 통해 공감하고 소통을 합니다.  </Title></Col>
+​          <Col span={12}><Image  preview={false} src={introduce_5} id='Big'/></Col>
+​        </Row>
+​        <Row id='Center'>
+​          <Col span={12}><Image  preview={false} src={introduce_6} id='Small'/></Col>
+​          <Col span={12} id='Center'><Title level={3}>내 삶의 순간을 기록하고 저장</Title>
+          <br/><Title level={5}>소중했던 오늘 하루를 기록으로 남기고 싶나요?<br/>HED는 당신의 추억과 기억을 저장해주는 동반자입니다.</Title></Col>
+​        </Row>
+​        <Row  id='Center'>
+​          <Col span={12} id='Center'><Title level={3}>감정분석을 통한 나의 컨디션 진단</Title><Title level={5}>오늘 기분이 어땠는지, 지금 기분이 어떤지 알고 싶나요?<br/>HED는 감정 분석을 통해 일기 속 감정들을 알려줍니다.</Title></Col>
+​          <Col span={12}><Image  preview={false} src={introduce_7} id='Small'/></Col>
+​        </Row>
+​        <Row id='Center'>
+​          <Col span={12}><Image  preview={false} src={introduce_8} id='Small'/></Col>
+​          <Col span={12} id='Center'><Title level={3}>내 하루에 어울리는 음악 추천</Title><Title level={5}>고단했던 하루를 음악으로 마무리하고 싶나요?<br/>HED는 일기를 기반으로 감정에 맞는 음악 추천을 통해 당신의 하루를 위로해줍니다.</Title></Col>
+​        </Row>
+​        <Row id="Center_padding2">
+​          <Col/>
+​          <Col id="Center"><Title level={1}>"Haru Emotion Diary"로<br/>오직 나에게만 집중해보세요</Title></Col>
+​          <Col/>
+​        </Row>
+​        <Row id="Center_padding">
+​          <Col id="Center">
+​          <Link to="/login"><Button id='Button2'>오늘 하루 진단받기</Button></Link>
+​          </Col>
+​        </Row>
+​        </Container >
 
 
-    </div>
+​    </div>
   )
 }
 

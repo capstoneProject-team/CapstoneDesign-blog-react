@@ -1,0 +1,35 @@
+.wrapper {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+#logo {
+    width: 250px;
+    height: 120px;
+}
+
+#step {
+    margin-top: 50px;
+    margin-bottom : 30px; 
+}
+
+#Info {
+    width: 400px;
+    text-align: left;
+    margin-bottom: 100px;
+
+}
+
+#nextButton {
+    background-color: #4A93FF;
+    border: none;
+    float: right;
+    width: 100px;
+}
+
+#previousButton {
+    border: none;
+    float: left;
+    width: 100px;
+}

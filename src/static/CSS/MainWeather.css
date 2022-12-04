@@ -1,0 +1,12 @@
+#div1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+#div2 {
+    float: left;
+    height: 50px;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12pt;
+}

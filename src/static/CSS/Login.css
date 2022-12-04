@@ -1,0 +1,55 @@
+#notification {
+    color: #108ee9;
+}
+
+.loginForm {
+    width : 300px;
+}
+
+.logoImage {
+    text-align: center;
+}
+
+.div1Login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 80px;
+
+}
+
+#submit {
+    margin-top: 50px;
+    width: 300px;
+}
+
+
+
+#logoImage {
+    width: 250px;
+    height: 120px;
+
+
+}
+
+#findPassword {
+    float: right;
+    font-size: 10pt;
+
+}
+
+#link {
+    text-decoration: none;;
+}
+
+#register {
+    text-align: center;
+    font-size: 10pt;
+    color : gray;
+}
+
+#loginButton {
+    background-color: #4A93FF;
+    border: none;
+}
