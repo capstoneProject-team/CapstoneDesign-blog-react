@@ -77,6 +77,7 @@ const DiaryEdit = ({ setNavVisible }) => {
     } else {
       formData.append('photo', selectFile);
     }
+    formData.append('keyword', keyword);
 
     try {
       await Axios.patch(`http://3.36.254.187:8000/post/update/${post_id}/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
