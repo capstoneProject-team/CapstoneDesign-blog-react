@@ -57,13 +57,13 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   const deleteAccount = async (event) => {
     event.preventDefault();
     try {
-      const response = await Axios.delete(`http://3.36.254.187:8000/user/delete/${user_id}/`)
+      const response = await Axios.delete(`http://3.36.254.187:8000/user/delete/${user_id}/`,{headers: {Authorization: `Bearer ${token}`}})
       window.localStorage.clear();
       handleClose();
       notification.open({
         message: "계정삭제 성공",
         icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomRight'
       });
       setAuthentication(false);
       navigate('/')
@@ -72,7 +72,7 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
       notification.open({
         message: "계정삭제 실패, 다시 시도해 주세요.",
         icon: <FrownOutlined style={{ color: "#108ee9" }} />,
-        placement: 'topRight'
+        placement: 'bottomRight'
       });
 
     }
