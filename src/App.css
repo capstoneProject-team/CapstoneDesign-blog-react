@@ -4,7 +4,7 @@
 }
 
 #font-family{
-  font-family: 'AppleSDGothicNeo' !important;
+  font-family: 'AppleSDGothicNeo';
 }
 
 
@@ -16,10 +16,6 @@
   margin: 0 auto;
 }
 
-.bannerContent{
-  display : flex;
-  justify-content : space-between;
-}
 
 .listNav{
   display: flex;
@@ -34,20 +30,6 @@
 
 }
 
-/* .ant-notification-topRight {
-  position: absolute;
-} */
-
-
-
-.mainBannerBox{
-  border-radius : 10px;
-  background-image: url(image/배너_7.jpeg);
-  background-repeat: no-repeat;
-  /* 이미지 여백이 나온 경우 */
-  background-size : cover;
-
-}
 
 .loadingSpinner{
   display: flex;
@@ -55,25 +37,5 @@
   align-items: center;
   min-height: 100vh;
   
-}
-
-
-.boxPrologue{
-  border-radius : 10px;
-  background-color: #DFEBFC;
-  padding: 10px;
-  height : 356px;
-
-}
-
-.inBox{
-  border-radius : 10px;
-  background-color: #FFFFFF;
-  
-}
-
-.bannerImage{
-  width: 250px;
-  height: 200px;
 }
 

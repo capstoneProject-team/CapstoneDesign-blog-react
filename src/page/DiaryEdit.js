@@ -177,7 +177,7 @@ const DiaryEdit = ({ setNavVisible }) => {
 
                 <div className="mt-4">
                   <h4>날짜 선택</h4>
-                  <p className='explain'>날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
+                  <p className='explain'>날짜를 선택해주세요. 밀린 일기도 OK</p>
                   <DatePicker className='datepickerSize' onChange={(date) => setEditCreate_at(date)}
                     defaultValue={moment(created_at, dateFormat)} format={dateFormat} />
 
@@ -192,7 +192,7 @@ const DiaryEdit = ({ setNavVisible }) => {
                 <div className="mt-5">
                   <div>
                     <h4>이미지 업로드</h4>
-                    <p className='explain'>대표 이미지 1장 업로드해주세요. jpg/png/gif 파일만 가능합니다.</p>
+                    <p className='explain'>대표 이미지 1장 업로드해주세요. ＊jpg/png/gif</p>
                     {photo && <div>
                       <Form.Control id="fileWidth1" type="file" onChange={fileSelectedHandler} disabled={true} />
                       <div className='preview'>

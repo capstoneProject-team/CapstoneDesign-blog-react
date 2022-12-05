@@ -50,7 +50,7 @@ const PostCard = ({ detail }) => {
   useEffect(() => {
     emotionResultList(emotionList);
 
-  }, [calResult])
+  }, [])
 
 
   return (

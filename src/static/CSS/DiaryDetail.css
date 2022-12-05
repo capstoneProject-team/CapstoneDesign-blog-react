@@ -15,8 +15,8 @@
   }
 
 .containerDetail{
-    padding-left: 13%;
-    padding-right: 13%;
+    padding-left: 20%;
+    padding-right: 20%;
     padding-top : 15px;
     display: flex;
     flex-direction: column;
@@ -112,9 +112,9 @@
 }
 
 .iframeYoutube{
-    width : 330px;
+    width : 350px;
     height: 210px;
     margin : 10px;
     border-radius: 10px;
-    /* style={{ margin: "10px", borderRadius: "20px" }} */
+    margin-left: 50px;
 }

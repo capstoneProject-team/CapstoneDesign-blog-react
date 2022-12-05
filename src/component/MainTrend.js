@@ -19,12 +19,12 @@ const MainTrend = ({detail}) => {
     const calResult = happy + sad + angry + hurt + anxious + startled;
 
     const emotionList = [
-      { emotion: "happy", emoticon: "😄", result: ((happy/ calResult) * 100).toFixed(1), emotionName: "기쁨" },
-      { emotion: "sad", emoticon: "😭", result: ((sad / calResult) * 100).toFixed(1), emotionName: "슬픔" },
-      { emotion: "angry", emoticon: "🤬", result: ((angry / calResult) * 100).toFixed(1), emotionName: "분노" },
-      { emotion: "hurt", emoticon: "🤕", result: ((hurt/ calResult) * 100).toFixed(1), emotionName: "상처" },
-      { emotion: "anxious", emoticon: "😨", result: ((anxious / calResult) * 100).toFixed(1), emotionName: "불안" },
-      { emotion: "statrled", emoticon: "😳", result: ((startled/ calResult) * 100).toFixed(1), emotionName: "당황" },
+      { emotion: "happy", emoticon: "😄", result: ((happy/ calResult) * 100).toFixed(0), emotionName: "기쁨" },
+      { emotion: "sad", emoticon: "😭", result: ((sad / calResult) * 100).toFixed(0), emotionName: "슬픔" },
+      { emotion: "angry", emoticon: "🤬", result: ((angry / calResult) * 100).toFixed(0), emotionName: "분노" },
+      { emotion: "hurt", emoticon: "🤕", result: ((hurt/ calResult) * 100).toFixed(0), emotionName: "상처" },
+      { emotion: "anxious", emoticon: "😨", result: ((anxious / calResult) * 100).toFixed(0), emotionName: "불안" },
+      { emotion: "statrled", emoticon: "😳", result: ((startled/ calResult) * 100).toFixed(0), emotionName: "당황" },
     ]
     //best emotion 관련 UseState
     const [bestEmotion, setBestEmotion] = useState("");
@@ -46,18 +46,18 @@ const MainTrend = ({detail}) => {
     useEffect(() => {
       emotionResultList(emotionList);
   
-    }, [calResult])
+    }, [])
   
       
 
     return (
       
           <Container>
-            <Link id="noblue" to={`/diary-detail/${detail.id}`}>
+            <Link id="noblue" to={`/diary-detail/${detail.id}`} >
             <Row>
-              <Col id='fontSmall'>{moment(detail.created_at).format('YYYY-MM-DD')}</Col>
+              <Col id='fontSmall'style={{color: "black"}}>{moment(detail.created_at).format('YYYY-MM-DD')}</Col>
               <Col id='fontBig'>{bestEmotionEmoticon}</Col>
-              <Col id='fontSmall'>{bestEmotionResult}</Col>
+              <Col id='fontSmall' style={{color: "black"}}>{bestEmotionResult}%</Col>
             </Row>
             </Link>
           </Container>

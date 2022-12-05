@@ -19,9 +19,7 @@ const Login = ({ setNavVisible, setAuthentication }) => {
     event.preventDefault();
     try {
       const response = await Axios.post(`http://3.36.254.187:8000/user/token/`, { username, password })
-      console.log(response)
       const token = response.data.access;
-      console.log(token)
       setAuthentication(true);
       const { nickname } = jwt_decode(token);
       localStorage.setItem('nickname', nickname);

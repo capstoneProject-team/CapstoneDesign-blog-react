@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { getJwtAtStorage } from '../utils/useLocalStorage';
 import { Card, Row, Col } from 'antd';
 import no_image from '../image/no_image.jpg';
 import "../static/CSS/MainPrologue.css";
@@ -30,22 +29,20 @@ const MainPrologue = ({ detail }) => {
 
     return (
         <Link to={`/diary-detail/${detail.id}`} id='link'>
-            <Row>
-                <Col>
-                    <Card
-                        bodyStyle={{ backgroundColor: '#E7EFFB', borderBlockColor: '#E7EFFB' }}
-                        id='cardStyle'
+            <div className="card">
+                    <Card 
+                        bodyStyle={{ backgroundColor: '#E7EFFB' }}
+                        
                         cover={
                             <img src={diaryPrologueContentPhoto} alt='image' id='cardImage'/>}>
                         <Meta
                             title={diaryPrologueTitleData}
-                            description={diaryPrologueContentData}
-                            style={{height : "100px"}}
+
+                            style={{height : "43px"}}
                         />
                     </Card>
                     <br />
-                </Col>
-            </Row>
+</div>
         </Link>
 
     )

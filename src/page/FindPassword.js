@@ -73,6 +73,7 @@ const FindPassword = ({setNavVisible}) => {
       await Axios.patch(`http://3.36.254.187:8000/user/edit/pwd/${user_id}/`,{password})
       notification.open({
         message:"비밀번호 변경 성공!",
+        placement: 'bottomRight',
         icon:<SmileOutlined/>
       });
       navigate('/login');
@@ -90,7 +91,7 @@ const FindPassword = ({setNavVisible}) => {
 }
 
     return (
-    <Container style={{paddingLeft : "20%", paddingRight : "20%"}}>
+    <Container style={{paddingLeft : "20%", paddingRight : "20%", marginBottom : "150px"}}>
         <Col>
           <Row className="mt-3">
             <h3>본인 인증</h3>
@@ -116,7 +117,7 @@ const FindPassword = ({setNavVisible}) => {
                   onChange={handleChange}/>
                 </Form.Group>
 
-                <Button className="button"type="submit">
+                <Button id="button" type="submit">
                   인증하기
                 </Button>
                 </Form>
@@ -144,7 +145,7 @@ const FindPassword = ({setNavVisible}) => {
                 </Form.Group>
               </Row>
 
-              <Button className="button" type="submit">
+              <Button id="button" type="submit">
                 완료
               </Button>
 
