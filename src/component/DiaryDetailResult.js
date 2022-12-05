@@ -24,12 +24,12 @@ const DiaryDetailResult = ({ detail }) => {
     const startled = ((detail.startled / calResult) * 100).toFixed(1)
 
     const emotionList = [
-        { emotion: "happy", emoticon: "😄", result: happy, emotionName: "기쁨" },
-        { emotion: "sad", emoticon: "😭", result: sad, emotionName: "슬픔" },
-        { emotion: "angry", emoticon: "🤬", result: angry, emotionName: "분노" },
-        { emotion: "hurt", emoticon: "🤕", result: hurt, emotionName: "상처" },
-        { emotion: "anxious", emoticon: "😨", result: anxious, emotionName: "불안" },
-        { emotion: "statrled", emoticon: "😳", result: startled, emotionName: "당황" },
+        { emotion: "happy", emoticon: "😄", result: happy, emotionName: "기쁨", emotionKeyword : "기분 좋은" },
+        { emotion: "sad", emoticon: "😭", result: sad, emotionName: "슬픔" , emotionKeyword : "우울한" },
+        { emotion: "angry", emoticon: "🤬", result: angry, emotionName: "분노" , emotionKeyword : "빡치는" },
+        { emotion: "hurt", emoticon: "🤕", result: hurt, emotionName: "상처" , emotionKeyword : "지칠 때"  },
+        { emotion: "anxious", emoticon: "😨", result: anxious, emotionName: "불안", emotionKeyword : "불안한" },
+        { emotion: "statrled", emoticon: "😳", result: startled, emotionName: "당황", emotionKeyword : "어이없는" },
     ]
 
     const emotionSort = emotionList.sort(function (a, b) {
@@ -40,6 +40,7 @@ const DiaryDetailResult = ({ detail }) => {
     const bestEmotionResult= emotionSort[0].result;
     const bestEmotionEmoticon = emotionSort[0].emoticon;
     const bestEmotionName = emotionSort[0].emotionName;
+    const bestEmotionKeyword = emotionSort[0].emotionKeyword;
 
     //best emotion 관련 UseState
 
@@ -162,7 +163,7 @@ const DiaryDetailResult = ({ detail }) => {
                 </div>
                 <Divider />
             </div>
-            <DiaryDetailYoutube bestEmotionName={bestEmotionName} keyword={keyword} />
+            <DiaryDetailYoutube bestEmotionName={bestEmotionKeyword} keyword={keyword} />
 
         </div>
     )

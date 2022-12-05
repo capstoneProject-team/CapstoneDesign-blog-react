@@ -185,8 +185,12 @@ const DiaryEdit = ({ setNavVisible }) => {
                 <div className="mt-5">
                   <h4>오늘의 키워드</h4>
                   <p className='explain'>오늘 하루를 나타내는 키워드를 적어주세요.</p>
-                  <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
-                    value={keyword} onChange={(event) => setKeyword(event.target.value)} />
+                  {
+                    keyword !== null ? <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
+                    value={keyword} onChange={(event) => setKeyword(event.target.value)} /> : 
+                    <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
+                     onChange={(event) => setKeyword(event.target.value)} />
+                  }
                 </div>
 
                 <div className="mt-5">

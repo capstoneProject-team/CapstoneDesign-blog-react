@@ -34,10 +34,9 @@ const MainPrologue = ({ detail }) => {
                         bodyStyle={{ backgroundColor: '#E7EFFB' }}
                         
                         cover={
-                            <img src={diaryPrologueContentPhoto} alt='image' id='cardImage'/>}>
+                            <img src={diaryPrologueContentPhoto} alt='image' id='cardImage' style={{width : "100%"}}/>}>
                         <Meta
                             title={diaryPrologueTitleData}
-
                             style={{height : "43px"}}
                         />
                     </Card>
