@@ -3,7 +3,7 @@ import { Figure, Container } from 'react-bootstrap';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Divider, Col, Row, Typography } from 'antd';
-import noimage from '../image/noimage.png';
+import noimage from '../static/image/noimage.png';
 
 const PostCard = ({ detail }) => {
   const text = detail.content;

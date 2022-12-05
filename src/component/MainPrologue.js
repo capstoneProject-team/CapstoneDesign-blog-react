@@ -1,8 +1,8 @@
 import { React, useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { Card, Row, Col } from 'antd';
-import no_image from '../image/no_image.jpg';
+import { Card } from 'antd';
+import no_image from '../static/image/no_image.jpg';
 import "../static/CSS/MainPrologue.css";
 
 const MainPrologue = ({ detail }) => {

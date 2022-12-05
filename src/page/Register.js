@@ -6,7 +6,7 @@ import { notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import logo_detail from '../image/logo_detail.png';
+import logo_detail from '../static/image/logo_detail.png';
 import { Steps } from "antd";
 import "../static/CSS/Register.css";
 

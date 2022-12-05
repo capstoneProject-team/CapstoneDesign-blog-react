@@ -6,7 +6,7 @@ import PostCard from '../component/PostCard';
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import { getJwtAtStorage } from '../utils/useLocalStorage'
-import editIcon from '../image/editicon.png'
+import editIcon from '../static/image/editicon.png'
 import {Input, Select, Divider, Row, Col, Typography} from 'antd';
 import "../static/CSS/DiaryList.css";
 

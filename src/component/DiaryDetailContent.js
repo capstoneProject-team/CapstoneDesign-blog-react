@@ -1,13 +1,11 @@
-import { React, useState, useEffect, useLayoutEffect } from 'react'
+import { React, useState } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import { Container, Col, Button, Dropdown, Modal, ProgressBar } from 'react-bootstrap';
+import { Button, Dropdown, Modal } from 'react-bootstrap';
 import jwt_decode from "jwt-decode";
 import { getJwtAtStorage } from '../utils/useLocalStorage';
 import Axios from 'axios';
-import noimage from '../image/noimage.png';
 import { Divider, notification } from 'antd';
 import { MoreOutlined, SmileOutlined, FrownOutlined, LoadingOutlined } from '@ant-design/icons';
-import youtubeAPI from '../youtubeAPI.json';
 import moment from 'moment';
 import "../static/CSS/DiaryDetail.css";
 
