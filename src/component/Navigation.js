@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import logo_detail from '../image/logo_detail.png';
+import logo_detail from '../static/image/logo_detail.png';
 
 
 const Navigation = ({ isAuthenticated, setAuthentication, setPage, setSearchInput }) => {

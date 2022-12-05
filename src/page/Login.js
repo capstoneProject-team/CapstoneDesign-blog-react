@@ -6,7 +6,7 @@ import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import { setJwtAtStorage } from '../utils/useLocalStorage';
-import logo_detail from '../image/logo_detail.png';
+import logo_detail from '../static/image/logo_detail.png';
 import "../static/CSS/Login.css";
 
 const Login = ({ setNavVisible, setAuthentication }) => {
