@@ -47,9 +47,6 @@ const DiaryCreate = ({ setNavVisible }) => {
     if (selectFile != null) {
       formData.append('photo', selectFile);
     }
-    for (var value of formData.values()) {
-      console.log(value);
-    }
 
     try {
       await Axios.post(`http://3.36.254.187:8000/post/create/`, formData, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } });
@@ -129,7 +126,7 @@ const DiaryCreate = ({ setNavVisible }) => {
 
               <div className="mt-4">
                 <h4>날짜 선택</h4>
-                <p className='explain' >날짜를 선택해주세요. 밀린 일기도 마음껏 쓸 수 있습니다.</p>
+                <p className='explain' >날짜를 선택해주세요. 밀린 일기도 OK!</p>
                 <DatePicker className='datepickerSize' onChange={(date) => setDate_time(date)} />
               </div>
 
@@ -143,7 +140,7 @@ const DiaryCreate = ({ setNavVisible }) => {
               <div className="mt-5">
                 <div>
                   <h4>이미지 업로드</h4>
-                  <p className='explain'>대표 이미지 1장 업로드해주세요. jpg/png/gif 파일만 가능합니다.</p>
+                  <p className='explain'>대표 이미지 1장 업로드해주세요. ＊jpg/png/gif</p>
                   <Form.Control id="fileWidth" type="file" onChange={fileSelectedHandler} />
 
                   <br />

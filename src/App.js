@@ -15,7 +15,6 @@ import 'antd/dist/antd.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './component/Navigation';
 import Footer from './component/footer';
-import KakaoRedirectHandler from './component/KakaoRedirectHandler';
 import getStorageItem from './utils/useLocalStorage';
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
         <Route path="/diary-detail/:post_id" element={isAuthenticated==true ? <DiaryDetail authentication={isAuthenticated} setNavVisible={setNavVisible}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/diary-list" element={isAuthenticated==true ? <DiaryList authentication={isAuthenticated} setNavVisible={setNavVisible} setPage={setPage} page={page} setSearchInput={setSearchInput} searchInput={searchInput}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/login"  element={<Login setAuthentication={setAuthentication} setNavVisible={setNavVisible}/>}/>
-        <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler setAuthentication={setAuthentication}/>}/>
         <Route path="/main" element={isAuthenticated ? <Main authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Navigate replace to="/" />} />
         <Route path="/Mypage" element={isAuthenticated==true ? <Mypage authentication={isAuthenticated} setNavVisible={setNavVisible} setAuthentication={setAuthentication}/> : <Login authentication={isAuthenticated} setAuthentication={setAuthentication}/>}/>
         <Route path="/Register" element={<Register setNavVisible={setNavVisible}/>}/>
