@@ -13,7 +13,7 @@ const DiaryDetailYoutube = (props) => {
     const [params, setParams] = useState({
         key: youtubeAPI.REACT_APP_YOUTUBE_API_KEY,
         part: 'snippet',
-        q: `[playlist] ${bestEmotionName} ` + `${keyword}`, //키워드랑 감정분석 결과 넣기
+        q: `playlist ${bestEmotionName}`+`${keyword}`, //키워드랑 감정분석 결과 넣기
         maxResults: 3,
         type: 'video',
         videoDuration: 'long'

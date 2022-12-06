@@ -63,7 +63,7 @@ const DiaryList = ({page,setPage,searchInput,setSearchInput}) => {
       }
       pageData();
       
-  },[page,searchInput])
+  },[page,searchInput,type])
 
   useEffect(() => {
     let pages = [];

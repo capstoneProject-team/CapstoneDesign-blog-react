@@ -24,12 +24,12 @@ const DiaryDetailResult = ({ detail }) => {
     const startled = ((detail.startled / calResult) * 100).toFixed(1)
 
     const emotionList = [
-        { emotion: "happy", emoticon: "😄", result: happy, emotionName: "기쁨", emotionKeyword : "기분 좋은" },
-        { emotion: "sad", emoticon: "😭", result: sad, emotionName: "슬픔" , emotionKeyword : "우울한" },
-        { emotion: "angry", emoticon: "🤬", result: angry, emotionName: "분노" , emotionKeyword : "빡치는" },
-        { emotion: "hurt", emoticon: "🤕", result: hurt, emotionName: "상처" , emotionKeyword : "지칠 때"  },
-        { emotion: "anxious", emoticon: "😨", result: anxious, emotionName: "불안", emotionKeyword : "불안한" },
-        { emotion: "statrled", emoticon: "😳", result: startled, emotionName: "당황", emotionKeyword : "어이없는" },
+        { emotion: "happy", emoticon: "😄", result: happy, emotionName: "기쁨이", emotionKeyword : "기분 좋은" },
+        { emotion: "sad", emoticon: "😭", result: sad, emotionName: "슬픔이" , emotionKeyword : "우울한" },
+        { emotion: "angry", emoticon: "🤬", result: angry, emotionName: "분노가" , emotionKeyword : "빡치는" },
+        { emotion: "hurt", emoticon: "🤕", result: hurt, emotionName: "상처가" , emotionKeyword : "지칠 때"  },
+        { emotion: "anxious", emoticon: "😨", result: anxious, emotionName: "불안이", emotionKeyword : "불안한" },
+        { emotion: "statrled", emoticon: "😳", result: startled, emotionName: "당황이", emotionKeyword : "어이없는" },
     ]
 
     const emotionSort = emotionList.sort(function (a, b) {
@@ -154,7 +154,7 @@ const DiaryDetailResult = ({ detail }) => {
                             <div className='resultText'>
                                 <br />
                                 <p>오늘 {nickname}님의 <br />
-                                    일기에서 <span style={{ fontSize: "12pt" }}><b>{bestEmotionName}</b></span>가 느껴집니다.<br />
+                                    일기에서 <span style={{ fontSize: "12pt" }}><b>{bestEmotionName}</b></span> 느껴집니다.<br />
                                     <br />HED가 추천해 준 노래를 듣고 <br />하루를 마무리해보세요!<br />늘 응원합니다 :-)
                                 </p>
                             </div>
