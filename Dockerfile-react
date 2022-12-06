@@ -15,9 +15,11 @@ FROM nginx
 RUN rm -rf /etc/nginx/conf.d
 COPY conf /etc/nginx
 
+
 # 위에서 생성한 앱의 빌드산출물을 nginx의 샘플 앱이 사용하던 폴더로 이동
 COPY --from=builder /capstone_deploy/frontend/build /usr/share/nginx/html
-COPY /etc/letsencrypt /etc
+
+# COPY /capstone_deploy/frontend/etc/letsencrypt/live/www.harudiary.kr /etc/letsencrypt/live/www.harudiary.kr/
 
 # 80포트 오픈하고 nginx 실행
 EXPOSE 80
