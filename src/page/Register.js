@@ -124,10 +124,10 @@ const Register = ({ setNavVisible, props }) => {
                 <Form.Control name="username" placeholder="이메일 주소를 입력하세요"
                   value={values.username}
                   onChange={handleChange} onBlur={handleBlur}
-                  isValid={touched.nickname && !errors.nickname}
-                  isInvalid={touched.nickname && errors.nickname ? true : false} />
-                {touched.nickname && !errors.nickname && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback>}
-                {touched.nickname && errors.nickname && <Form.Control.Feedback type="invalid">{errors.nickname}</Form.Control.Feedback>}
+                  isValid={touched.username && !errors.username}
+                  isInvalid={touched.username && errors.username ? true : false} />
+                {touched.username && !errors.username && <Form.Control.Feedback type="valid">확인되었습니다 :)</Form.Control.Feedback>}
+                {touched.username && errors.username && <Form.Control.Feedback type="invalid">{errors.username}</Form.Control.Feedback>}
               </Form.Group>
               <br />
               <Form.Group controlId="formGroupPassword">
