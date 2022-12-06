@@ -15,7 +15,7 @@ const DiaryDetailResult = ({ detail }) => {
 
     const keyword = detail.keyword;
     const calResult = detail.happy + detail.sad + detail.angry + detail.hurt + detail.anxious + detail.startled;
-    
+    console.log(calResult, "calResult")
     const happy = ((detail.happy / calResult) * 100).toFixed(1);
     const sad = ((detail.sad / calResult) * 100).toFixed(1)
     const angry = ((detail.angry / calResult) * 100).toFixed(1)
@@ -44,6 +44,7 @@ const DiaryDetailResult = ({ detail }) => {
 
     //best emotion 관련 UseState
 
+    
     const emotionBackgroundColor = (bestEmotion) => {
         if (bestEmotion == "happy") {
           const happyStyle = {
@@ -98,6 +99,14 @@ const DiaryDetailResult = ({ detail }) => {
         }
 
       }
+
+    if (calResult == 0){
+      return (
+        <div style={{textAlign : "center"}}>
+        <h4>죄송합니다. 일기에서 감정이 잘 느껴지지 않습니다😭</h4>
+      </div>
+      )
+    }
 
     return (
         <div>
