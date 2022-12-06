@@ -55,7 +55,7 @@ const Introduce = ({ setNavVisible, setAuthentication }) => {
 
         <br /><br /><br />
 
-        <div data-aos="fade-down" data-aos-duration="1500">
+        <div data-aos="fade-down" data-aos-duration="2000">
         <Row id="Center">
           <Col id="Center" span={8}><Image preview={false} src={introduce_2} id='Small' /><p>매 순간 특별해지는 나의 일상</p></Col>
           <Col className='text-center' span={8}><Image preview={false} src={introduce_3} id='Small' /><p>일기내용을 통한 감정분석</p></Col>
@@ -63,16 +63,16 @@ const Introduce = ({ setNavVisible, setAuthentication }) => {
         </Row>
         </div>
 
-        <br /><br /><br /> <br /><br /><br />
+        <br /><br /><br /> <br /><br />
 
-        <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="200">
+        <div data-aos="fade-right" data-aos-duration="2000" data-aos-delay="400">
         <Row id='Center'>
           <Col className='text-center' span={12}><Title level={3}>HED는 특별한 경험을 선사하는 일기장입니다</Title><Title level={5}>인공지능을 통해 일기가 가진 생각과 고민을 이해하고,<br />더 나아가 노래를 통해 공감하고 소통을 합니다.  </Title></Col>
           <Col span={12}><Image preview={false} src={introduce_5} id='Big' /></Col>
         </Row>
         </div>
 
-        <div data-aos="fade-left" data-aos-duration="1500" data-aos-delay="200">
+        <div data-aos="fade-left" data-aos-duration="2000" data-aos-delay="400">
         <Row id='Center'>
           <Col span={12}><Image preview={false} src={introduce_6} id='Small' /></Col>
           <Col span={12} id='Center'><Title level={3}>내 삶의 순간을 기록하고 저장</Title>
@@ -80,14 +80,14 @@ const Introduce = ({ setNavVisible, setAuthentication }) => {
         </Row>
         </div>
 
-        <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="200">
+        <div data-aos="fade-right" data-aos-duration="2000" data-aos-delay="400">
         <Row id='Center'>
           <Col span={12} id='Center'><Title level={3}>감정분석을 통한 나의 컨디션 진단</Title><Title level={5}>오늘 기분이 어땠는지, 지금 기분이 어떤지 알고 싶나요?<br />HED는 감정 분석을 통해 일기 속 감정들을 알려줍니다.</Title></Col>
           <Col span={12}><Image preview={false} src={introduce_7} id='Small' /></Col>
         </Row>
         </div>
 
-        <div data-aos="fade-left" data-aos-duration="1500" data-aos-delay="200">
+        <div data-aos="fade-left" data-aos-duration="2000" data-aos-delay="400">
         <Row id='Center'>
           <Col span={12}><Image preview={false} src={introduce_8} id='Small' style={{width : "500px", height : "500px"}}/></Col>
           <Col span={12} id='Center'><Title level={3}>내 하루에 어울리는 음악 추천</Title><Title level={5}>고단했던 하루를 음악으로 마무리하고 싶나요?<br />HED는 일기를 기반으로 감정에 맞는 음악 추천을 통해 당신의 하루를 위로해줍니다.</Title></Col>
@@ -95,10 +95,10 @@ const Introduce = ({ setNavVisible, setAuthentication }) => {
         </div>
         
 
-        <div data-aos="zoom-out" data-aos-duration="1000" data-aos-delay="200">
+        <div data-aos="zoom-out" data-aos-duration="2000" data-aos-delay="400">
         <Row id="Center_padding2">
           <Col />
-          <Col id="Center"><Title level={1}>"Haru Emotion Diary"로<br />오직 나에게만 집중해보세요</Title></Col>
+          <Col id="Center"><Title level={1}>Haru Emotion Diary로<br />오직 나에게만 집중해보세요</Title></Col>
           <Col />
         </Row>
         <Row id="Center_padding">
