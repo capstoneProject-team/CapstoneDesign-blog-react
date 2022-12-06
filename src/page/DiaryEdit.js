@@ -46,7 +46,10 @@ const DiaryEdit = ({ setNavVisible }) => {
     setCreate_at(data.created_at);
     setTitle(data.title);
     setContent(data.content);
-    setKeyword(data.keyword);
+    
+    if(data.keyword != null){
+      setKeyword(data.keyword)
+    }
 
     // 사진이 있는 경우
     if (data.photo != null) {
@@ -69,7 +72,6 @@ const DiaryEdit = ({ setNavVisible }) => {
       formData.append('created_at', moment(editCreated_at).format('YYYY-MM-DD HH:mm:ss'));
 
     }
-
     formData.append('title', title);
     formData.append('content', content);
     if (selectFile == "") {
@@ -185,12 +187,8 @@ const DiaryEdit = ({ setNavVisible }) => {
                 <div className="mt-5">
                   <h4>오늘의 키워드</h4>
                   <p className='explain'>오늘 하루를 나타내는 키워드를 적어주세요.</p>
-                  {
-                    keyword !== null ? <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
-                    value={keyword} onChange={(event) => setKeyword(event.target.value)} /> : 
                     <Input id='keywordSize' name='keyword' type="text" placeholder="ex) 짝사랑"
-                     onChange={(event) => setKeyword(event.target.value)} />
-                  }
+                    value={keyword} onChange={(event) => setKeyword(event.target.value)} />
                 </div>
 
                 <div className="mt-5">
