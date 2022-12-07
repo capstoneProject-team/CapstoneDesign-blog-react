@@ -11,7 +11,7 @@ const DiaryDetailYoutube = (props) => {
     const bestEmotionName = props.bestEmotionName;
     const keyword = props.keyword;
     const [params, setParams] = useState({
-        key: youtubeAPI.REACT_APP_YOUTUBE_API_KEY3,
+        key: youtubeAPI['REACT_APP_YOUTUBE_API_KEY3'],
         part: 'snippet',
         q: `playlist ${bestEmotionName}`+`${keyword}`, //키워드랑 감정분석 결과 넣기
         maxResults: 3,
