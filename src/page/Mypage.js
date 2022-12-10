@@ -79,7 +79,6 @@ const Mypage = ({ setAuthentication, setNavVisible }) => {
   }
   return (
     <div>
-      <br/>
       <div className="containerMypage">
         <div>
           <Form>

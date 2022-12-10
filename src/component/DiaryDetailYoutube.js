@@ -5,9 +5,19 @@ import { FrownOutlined } from '@ant-design/icons';
 import youtubeAPI from '../youtubeAPI.json';
 import "../static/CSS/DiaryDetail.css";
 import DiaryDetailYoutubeInfo from './DiaryDetailYoutubeInfo';
+import { useMediaQuery } from 'react-responsive'
 
 const DiaryDetailYoutube = (props) => {
-    
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ maxWidth: 999 })
+    return isMobile ? children : null
+  }
+  const Default = ({ children }) => {
+    const isNotMobile = useMediaQuery({ minWidth: 1000 })
+    return isNotMobile ? children : null
+  }
+  
+
     const bestEmotionName = props.bestEmotionName;
     const keyword = props.keyword;
     const [params, setParams] = useState({
@@ -49,6 +59,7 @@ const DiaryDetailYoutube = (props) => {
                 <div className='recommendMusicTitle'>
                     <h4>추천 플레이리스트 🎶</h4>
                 </div>
+                <Default>
                 <div className="mt-3">
                     {youtubeVideos.slice(0, 3).map((element) => {
                         return (
@@ -63,7 +74,24 @@ const DiaryDetailYoutube = (props) => {
                                 
                                 </div>
                                 <Divider/></div>)
+                    })}</div></Default>
+                  <Mobile>
+                  <div className="mt-3">
+                    {youtubeVideos.slice(0, 3).map((element) => {
+                        return (
+                        <div>  
+                          <div style={{}}>
+                            <iframe className="iframeYoutubeMobile" src={`https://www.youtube.com/embed/${element.id.videoId}`}
+                                frameborder='0' allow='accelerometer; autoplay; clip-board-write; gyroscope; picture-in-picture'
+                                allowFullscreen></iframe>
+                            <div>
+                              <DiaryDetailYoutubeInfo youtubeVideos={element.snippet}/>
+                              </div>    
+                                
+                                </div>
+                                <Divider/></div>)
                     })}</div>
+                  </Mobile>
             </div>
 
         </div>

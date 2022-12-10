@@ -36,7 +36,6 @@ const DiaryEdit = ({ setNavVisible }) => {
 
   const changeTitle = (event) => {
     setTitle(event.target.value);
-    console.log(title);
   }
 
   //다이어리 보여지기 관련
@@ -196,13 +195,13 @@ const DiaryEdit = ({ setNavVisible }) => {
                     <h4>이미지 업로드</h4>
                     <p className='explain'>대표 이미지 1장 업로드해주세요. ＊jpg/png/gif</p>
                     {photo && <div>
-                      <Form.Control id="fileWidth1" type="file" onChange={fileSelectedHandler} disabled={true} />
+                      <Form.Control id="fileWidth" type="file" onChange={fileSelectedHandler} disabled={true} />
                       <div className='preview'>
                       <div><br/><img src={photo} alt='지원하지 않는 파일 형식의 이미지' id="photo-Img" /></div>
                       <div><br/><DeleteOutlined onClick={deleteBeforeImg} id="deleteIcon"/></div></div>
                     </div>}
 
-                    {!photo && <Form.Control id="fileWidth2"type="file" onChange={fileSelectedHandler} disabled={disiable} />}
+                    {!photo && <Form.Control id="fileWidth"type="file" onChange={fileSelectedHandler} disabled={disiable} />}
                     <br />
                     {imageSrc && <div className='preview'>
                       <div><img src={imageSrc} alt="지원하지 않는 파일 형식의 이미지" id="imageSrc-Img"  /></div>

@@ -9,116 +9,136 @@ import { Divider, notification } from 'antd';
 import { MoreOutlined, SmileOutlined, FrownOutlined, LoadingOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import "../static/CSS/DiaryDetail.css";
+import { useMediaQuery } from 'react-responsive';
 
-const DiaryDetailContent = ({detail}) => {
+const DiaryDetailContent = ({ detail }) => {
+  const Mobile = ({ children }) => {
+    const isMobile = useMediaQuery({ maxWidth: 999 })
+    return isMobile ? children : null
+  }
+  const Default = ({ children }) => {
+    const isNotMobile = useMediaQuery({ minWidth: 1000 })
+    return isNotMobile ? children : null
+  }
 
-    const { post_id } = useParams();
-    const token = getJwtAtStorage();
-    const { nickname } = jwt_decode(token);
-    
-    //본문
-    const created_at = detail.created_at;
-    const title = detail.title;
-    const content = detail.content;
-    const keyword = detail.keyword;
-    const photo = detail.photo;
+  const { post_id } = useParams();
+  const token = getJwtAtStorage();
+  const { nickname } = jwt_decode(token);
+
+  //본문
+  const created_at = detail.created_at;
+  const title = detail.title;
+  const content = detail.content;
+  const keyword = detail.keyword;
+  const photo = detail.photo;
 
 
-    //수정 기능
-    const navigate = useNavigate();
+  //수정 기능
+  const navigate = useNavigate();
 
-    const navigateEditDiary = () => {
-      navigate(`/diary-edit/${post_id}`)
+  const navigateEditDiary = () => {
+    navigate(`/diary-edit/${post_id}`)
+  }
+
+  //삭제 기능
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const deleteDiary = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await Axios.delete(`http://3.36.254.187:8000/post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
+      handleClose();
+      notification.open({
+        message: "일기가 삭제되었습니다.",
+        icon: <SmileOutlined style={{ color: "#108ee9" }} />,
+        placement: 'bottomeRight'
+      });
+      navigate('/diary-list')
+    } catch (e) {
+      console.log(e)
+      notification.open({
+        message: "일기 삭제 실패, 다시 시도해 주세요.",
+        icon: <FrownOutlined style={{ color: "#108ee9" }} />,
+        placement: 'bottomeRight'
+      });
+
     }
-  
-    //삭제 기능
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  }
 
-    const deleteDiary = async (event) => {
-        event.preventDefault();
-        try {
-          const response = await Axios.delete(`http://3.36.254.187:8000/post/delete/${post_id}`, { headers: { Authorization: `Bearer ${getJwtAtStorage()}` } })
-          handleClose();
-          notification.open({
-            message: "일기가 삭제되었습니다.",
-            icon: <SmileOutlined style={{ color: "#108ee9" }} />,
-            placement: 'bottomeRight'
-          });
-          navigate('/diary-list')
-        } catch (e) {
-          console.log(e)
-          notification.open({
-            message: "일기 삭제 실패, 다시 시도해 주세요.",
-            icon: <FrownOutlined style={{ color: "#108ee9" }} />,
-            placement: 'bottomeRight'
-          });
-    
-        }
-      }
-    
   return (
     <div>
+      <div className='detailTitle'>
         <div className='detailTitle'>
-            <div className='detailTitle'>
-              <h2>{title}</h2>
-              <br />
-            </div>
-            <div className='writerToggle'>
-              <div className='contentInfo'>
-                <p>
-                  {nickname} &nbsp; 
-                  <span style={{ color: 'grey' }}>
-                    {moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
-              </div>
-              <Dropdown>
-                <Dropdown.Toggle className="shadow-none" drop="start" key="start"
-                  style={{ backgroundColor: "white", border: "none", outline: "none" }}>
-                  <MoreOutlined style={{ color: "grey" }} />
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
-                  <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-            <Divider />
+          <h2>{title}</h2>
+          <br />
+        </div>
+        <div className='writerToggle'>
+          <div className='contentInfo'>
+            <p>
+              {nickname} &nbsp;
+              <span style={{ color: 'grey' }}>
+                {moment(created_at).format('YYYY년 MM월 DD일')}</span> </p>
           </div>
+          <Dropdown>
+            <Dropdown.Toggle className="shadow-none" drop="start" key="start"
+              style={{ backgroundColor: "white", border: "none", outline: "none" }}>
+              <MoreOutlined style={{ color: "grey" }} />
+            </Dropdown.Toggle>
 
-          
-          <div className='detailContent'>
-            <div className="content">
-              <div><p dangerouslySetInnerHTML={{ __html: content }}></p></div>
-              <div>{photo && <div>
-                  <img src={photo} alt='image' id="contentImg"/>
-                </div>}</div>
-            </div>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={navigateEditDiary}>수정하기</Dropdown.Item>
+              <Dropdown.Item onClick={handleShow}>삭제하기</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <Divider />
+      </div>
+
+      <Default>
+        <div className='detailContent'>
+          <div className="content">
+            <div><p dangerouslySetInnerHTML={{ __html: content }}></p></div>
+            <div>{photo && <div>
+              <img src={photo} alt='image' id="contentImg" />
+            </div>}</div>
           </div>
+        </div>
+      </Default>
 
-          <div className="detailKeyword">
-          {keyword && <div>
-              <Divider />
-              <p>오늘의 키워드 : {keyword}</p>
-            </div>}
-            <Divider />  
+      <Mobile>
+        <div>
+          <div>
+            <div><p dangerouslySetInnerHTML={{ __html: content }}></p></div>
+            <div>{photo && <div>
+              <img src={photo} alt='image' id="contentImg" />
+            </div>}</div>
           </div>
+        </div>
+      </Mobile>
+      <div className="detailKeyword">
+        {keyword && <div>
+          <Divider />
+          <p>오늘의 키워드 : {keyword}</p>
+        </div>}
+        <Divider />
+      </div>
 
-          <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>일기 삭제</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>일기를 삭제하시겠습니까?</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              취소
-            </Button>
-            <Button variant="danger" onClick={deleteDiary}>
-              삭제
-            </Button>
-          </Modal.Footer>
-        </Modal>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>일기 삭제</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>일기를 삭제하시겠습니까?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            취소
+          </Button>
+          <Button variant="danger" onClick={deleteDiary}>
+            삭제
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

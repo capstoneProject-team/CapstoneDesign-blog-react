@@ -1,3 +1,21 @@
+@media (max-width: 580px) {
+    #Info {
+        width: 300px;
+        text-align: left;
+        margin-bottom: 100px;
+    }
+    
+  }
+  @media (min-width: 581px) {
+    #Info {
+        width: 400px;
+        text-align: left;
+        margin-bottom: 100px;
+    
+    }
+  }
+
+
 .wrapper {
     display: flex;
     text-align: center;
@@ -14,12 +32,7 @@
     margin-bottom : 30px; 
 }
 
-#Info {
-    width: 400px;
-    text-align: left;
-    margin-bottom: 100px;
 
-}
 
 #nextButton {
     background-color: #4A93FF;
