@@ -6,9 +6,6 @@ import moment from 'moment';
 
 
 const MainTrend = ({detail}) => {
-
-
-    // let diaryDateData =  new Date(detail.created_at).toISOString().split('T')[0]; //다이어리 작성 날짜
     const text = detail.content;
     const happy = detail.happy;
     const sad = detail.sad;
@@ -49,7 +46,20 @@ const MainTrend = ({detail}) => {
     }, [])
   
       
-
+    if (calResult == 0){
+      return (
+        <Container>
+            <Link id="noblue" to={`/diary-detail/${detail.id}`} >
+            <Row>
+              <Col id='fontSmall'style={{color: "black"}}>{moment(detail.created_at).format('YYYY-MM-DD')}</Col>
+              <Col id='fontBig'>👀</Col>
+              <Col id='fontSmall' style={{color: "black"}}>분석 실패</Col>
+            </Row>
+            </Link>
+          </Container>
+      )
+    }
+  else{
     return (
       
           <Container>
@@ -63,5 +73,7 @@ const MainTrend = ({detail}) => {
           </Container>
     )
 }
+  }
+    
 
 export default MainTrend

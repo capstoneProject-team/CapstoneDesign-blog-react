@@ -1,27 +1,22 @@
-@media (max-width: 800px) {
-    .content {
-        flex-direction: column;
-      }
-  }
-
-  @media (max-width: 600px) {
-    .resultContent {
-        flex-direction: column;
-      }
-    .contentLeft {
+  @media (max-width: 900px) {
+    .containerDetail {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top : 15px;
+        display: flex;
         flex-direction: column;
     }
-
   }
 
-.containerDetail{
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-top : 15px;
-    display: flex;
-    flex-direction: column;
-}
-
+  @media (min-width: 910px) {
+    .containerDetail {
+        padding-left: 20%;
+        padding-right: 20%;
+        padding-top : 15px;
+        display: flex;
+        flex-direction: column;
+    }
+  }
 
 
 .detailTitle{
@@ -54,7 +49,7 @@
 #contentImg{
     width : auto;
     height: auto;
-    max-width: 300px;
+    max-width: 250px;
     max-height: 50%;
     margin-left: 40px;
 
@@ -117,4 +112,10 @@
     margin : 10px;
     border-radius: 10px;
     margin-left: 50px;
+}
+
+.iframeYoutubeMobile{
+    width : 350px;
+    height: 210px;
+    border-radius: 10px;
 }

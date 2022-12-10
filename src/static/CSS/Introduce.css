@@ -1,3 +1,37 @@
+@media (max-width: 1000px) {
+    .mobileCenter{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .bigTitle {
+        text-align: center;
+        font-size: 25pt;
+    }
+    #Big {
+        width: 300px;
+        height: 300px;
+    }
+
+  }
+
+  @media (min-width: 1001px) {
+    .mobileCenter{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+
+  }
+.bigTitle {
+    font-size: 30pt;
+}
+.bigTitle2 {
+    font-size: 30pt;
+}
+
+
 #Button1 {
     text-decoration-color: white;
     background-color: #4A93FF;
@@ -25,8 +59,8 @@
 }
 
 #Big {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
 }
 
 #Small {

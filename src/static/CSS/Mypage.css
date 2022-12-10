@@ -1,42 +1,93 @@
-.containerMypage{
-    padding-left: 6%;
-    padding-right: 6%;
+@media (max-width: 700px) {
+    .myPageCard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+
+    .explain {
+        width: 300px;
+    }
+
+    .explain2 {
+        width: 200px;
+    }
+
+    .mypageBox {
+        border-radius: 10px;
+        background-color: #DFEBFC;
+        padding: 30px;
+        width: 300px;
+    }
+
+    .deleteBox {
+        border-radius: 10px;
+        background-color: #DFEBFC;
+        padding: 30px;
+        width: 300px;
+        text-align: center;
+    }
+
+
+    #changeButton {
+        background-color: #4A93FF;
+        border: none;
+        float: "right"
+    }
 }
 
-.myPageCard{
-    display: flex;
-    justify-content: center;
-    margin : 30px;
-}
-
-.explain {
-    width: 300px;
-}
-
-.explain2{
-    width : 200px;
-}
-
-.mypageBox{
-    border-radius : 10px;
-    background-color: #DFEBFC;
-    padding: 30px;
-    width:500px;
 
 
-}
+@media (min-width: 701px) {
+    .myPageCard {
+        display: flex;
+        justify-content: center;
+        margin: 30px;
+    }
 
-.deleteBox{
-    border-radius : 10px;
-    background-color: #DFEBFC;
-    padding: 30px;
-    width:500px;
-    text-align: center;
-}
+    .containerMypage {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .myPageCard {
+        display: flex;
+        justify-content: center;
+        margin: 30px;
+    }
+
+    .explain {
+        width: 300px;
+    }
+
+    .explain2 {
+        width: 200px;
+    }
+
+    .mypageBox {
+        border-radius: 10px;
+        background-color: #DFEBFC;
+        padding: 30px;
+        width: 500px;
 
 
-#changeButton{
-    background-color: #4A93FF;
-    border : none;
-    float : "right"
+    }
+
+    .deleteBox {
+        border-radius: 10px;
+        background-color: #DFEBFC;
+        padding: 30px;
+        width: 500px;
+        text-align: center;
+    }
+
+
+    #changeButton {
+        background-color: #4A93FF;
+        border: none;
+        float: "right"
+    }
 }
